@@ -195,7 +195,8 @@ const AddFacility = () => {
           </form>
         </div>
       </div>
-      <SuccessModal open={openModal} handleOpen={setOpenModal} />
+      <SuccessModal open={openModal} handleOpen={setOpenModal} message="Your email has been successfully verified. Click on the button below
+            to continue." />
       <Footer />
     </main>
   );
