@@ -1,17 +1,62 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { PrimaryInput } from "../(components)/inputs/Inputs";
 import { EmailConfirmationModal } from "../(components)/modals/EmailConfirmationModal";
 import { SuccessModal } from "../(components)/modals/SuccessModal";
 import Footer from "../(components)/navigations/Footer";
-import { useState } from "react";
-
+import { FormEvent, useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const SignUpPage = () => {
-  const [openModal,setOpenModal]=useState(false);
-  const handleSubmit=()=>{
-    setOpenModal(true)
-  }
+  const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(e.currentTarget);
+      const values: { [key: string]: any } = {};
+      formData.forEach((value, key) => {
+        values[key] = value;
+      });
+      if (!values.password === values.Confirmpassword) {
+        toast.error("Password is not confirmed");
+        setLoading(false);
+      } else if (!values.email) {
+        toast.error("Email must exist");
+        setLoading(false);
+      } else if (!values.firstName) {
+        toast.error("First name must exist");
+        setLoading(false);
+      } else {
+        const response = await fetch(`/api/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const responseData = await response.json();
+        if (responseData.status === 201) {
+          toast.success(responseData.message);
+          setOpenModal(true);
+          form.reset();
+          setLoading(false);
+        } else if (responseData.status === 400) {
+          toast.error(responseData.message);
+          setLoading(false);
+        } else {
+          toast.error(responseData[0].message);
+          setLoading(false);
+        }
+      }
+    } catch (error) {
+      toast.error("Some error occured");
+      setLoading(false);
+    }
+  };
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-white">
       <Link
@@ -32,63 +77,52 @@ const SignUpPage = () => {
       </h1>
       <div className="w-full  bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <form className="space-y-4 md:space-y-6">
+          <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
             <PrimaryInput
               label="First Name"
               type="text"
               name="firstName"
               placeholder="Enter your first name here"
-              changeHandler={() => {
-                "use client"
-              }}
+              changeHandler={() => {}}
             />
             <PrimaryInput
               label="Last Name"
               type="text"
               name="lastName"
               placeholder="Enter your last name here"
-              changeHandler={() => {
-                "use client"
-              }}
+              changeHandler={() => {}}
             />
             <PrimaryInput
               label="Email"
               type="text"
               name="email"
               placeholder="Enter your email here"
-              changeHandler={() => {
-                "use client"
-              }}
+              changeHandler={() => {}}
             />
             <PrimaryInput
               label="Password"
               type="password"
-              name="passowrd"
+              name="password"
               placeholder="Enter password here"
-              changeHandler={() => {
-                "use client"
-              }}
+              changeHandler={() => {}}
             />
             <PrimaryInput
               label="Confirm Password"
               type="password"
-              name="password"
+              name="Confirmpassword"
               placeholder="Confirm password"
-              changeHandler={() => {
-                "use client"
-              }}
+              changeHandler={() => {}}
             />
             <button
-              type="button"
+              type="submit"
               className="w-full text-white bg-blue-700 hover:bg-blue-500 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              onClick={handleSubmit}
             >
-              Create an account
+              {loading ? "Creating..." : "Create an account"}
             </button>
           </form>
         </div>
       </div>
-      <EmailConfirmationModal open={openModal} handleOpen={setOpenModal}/>
+      <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} />
       {/* <SuccessModal/> */}
       <Footer />
     </main>
