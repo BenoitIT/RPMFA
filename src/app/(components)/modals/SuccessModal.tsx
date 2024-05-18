@@ -5,8 +5,9 @@ import Button from "../buttons/primaryBtn";
 export interface ModalProps{
     open:boolean;
     handleOpen:(val:boolean)=>void;
+    message?:string;
 }
-export const SuccessModal = ({open,handleOpen}:ModalProps) => {
+export const SuccessModal = ({open,handleOpen,message}:ModalProps) => {
   return (
     <Modal open={open} onCancel={() =>handleOpen(false)} width={400} footer={null} centered>
       <div className="w-full flex justify-center items-center flex-col gap-6 p-6">
@@ -16,9 +17,8 @@ export const SuccessModal = ({open,handleOpen}:ModalProps) => {
 
         <div className="flex flex-col gap-2 w-full text-center">
           <p className="font-medium text-black text-base">Success!</p>
-          <p className="text-sm text-black opacity-90 w-11/12">
-            Your email has been successfully verified. Click on the button below
-            to continue.
+          <p className="text-sm text-black opacity-90 w-11/12 mx-auto text-center">
+            {message}
           </p>
           <div className="w-12/12 flex items-center  justify-center">
             <Button

@@ -10,6 +10,9 @@ const NavBar = () => {
   const handleMoveSignUp=()=>{
     router.push("/signup")
   }
+  const handleMoveLogin=()=>{
+    router.push("/login")
+  }
   const menus = [
     {
       id: 1,
@@ -47,7 +50,7 @@ const NavBar = () => {
           <Button
             label="Log in"
             customStyle="border text-blue-700 border-blue-700 hover:bg-blue-700 hover:text-white mt-1 md:mt-0"
-            Click={() => {}}
+            Click={handleMoveLogin}
           />
           <Button
             label="Get started"
