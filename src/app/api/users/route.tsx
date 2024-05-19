@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 
 export const POST = async (request: NextRequest) => {
+  try{
   const body = await request.json();
   const validation = schema.safeParse(body);
   const hashedPassword = await bcrypt.hash(body.password, 10);
@@ -39,6 +40,9 @@ export const POST = async (request: NextRequest) => {
     user,
     token,
   });
+} catch (err) {
+  return NextResponse.json({ message: "unexpected issue occurs",status:400 });
+}
 };
 
 const sendEmail = async (user: any, token: string) => {
@@ -62,7 +66,7 @@ const sendEmail = async (user: any, token: string) => {
     <p >
         kindly click the button below.
     </p>
-    <a href="${process.env.NEXT_APP_UR}/confirm/${token}" style="text-decoration:none;">
+    <a href="http://localhost:3000/confirm/${token}" style="text-decoration:none;">
     <button style="
     display: inline-block;
     padding: 0.5em 3em;
@@ -91,9 +95,14 @@ const sendEmail = async (user: any, token: string) => {
   });
 
   console.log("Message sent: %s", info.messageId);
+
 };
 
 export const GET = async () => {
+  try{
   const users = await prisma.user.findMany({});
   return NextResponse.json({ status: 200, users });
+} catch (err) {
+  return NextResponse.json({ message: "unexpected issue occurs",status:400 });
+}
 };
