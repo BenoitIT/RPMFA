@@ -37,3 +37,12 @@ model Facility {
   userId           Int
   documents        String[]
 }
+
+model passwordResetToken {
+  id        String     @id @default(cuid())
+  email     String
+  token     String @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
