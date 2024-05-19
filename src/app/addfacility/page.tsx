@@ -5,8 +5,11 @@ import { PrimaryInput } from "../(components)/inputs/Inputs";
 import { SuccessModal } from "../(components)/modals/SuccessModal";
 import Footer from "../(components)/navigations/Footer";
 import { Button, Progress, Upload, UploadFile } from "antd";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { BsUpload } from "react-icons/bs";
+import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const AddFacility = () => {
   const numberOfSections = 4;
@@ -19,6 +22,7 @@ const AddFacility = () => {
       name: "uploaded.pdf",
     },
   ];
+
   const handleNext = (e: any) => {
     e.preventDefault();
     if (currentSection < numberOfSections) {
@@ -26,8 +30,18 @@ const AddFacility = () => {
       setCurrentProgress(currentProgress + 24.9);
     }
   };
-  const handleSubmit = () => {
-    setOpenModal(true);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(e.currentTarget);
+      const values: { [key: string]: any } = {};
+      formData.forEach((value, key) => {
+        values[key] = value;
+      });
+      setOpenModal(true);
+    } catch (err) {
+      toast.error("unexpected error occurs");
+    }
   };
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-white">
@@ -54,7 +68,7 @@ const AddFacility = () => {
             showInfo={false}
             className="h-6"
           />
-          <form className="space-y-4 md:space-y-6">
+          <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
             {currentSection === 1 ? (
               <>
                 <PrimaryInput
@@ -64,11 +78,15 @@ const AddFacility = () => {
                   placeholder="Enter health facility name here"
                   changeHandler={() => {}}
                 />
-                <PrimaryInput
+                <PrimarySelectorInput
                   label="Health Facility Category"
-                  type="text"
                   name="facilityCategory"
-                  placeholder="Select health facility category"
+                  options={[
+                    "Genaral clinic",
+                    "Polyclinic",
+                    "Hospital",
+                    "Health center",
+                  ]}
                   changeHandler={() => {}}
                 />
               </>
@@ -185,9 +203,8 @@ const AddFacility = () => {
               </button>
             ) : (
               <button
-                type="button"
+                type="submit"
                 className="w-full text-white bg-blue-700 hover:bg-blue-500 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                onClick={handleSubmit}
               >
                 Submit
               </button>
@@ -195,8 +212,7 @@ const AddFacility = () => {
           </form>
         </div>
       </div>
-      <SuccessModal open={openModal} handleOpen={setOpenModal} message="Your email has been successfully verified. Click on the button below
-            to continue." />
+      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="" />
       <Footer />
     </main>
   );

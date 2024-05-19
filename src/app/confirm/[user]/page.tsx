@@ -49,35 +49,45 @@ const Page = async ({ params }: Props) => {
                 type="text"
                 name="firstName"
                 placeholder="Enter your first name here"
-                changeHandler={() => {}}
+                changeHandler={async () => {
+                  "use server";
+                }}
               />
               <PrimaryInput
                 label="Last Name"
                 type="text"
                 name="lastName"
                 placeholder="Enter your last name here"
-                changeHandler={() => {}}
+                changeHandler={async () => {
+                  "use server";
+                }}
               />
               <PrimaryInput
                 label="Email"
                 type="text"
                 name="email"
                 placeholder="Enter your email here"
-                changeHandler={() => {}}
+                changeHandler={async () => {
+                  "use server";
+                }}
               />
               <PrimaryInput
                 label="Password"
                 type="password"
                 name="password"
                 placeholder="Enter password here"
-                changeHandler={() => {}}
+                changeHandler={async () => {
+                  "use server";
+                }}
               />
               <PrimaryInput
                 label="Confirm Password"
                 type="password"
                 name="Confirmpassword"
                 placeholder="Confirm password"
-                changeHandler={() => {}}
+                changeHandler={async () => {
+                  "use server";
+                }}
               />
               <button
                 type="submit"
@@ -88,7 +98,15 @@ const Page = async ({ params }: Props) => {
             </form>
           </div>
         </div>
-        <SuccessModal open={true} handleOpen={() => {}} />
+        {responseData.status === 200 && (
+          <SuccessModal
+            open={responseData.status === 200}
+            handleOpen={async () => {
+              "use server";
+            }}
+            NextPath="/addfacility"
+          />
+        )}
         <Footer />
       </main>
     );

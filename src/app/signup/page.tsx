@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { PrimaryInput } from "../(components)/inputs/Inputs";
 import { EmailConfirmationModal } from "../(components)/modals/EmailConfirmationModal";
-import { SuccessModal } from "../(components)/modals/SuccessModal";
 import Footer from "../(components)/navigations/Footer";
 import { FormEvent, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -122,7 +121,7 @@ const SignUpPage = () => {
           </form>
         </div>
       </div>
-      <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} />
+      <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} NextPath={""} />
       {/* <SuccessModal/> */}
       <Footer />
     </main>
