@@ -28,7 +28,7 @@ export const PrimaryInput = ({
         name={name}
         id={name}
         onChange={changeHandler}
-        className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
+        className="bg-gray-1 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
         placeholder={placeholder}
       />
       <p

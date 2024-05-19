@@ -5,7 +5,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { IoLogoTwitter } from "react-icons/io5";
 const Footer = () => {
   return (
-    <div className="text-black bg-green-100 w-full items-center flex justify-center px-6 lg:px-0">
+    <div className="text-black bg-gray-1 w-full items-center flex justify-center px-6 lg:px-0">
       <div className="w-full lg:px-16 md:px-8 px-4 flex justify-center">
         <div className="py-6 h-fit flex flex-col gap-y-6 lg:flex-row lg:gap-10 my-6">
           <div className="flex flex-col gap-3">
@@ -30,7 +30,7 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="text-white bg-blue-700 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                className="text-white bg-blue-1 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
               >
                 Submit
               </button>

@@ -27,7 +27,7 @@ export const EmailConfirmationModal = ({ open, handleOpen }: ModalProps) => {
           <div className="w-12/12 flex items-center  justify-center">
             <Button
               label="Resend verification link"
-              customStyle="bg-blue-700 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0"
+              customStyle="bg-blue-700 py-1 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0"
               Click={() => {}}
             />
           </div>
