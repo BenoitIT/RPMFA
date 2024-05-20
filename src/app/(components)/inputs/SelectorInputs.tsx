@@ -2,8 +2,11 @@
 interface PrimaryInputProps {
   label: string;
   options: string[];
+  value?:string,
   name: string;
-  changeHandler: () => void;
+  changeHandler: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
 }
 export const PrimarySelectorInput = ({
   label,
@@ -26,7 +29,9 @@ export const PrimarySelectorInput = ({
         onChange={changeHandler}
       >
         {options.map((option: string, index: number) => (
-          <option key={index}>{option}</option>
+          <option key={index} value={option}>
+            {option}
+          </option>
         ))}
       </select>
     </div>

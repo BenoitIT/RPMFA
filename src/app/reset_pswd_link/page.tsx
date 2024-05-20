@@ -36,7 +36,7 @@ const SignUpPage = () => {
             <div className="w-full  bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <p className="text-center text-sm text-gray-500">
-                    Didn't receive a reset link?
+                    {"Didn't receive a reset link?"}
                     </p>
                         <div className="flex flex-col space-y-2">
                             <button
@@ -50,7 +50,7 @@ const SignUpPage = () => {
 
                 </div>
             </div>
-            <EmailConfirmationModal open={openModal} handleOpen={setOpenModal}/>
+            <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} NextPath={""}/>
             {/* <SuccessModal/> */}
             <Footer />
         </main>

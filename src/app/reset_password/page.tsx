@@ -66,7 +66,7 @@ const SignUpPage = () => {
       </div>
       {/* <EmailConfirmationModal open={openModal} handleOpen={setOpenModal}/> */}
       <SuccessModal open={openModal} handleOpen={setOpenModal} message="
-            Password reset successfully."/>
+            Password reset successfully." NextPath=""/>
       <Footer />
     </main>
   );

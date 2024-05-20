@@ -14,13 +14,14 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
   firstName    String
   lastName     String
   password     String
   profileImage String?
-  confirmed    Boolean? @default(false)
+  confirmed    Boolean?   @default(false)
+  Facility     Facility[]
 }
 
 model Facility {
@@ -32,5 +33,7 @@ model Facility {
   sector           String
   cell             String
   plotNumber       String
+  user             User     @relation(fields: [userId], references: [id])
+  userId           Int
   documents        String[]
 }

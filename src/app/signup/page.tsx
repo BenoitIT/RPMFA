@@ -40,6 +40,7 @@ const SignUpPage = () => {
         const responseData = await response.json();
         if (responseData.status === 201) {
           toast.success(responseData.message);
+          localStorage.setItem("token",responseData.token)
           setOpenModal(true);
           form.reset();
           setLoading(false);
