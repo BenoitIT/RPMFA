@@ -59,7 +59,7 @@ const SignUpPage = () => {
                     </form>
                 </div>
             </div>
-            <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} />
+            <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} NextPath={""} />
             {/* <SuccessModal/> */}
             <Footer />
         </main>
