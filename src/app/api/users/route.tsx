@@ -66,7 +66,7 @@ const sendEmail = async (user: any, token: string) => {
     <p >
         kindly click the button below.
     </p>
-    <a href="http://localhost:3000/confirm/${token}" style="text-decoration:none;">
+    <a href="https://rpmfa.vercel.app/confirm/${token}" style="text-decoration:none;">
     <button style="
     display: inline-block;
     padding: 0.5em 3em;
