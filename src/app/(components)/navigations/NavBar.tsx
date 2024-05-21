@@ -1,33 +1,33 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Button from "../buttons/primaryBtn";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { IoMenuSharp } from "react-icons/io5"
+import { IoMenuSharp } from "react-icons/io5";
 
 const NavBar = () => {
-  const router=useRouter();
-  const handleMoveSignUp=()=>{
-    router.push("/signup")
-  }
-  const handleMoveLogin=()=>{
-    router.push("/login")
-  }
+  const router = useRouter();
+  const handleMoveSignUp = () => {
+    router.push("/signup");
+  };
+  const handleMoveLogin = () => {
+    router.push("/login");
+  };
   const menus = [
     {
       id: 1,
       title: "Members",
-      path: "#members",
+      path: "/members",
     },
     {
       id: 2,
       title: "Announcements",
-      path: "#announcements",
+      path: "/announcements",
     },
     {
       id: 3,
       title: "Contact Us",
-      path: "#contactUs",
+      path: "contactUs",
     },
   ];
   return (
@@ -37,7 +37,7 @@ const NavBar = () => {
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-         <Image
+          <Image
             src="/logo/logooo.png"
             className="h-14"
             alt="rpmfa Logo"
@@ -48,13 +48,13 @@ const NavBar = () => {
         </Link>
         <div className="flex md:order-2 space-x-2 lg:space-x-3 rtl:space-x-reverse">
           <Button
-            label="Log in"
-            customStyle="border text-blue-700 border-blue-700 hover:bg-blue-700 hover:text-white mt-1 md:mt-0"
+            label="Login"
+            customStyle="border text-blue-1 py-1 border-blue-700 hover:bg-blue-1 hover:text-white mt-1 md:mt-0"
             Click={handleMoveLogin}
           />
           <Button
             label="Get started"
-            customStyle="bg-blue-700 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0"
+            customStyle="bg-blue-1 py-1 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0"
             Click={handleMoveSignUp}
           />
           <button
@@ -64,7 +64,7 @@ const NavBar = () => {
             aria-controls="navbar-cta"
             aria-expanded="false"
           >
-            <IoMenuSharp size={25}/>
+            <IoMenuSharp size={25} />
           </button>
         </div>
         <div

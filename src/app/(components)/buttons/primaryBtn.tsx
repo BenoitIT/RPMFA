@@ -7,7 +7,9 @@ interface buttonProps {
 const Button = ({ customStyle, label, Click }: buttonProps) => {
   return (
     <button
-      className={` ${customStyle} focus:outline-none  font-normal rounded lg:rounded-lg text-xs md:text-sm px-3 h-fit lg:px-4 py-[4px] lg:py-[5px] text-center
+      className={`
+       ${customStyle} 
+       focus:outline-none  font-normal rounded lg:rounded-lg text-xs md:text-sm px-3 h-fit text-center
       `}
       onClick={Click}
     >

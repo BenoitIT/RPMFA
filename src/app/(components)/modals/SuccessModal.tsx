@@ -25,7 +25,7 @@ export const SuccessModal = ({open,handleOpen,NextPath,message}:ModalProps) => {
           <div className="w-12/12 flex items-center  justify-center">
             <Link href={NextPath}><Button
               label="Continue"
-              customStyle="bg-blue-700 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0 w-40"
+              customStyle="bg-blue-700 py-1 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0 w-40"
               Click={() => {}}
             />
             </Link>
