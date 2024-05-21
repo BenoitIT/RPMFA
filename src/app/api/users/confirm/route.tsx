@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/client";
+import prisma from "../../../../prisma/client";
 import jwt from "jsonwebtoken";
 
 export const PUT = async (request: NextRequest) => {
