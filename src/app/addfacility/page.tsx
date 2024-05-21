@@ -10,8 +10,19 @@ import { BsUpload } from "react-icons/bs";
 import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { Facility } from "@prisma/client";
 
+interface FacilityTypes {
+  id: number;
+  facilityName: string;
+  facilityCategory: string;
+  province: string;
+  district: string;
+  sector: string;
+  cell: string;
+  userId: number;
+  plotNumber: string;
+  documents: number[];
+}
 const AddFacility = () => {
   const numberOfSections = 4;
   const [currentSection, setCurrentSection] = useState(1);
@@ -19,9 +30,9 @@ const AddFacility = () => {
   const [disabled, setDisabled] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [Uploadeddocuments, setDocuments] = useState<string[]>([]);
-  const [token,setToken]=useState<any>();
+  const [token, setToken] = useState<any>();
   const [fileList, setFileList] = useState<any>([]);
-  const [formValues, setFormValues] = useState<Facility>({
+  const [formValues, setFormValues] = useState<FacilityTypes>({
     id: 0,
     facilityName: "",
     facilityCategory: "",
@@ -34,9 +45,9 @@ const AddFacility = () => {
     documents: [],
   });
   useEffect(() => {
-    if(window!==undefined){
-      const accessToken=window.localStorage.getItem("token");
-      setToken(accessToken)
+    if (window !== undefined) {
+      const accessToken = window.localStorage.getItem("token");
+      setToken(accessToken);
     }
     const handleButtonDisability = () => {
       if (
@@ -58,7 +69,7 @@ const AddFacility = () => {
       }
     };
     handleButtonDisability();
-  }, [formValues,currentSection]);
+  }, [formValues, currentSection]);
 
   const handleChange = async (info: any) => {
     let newFileList = [...info.fileList];
