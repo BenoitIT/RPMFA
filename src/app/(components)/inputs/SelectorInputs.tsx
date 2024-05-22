@@ -1,8 +1,8 @@
 "use client";
 interface PrimaryInputProps {
   label: string;
-  options: string[];
-  value?:string,
+  options: any[];
+  value?: string;
   name: string;
   changeHandler: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -25,12 +25,12 @@ export const PrimarySelectorInput = ({
 
       <select
         name={name}
-        className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
+        className="bg-green-50 outline-none text-gray-900 text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
         onChange={changeHandler}
       >
-        {options.map((option: string, index: number) => (
-          <option key={index} value={option}>
-            {option}
+        {options.map((option: any, index: number) => (
+          <option key={index} value={option?.name ? option?.name : option}>
+            {option?.name ? option?.name : option}
           </option>
         ))}
       </select>

@@ -9,7 +9,11 @@ import { FormEvent, useEffect, useState } from "react";
 import { BsUpload } from "react-icons/bs";
 import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
 import "react-toastify/dist/ReactToastify.css";
+import provinces from "../api/(data)/provinces";
+import districts from "../api/(data)/districts";
 import { toast } from "react-toastify";
+import { CldUploadWidget } from "next-cloudinary";
+import { FaArrowLeft } from "react-icons/fa6";
 
 interface FacilityTypes {
   id: number;
@@ -32,6 +36,7 @@ const AddFacility = () => {
   const [Uploadeddocuments, setDocuments] = useState<string[]>([]);
   const [token, setToken] = useState<any>();
   const [fileList, setFileList] = useState<any>([]);
+  const [provinceDistricts, setDistricts] = useState<any[]>([]);
   const [formValues, setFormValues] = useState<FacilityTypes>({
     id: 0,
     facilityName: "",
@@ -55,48 +60,38 @@ const AddFacility = () => {
         formValues.facilityName == "" &&
         formValues.facilityName == ""
       ) {
+        toast.error("Fill the missing data");
         setDisabled(true);
       } else if (
         currentSection == 2 &&
-        formValues.province == "" &&
         formValues.district == "" &&
         formValues.sector == "" &&
         formValues.cell == ""
       ) {
+        toast.error("Fill the missing data");
         setDisabled(true);
+      } else if (currentSection == 3 && Uploadeddocuments.length < 3) {
+        toast.error("Upload the missing documents");
+        setDisabled(true);
+        console.log(Uploadeddocuments);
       } else {
         setDisabled(false);
       }
     };
     handleButtonDisability();
-  }, [formValues, currentSection]);
+  }, [formValues, currentSection, Uploadeddocuments.length]);
 
-  const handleChange = async (info: any) => {
-    let newFileList = [...info.fileList];
-    newFileList = newFileList.slice(-1);
-    setFileList(newFileList);
-    if (info.file.status === "done") {
-      try {
-        const data = new FormData();
-        data.append("file", info.file.originFileObj);
-
-        const res = await fetch("/api/upload", {
-          method: "POST",
-          body: data,
-        });
-        if (!res.ok) {
-          toast.error("Error while uploading that document");
-        }
-        const savedInfo = await res.json();
-        if (savedInfo.success) {
-          setDocuments((prev) => [...prev, savedInfo.imgUrl]);
-          toast.success(savedInfo.message);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
+  useEffect(() => {
+    const getGroupedDistricts = () => {
+      const groupedDistricts = districts.filter(
+        (district) =>
+          district.province.toLowerCase() ==
+          formValues.province.toLocaleLowerCase()
+      );
+      return setDistricts(groupedDistricts);
+    };
+    getGroupedDistricts();
+  }, [formValues.province]);
 
   const handleNext = (e: any) => {
     e.preventDefault();
@@ -134,6 +129,8 @@ const AddFacility = () => {
       const responseData = await response.json();
       if (responseData.status === 201) {
         setOpenModal(true);
+      } else {
+        toast.error(responseData[0].message);
       }
     } catch (err) {
       toast.error("Unexpected error occurs");
@@ -155,9 +152,22 @@ const AddFacility = () => {
           quality={100}
         />
       </Link>
-      <h1 className="text-xl font-normal text-center py-4 leading-tight tracking-tight text-blue-600 md:text-2xl">
-        Add Your Health Facility
-      </h1>
+      <div className="flex justify-center gap-2">
+        {currentSection > 1 && (
+          <button
+            className="w-8 h-8 text-white rounded-full bg-blue-700 pl-2 mt-4"
+            onClick={() => {
+              setCurrentSection(currentSection - 1);
+              setCurrentProgress(currentProgress - 24.8);
+            }}
+          >
+            <FaArrowLeft />
+          </button>
+        )}
+        <h1 className="text-xl font-normal text-center py-4 leading-tight tracking-tight text-blue-600 md:text-2xl">
+          Add Your Health Facility
+        </h1>
+      </div>
       <div className="w-full bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <Progress
@@ -181,7 +191,7 @@ const AddFacility = () => {
                   name="facilityCategory"
                   value={formValues.facilityCategory}
                   options={[
-                    "Select the type here",
+                    "Select category here",
                     "Genaral clinic",
                     "Polyclinic",
                     "Hospital",
@@ -192,20 +202,18 @@ const AddFacility = () => {
               </>
             ) : currentSection === 2 ? (
               <>
-                <PrimaryInput
+                <PrimarySelectorInput
                   label="Province"
-                  type="text"
                   name="province"
                   value={formValues.province}
-                  placeholder="Enter province here"
+                  options={provinces}
                   changeHandler={handleInputChange}
                 />
-                <PrimaryInput
+                <PrimarySelectorInput
                   label="District"
-                  type="text"
                   name="district"
                   value={formValues.district}
-                  placeholder="Enter district here"
+                  options={provinceDistricts}
                   changeHandler={handleInputChange}
                 />
                 <PrimaryInput
@@ -235,14 +243,38 @@ const AddFacility = () => {
               </>
             ) : currentSection === 3 ? (
               <>
-                <Upload defaultFileList={[...fileList]} onChange={handleChange}>
-                  <Button
-                    icon={<BsUpload />}
-                    className="h-[200px] w-[440px] bg-green-50 flex flex-col justify-center items-center"
-                  >
-                    <p className="text-sm opacity-85">Upload file here</p>
-                  </Button>
-                </Upload>
+                <CldUploadWidget
+                  uploadPreset="ny2jj7zl"
+                  options={{
+                    sources: ["local", "google_drive"],
+                    cropping: false,
+                    multiple: true,
+                    showAdvancedOptions: false,
+                    defaultSource: "local",
+                    styles: {
+                      palette: {
+                        action: "#06476E",
+                      },
+                    },
+                  }}
+                  onUpload={(result: any, widget) => {
+                    toast.success("Document is uploaded");
+                    setDocuments((prev) => [...prev, result.info?.secure_url]);
+                    setFileList(result.info?.original_filename);
+                  }}
+                >
+                  {({ open }) => {
+                    return (
+                      <Button
+                        icon={<BsUpload />}
+                        onClick={() => open()}
+                        className="h-[200px] w-[440px] bg-green-50 flex flex-col justify-center items-center"
+                      >
+                        <p className="text-sm opacity-85">Upload file here</p>
+                      </Button>
+                    );
+                  }}
+                </CldUploadWidget>
                 <div className="flex flex-col gap-2">
                   <p className="font-medium text-black text-sm">
                     Upload the following documents if available
