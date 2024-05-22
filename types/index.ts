@@ -5,3 +5,9 @@ export interface ExpandCollapseProps {
   collapseIcon?: React.ReactNode;
   className?: string;
 } 
+
+export interface SidebarMenuLinkProps {
+  path: string;
+  name: string;
+  icon: JSX.Element;
+}
