@@ -106,7 +106,11 @@ const sendEmail = async (user: any, token: string) => {
 
 export const GET = async () => {
   try {
-    const users = await prisma.user.findMany({});
+    const users = await prisma.user.findMany({
+      include: {
+        Facility: true,
+      },
+    });
     return NextResponse.json({ status: 200, users });
   } catch (err) {
     return NextResponse.json({
