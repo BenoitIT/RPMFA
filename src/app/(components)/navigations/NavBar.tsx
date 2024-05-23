@@ -14,7 +14,7 @@ const NavBar = () => {
     router.push("/signup");
   };
   const handleMoveLogin = () => {
-    router.push("/login");
+    router.push("/dash");
   };
   const menus = [
     {

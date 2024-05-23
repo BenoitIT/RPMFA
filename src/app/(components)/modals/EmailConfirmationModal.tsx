@@ -3,7 +3,9 @@ import { Modal } from "antd";
 import { FaEnvelopeOpenText } from "react-icons/fa";
 import Button from "../buttons/primaryBtn";
 import { ModalProps } from "./SuccessModal";
-export const EmailConfirmationModal = ({ open, handleOpen }: ModalProps) => {
+import { useRouter } from "next/navigation";
+export const EmailConfirmationModal = ({ open, handleOpen, NextPath }: ModalProps) => {
+  const router = useRouter();
   return (
     <Modal
       open={open}
@@ -28,7 +30,10 @@ export const EmailConfirmationModal = ({ open, handleOpen }: ModalProps) => {
             <Button
               label="Resend verification link"
               customStyle="bg-blue-700 py-1 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0"
-              Click={() => {}}
+              Click={() => {
+                router.push(NextPath);
+              }
+              }
             />
           </div>
         </div>

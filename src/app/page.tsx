@@ -14,12 +14,20 @@ import { MdMenuBook } from "react-icons/md";
 import { GiToothbrush } from "react-icons/gi";
 import { BsPeopleFill } from "react-icons/bs";
 import Footer from "./(components)/navigations/Footer";
+import { auth, signOut } from "@/auth"
 
-export default function Home() {
+export default async function Home() {
+  const session: any = await auth();
+  const isLoggedin = session ? true : false;
+  const handleSignOut =  async () => {
+    'use server'
+      await signOut();
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center bg-white">
       <div className="sticky w-full top-0 z-40">
-        <NavBar />
+        <NavBar/>
       </div>
       <div className="p-4 w-full mt-6">
         <div className="lg:w-1/2 md:w-full w-full text-left lg:mx-11 mx-4 flex flex-col space-y-4">
