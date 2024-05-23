@@ -4,8 +4,11 @@ import Button from "../buttons/primaryBtn";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IoMenuSharp } from "react-icons/io5";
+import { usePathname } from "next/navigation";
+import classNames from "classnames";
 
 const NavBar = () => {
+  const currentPath = usePathname();
   const router = useRouter();
   const handleMoveSignUp = () => {
     router.push("/signup");
@@ -27,7 +30,7 @@ const NavBar = () => {
     {
       id: 3,
       title: "Contact Us",
-      path: "contactUs",
+      path: "/contactUs",
     },
   ];
   return (
@@ -76,7 +79,10 @@ const NavBar = () => {
               <li key={menu.id} className="list-none">
                 <Link
                   href={menu.path}
-                  className="block py-2 px-3 md:p-0 text-black hover:text-blue-500"
+                  className={classNames(
+                    "block py-2 px-3 md:p-0 text-black hover:text-blue-1",
+                    currentPath === menu.path ? "text-blue-1" : ""
+                  )}
                   aria-current="page"
                 >
                   {menu.title}

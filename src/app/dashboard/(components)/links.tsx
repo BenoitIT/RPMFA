@@ -8,27 +8,27 @@ import { MdOutlineContactSupport } from "react-icons/md";
 export const DashboardLinks = [
   {
     name: "Members",
-    path: "#members",
+    path: "/dashboard/members",
     icon: <HiOutlineUserGroup />,
   },
   {
     name: "Contributions",
-    path: "#contributions",
+    path: "/dashboard/contributions",
     icon: <PiHouseLine />,
   },
   {
     name: "Applications",
-    path: "#applications",
+    path: "/dashboard/applications",
     icon: <FaRegEnvelope />,
   },
   {
     name: "Announcements",
-    path: "#announcements",
+    path: "/dashboard/announcements",
     icon: <TfiAnnouncement />,
   },
   {
     name: "Performance",
-    path: "#performance",
+    path: "/dashboard/performance",
     icon: <PiChartLineUpBold />,
   },
 ];
