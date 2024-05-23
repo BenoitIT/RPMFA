@@ -10,9 +10,9 @@ const ExpandCollapseButton = ({
   return (
     <button
       onClick={handleExpand}
-      className={`${className} flex gap-1 p-1`}
+      className={`${className} flex gap-1 p-1 text-xs`}
     >
-      {expanded ? expandIcon : collapseIcon}
+      {!expanded ? expandIcon : collapseIcon}
     </button>
   );
 };

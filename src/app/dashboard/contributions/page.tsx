@@ -1,6 +1,6 @@
 "use server";
-import Allmembers from "../(components)/ContentsContainers/allmembers";
 import { PiGreaterThanLight } from "react-icons/pi";
+import Contributions from "../(components)/ContentsContainers/contributions";
 
 const Page = () => {
   return (
@@ -8,9 +8,9 @@ const Page = () => {
       <h3 className="text-gray-600 text-sm flex gap-1">
         Home
         <PiGreaterThanLight className="mt-1" />
-        Members
+        Contributions
       </h3>
-      <Allmembers />
+      <Contributions />
     </div>
   );
 };

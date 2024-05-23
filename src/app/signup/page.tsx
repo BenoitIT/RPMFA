@@ -100,6 +100,13 @@ const SignUpPage = () => {
               changeHandler={() => {}}
             />
             <PrimaryInput
+              label="Telephone"
+              type="text"
+              name="phone"
+              placeholder="Enter your phone number here"
+              changeHandler={() => {}}
+            />
+            <PrimaryInput
               label="Password"
               type="password"
               name="password"

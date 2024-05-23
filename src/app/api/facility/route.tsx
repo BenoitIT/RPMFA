@@ -1,4 +1,4 @@
-import prisma from "../../../prisma/client";
+import prisma from "@/prisma/client";
 import schema from "./validationSchema";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
@@ -40,3 +40,5 @@ export const POST = async (request: NextRequest) => {
     });
   }
 };
+
+

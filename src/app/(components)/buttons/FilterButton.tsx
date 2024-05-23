@@ -17,11 +17,11 @@ const FilterButton = ({
   return (
     <div className={className}>
       <button
-        className="flex items-center gap-x-2 border border-gray-150 py-2 px-2 rounded-lg"
+        className="flex items-center gap-x-2 border border-gray-400 py-2 px-2 rounded-lg text-gray-500"
         onClick={onClick}
       >
         <span>{icon || <VscSettings />}</span>
-        {btnText || "Filter buy"}
+        {btnText || "Filter by"}
       </button>
     </div>
   );

@@ -10,7 +10,7 @@ export const {
 } = NextAuth({
     callbacks: {
         async session({ token, session}) {
-            console.log({sessionToken: token, 
+            console.log({sessionToken: token,
                 session
             });
             if(token.sub && session.user){
@@ -30,10 +30,12 @@ export const {
                 token.email = existingUser.email;
                 token.image = existingUser.profileImage;
                 token.id = existingUser.id;
+                token.role=existingUser.userType
             }
             token.customField = "customField";
             return token;
         },
+
     },
     adapter: PrismaAdapter(prisma),
     session: { strategy: "jwt"},

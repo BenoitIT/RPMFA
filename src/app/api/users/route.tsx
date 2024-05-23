@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "../../../prisma/client";
+import prisma from "@/prisma/client";
 import schema from "./validationSchema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -30,6 +30,7 @@ export const POST = async (request: NextRequest) => {
         lastName: body.lastName,
         password: hashedPassword,
         email: body.email,
+        phone:body.phone
       },
     });
     const token = jwt.sign(user, process.env.NEXT_JWT_SECRETE!);

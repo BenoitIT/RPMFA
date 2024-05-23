@@ -19,9 +19,11 @@ model User {
   firstName    String
   lastName     String
   password     String
+  phone        String    @default("+25000000000")
   profileImage String?
   confirmed    Boolean?   @default(false)
   Facility     Facility[]
+  userType     String?    @default("member")
 }
 
 model Facility {
@@ -36,6 +38,7 @@ model Facility {
   user             User     @relation(fields: [userId], references: [id])
   userId           Int
   documents        String[]
+  status           String   @default("pending")
 }
 
 model passwordResetToken {
