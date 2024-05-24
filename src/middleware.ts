@@ -35,12 +35,12 @@ export default auth((req) => {
     if(!isPublicRoute && !isLoggedin){
         return Response.redirect(new URL("/auth/login", nextUrl));
     }
-    
+
     return null as any;
 })
 
 export const config = {
-    matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+    matcher: ["/dashboard"],
 }
 
 

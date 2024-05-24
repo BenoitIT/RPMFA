@@ -79,7 +79,7 @@ const AddFacility = () => {
       }
     };
     handleButtonDisability();
-  }, [formValues, currentSection, Uploadeddocuments.length]);
+  }, [formValues, currentSection, Uploadeddocuments]);
 
   useEffect(() => {
     const getGroupedDistricts = () => {

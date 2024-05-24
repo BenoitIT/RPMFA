@@ -14,7 +14,7 @@ const NavBar = () => {
     router.push("/signup");
   };
   const handleMoveLogin = () => {
-    router.push("/dash");
+    router.push("/auth/login");
   };
   const menus = [
     {
@@ -52,12 +52,12 @@ const NavBar = () => {
         <div className="flex md:order-2 space-x-2 lg:space-x-3 rtl:space-x-reverse">
           <Button
             label="Login"
-            customStyle="border text-blue-1 py-1 border-blue-700 hover:bg-blue-1 hover:text-white mt-1 md:mt-0"
+            customStyle="border text-blue-1 py-1 border-blue-900 hover:bg-blue-1 hover:text-white mt-1 md:mt-0"
             Click={handleMoveLogin}
           />
           <Button
             label="Get started"
-            customStyle="bg-blue-1 py-1 hover:bg-blue-300 text-white border border-blue-700 mt-1 md:mt-0"
+            customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0"
             Click={handleMoveSignUp}
           />
           <button
