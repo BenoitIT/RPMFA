@@ -18,9 +18,7 @@ const authConfig: NextAuthConfig = {
                             email
                         }
                     });
-                    
                     if (!user ||!user.password) {
-                        
                         return null;
                     }
                     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -28,6 +26,7 @@ const authConfig: NextAuthConfig = {
                         return {
                             id: user.id.toString(),
                             email: user.email,
+                            userType: user.userType,
                             firstName: user.firstName,
                             lastName: user.lastName,
                             password: user.password,

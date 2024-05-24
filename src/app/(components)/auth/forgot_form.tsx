@@ -25,8 +25,6 @@ const ForgotForm = () => {
 
 
     const onSubmit = (values: z.infer<typeof ForgotSchema>) => {
-        console.log(values, "values");
-        
         setPending(true);
         startTransition(() => {
             forgot(values)
