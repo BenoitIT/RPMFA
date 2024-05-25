@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PrimaryInput } from "../(components)/inputs/Inputs";
 import { SuccessModal } from "../(components)/modals/SuccessModal";
 import Footer from "../(components)/navigations/Footer";
-import { Button, Progress, Upload, UploadFile } from "antd";
+import { Button, Progress} from "antd";
 import { FormEvent, useEffect, useState } from "react";
 import { BsUpload } from "react-icons/bs";
 import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
@@ -73,7 +73,6 @@ const AddFacility = () => {
       } else if (currentSection == 3 && Uploadeddocuments.length < 3) {
         toast.error("Upload the missing documents");
         setDisabled(true);
-        console.log(Uploadeddocuments);
       } else {
         setDisabled(false);
       }
@@ -259,7 +258,7 @@ const AddFacility = () => {
                   }}
                   onUpload={(result: any, widget) => {
                     toast.success("Document is uploaded");
-                    setDocuments((prev) => [...prev, result.info?.secure_url]);
+                    setDocuments((prev) => [...prev, result?.info?.public_id]);
                     setFileList(result.info?.original_filename);
                   }}
                 >

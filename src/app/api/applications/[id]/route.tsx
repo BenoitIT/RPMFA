@@ -1,14 +1,13 @@
 import prisma from "@/prisma/client";
-import { NextRequest,NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 export const PUT = async (request: NextRequest) => {
   try {
-    const url = new URL(request.url);
-    const id = url.searchParams.get("id");
+    const id = request.url.split("applications/")[1];
     if (id) {
       const application = await prisma.facility.findFirst({
         where: {
-          id: parseInt(id),
-          status: "pending",
+          id: Number(id),
         },
         include: {
           user: true,
@@ -17,7 +16,7 @@ export const PUT = async (request: NextRequest) => {
       if (application) {
         const updatedApplication = await prisma.facility.update({
           where: {
-            id: parseInt(id),
+            id: Number(id),
           },
           data: {
             status: "approved",
@@ -37,3 +36,35 @@ export const PUT = async (request: NextRequest) => {
     });
   }
 };
+
+export async function GET(request: Request) {
+  try {
+    const id = request.url.split("applications/")[1];
+    if (id) {
+      const application = await prisma.facility.findFirst({
+        where: {
+          id: Number(id),
+        },
+        include: {
+          user: true,
+        },
+      });
+      if (application) {
+        return NextResponse.json({
+          status: 200,
+          application: application,
+        });
+      }
+      return NextResponse.json({
+        status: 200,
+        application: null,
+      });
+    }
+  } catch (err) {
+    return NextResponse.json({
+      message: "unexpected issue occurs",
+      status: 400,
+      application: null,
+    });
+  }
+}

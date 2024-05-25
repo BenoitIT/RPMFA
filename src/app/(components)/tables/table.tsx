@@ -194,6 +194,7 @@ const Table = ({
                           } ${
                             data.status?.toLowerCase() == "completed" ||
                             data.status?.toLowerCase() == "paid" ||
+                            data.status?.toLowerCase() == "approved" ||
                             data.status?.toLowerCase() == "active"
                               ? "text-blue-400 bg-green-100 font-medium"
                               : ""
