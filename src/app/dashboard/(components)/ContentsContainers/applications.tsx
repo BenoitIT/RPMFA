@@ -4,20 +4,20 @@ import {
   handleAllDataRowsSelection,
   handleSelectedRow,
 } from "@/app/(components)/utilities/tableSelector";
+import { useRouter } from "next/navigation";
 import Table from "@/app/(components)/tables/table";
-
 import { ApplicationTableColumns } from "./columns";
 import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import FilterButton from "@/app/(components)/buttons/FilterButton";
 import SearchInput from "@/app/(components)/inputs/SearchInput";
 import TabsNavigation from "../tabs/TabManager";
 import { application } from "@/app/interfaces/applications";
-import ApplicationApproveModal from "./modals/appApprove";
 interface pageProps{
   applications:application[];
   tabs:{name:string,counts:number,data:any[]}[]
 }
 const Applications = ({applications,tabs}:pageProps) => {
+  const router=useRouter();
   const [selectedTableRow, setSelectedTableRow] = useState<number[]>([]);
   const [allSelected, setAllSelected] = useState(false);
   const [activeTab, setActiveTab] = useState("New Applicants");
@@ -33,6 +33,9 @@ const Applications = ({applications,tabs}:pageProps) => {
       setAllSelected
     );
   };
+  const handleViewApplication=(id:number)=>{
+    router.push(`/dashboard/applications/${id}`);
+  }
   return (
     <div className="mt-2 w-full">
       <div className="py-4 flex flex-row gap-2 mb-2">
@@ -60,10 +63,9 @@ const Applications = ({applications,tabs}:pageProps) => {
         onSelectingRow={handleSelectedRows}
         selectAllRow={handleAllRowsSelection}
         isSelectAll={allSelected}
-        handleView={() => {}}
+        handleView={handleViewApplication}
         selectedRow={selectedTableRow}
       />
-      {/* <ApplicationApproveModal/> */}
     </div>
   );
 };

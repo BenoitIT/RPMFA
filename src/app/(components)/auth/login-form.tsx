@@ -15,9 +15,9 @@ import { useRouter } from "next/navigation";
 const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>(''); 
+  const [success, setSuccess] = useState<string | undefined>('');
   const [pending, setPending] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -45,7 +45,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (error) {
       toast.error(error);
-      setError(''); 
+      setError('');
     }
   }, [error]);
   useEffect(() => {
@@ -64,7 +64,7 @@ const LoginForm = () => {
   , [pending, error,router]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-white">
+    <><main className="flex min-h-screen flex-col items-center justify-center bg-white">
       <Link
         href="/"
         className="flex items-center space-x-3 rtl:space-x-reverse my-5"
@@ -75,8 +75,7 @@ const LoginForm = () => {
           alt="rpmfa Logo"
           width={70}
           height={160}
-          quality={100}
-        />
+          quality={100} />
       </Link>
       <h1 className="text-xl font-medium text-center py-4 leading-tight tracking-tight text-blue-600 md:text-2xl lg:text-3xl">
         Login
@@ -84,17 +83,16 @@ const LoginForm = () => {
       <div className="w-full  bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <form className="space-y-4 md:space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="relative w-full">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              disabled={pending}
-              placeholder="Enter your email here"
-              {...form.register('email')}
-              className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
-            />
-            {form.formState.errors.email && <p className="text-red-500 text-xs">{form.formState.errors.email.message}</p>}
-          </div>
+            <div className="relative w-full">
+              <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                disabled={pending}
+                placeholder="Enter your email here"
+                {...form.register('email')}
+                className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm" />
+              {form.formState.errors.email && <p className="text-red-500 text-xs">{form.formState.errors.email.message}</p>}
+            </div>
             <div className="relative w-full">
               <label htmlFor="password" className="text-sm font-medium text-gray-700">Password</label>
               <input
@@ -102,8 +100,7 @@ const LoginForm = () => {
                 disabled={pending}
                 placeholder="Enter password here"
                 {...form.register('password')}
-                className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
-              />
+                className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm" />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -117,9 +114,8 @@ const LoginForm = () => {
               <button
                 type="submit"
                 disabled={pending
-                  || !form.formState.isValid
-                }
-                className={` ${pending || !form.formState.isValid ? 'cursor-not-allowed opacity-40':''} w-full text-white bg-blue-700 hover:bg-blue-500 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center`}
+                  || !form.formState.isValid}
+                className={` ${pending || !form.formState.isValid ? 'cursor-not-allowed opacity-40' : ''} w-full text-white bg-blue-700 hover:bg-blue-500 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center`}
               >
                 Login
               </button>
@@ -130,8 +126,8 @@ const LoginForm = () => {
           </form>
         </div>
       </div>
-      <Footer />
-    </main>
+    </main><Footer /></>
+
   );
 };
 

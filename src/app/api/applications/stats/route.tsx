@@ -20,7 +20,7 @@ export const GET = async () => {
     });
     const rejectedApplications = await prisma.facility.findMany({
       where: {
-        status: "approved",
+        status: "rejected",
       },
       include: {
         user: true,
