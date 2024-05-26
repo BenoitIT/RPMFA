@@ -7,7 +7,6 @@ export const getPasswordResetTokenByToken = async (token: string) => {
         });
         return pswdResetToken;
     }catch (error) {
-        console.log(error);
         return null;
     }
 }
@@ -19,7 +18,6 @@ export const getPasswordResetTokenByEmail = async (email: string) => {
         });
         return pswdResetEmail;
     }catch (error) {
-        console.log(error);
         return null;
     }
 }

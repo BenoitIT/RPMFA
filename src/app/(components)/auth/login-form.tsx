@@ -12,7 +12,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-const LoginForm = () => {
+const LoginForm = ({userRole}:any) => {
   const router = useRouter();
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
@@ -25,8 +25,6 @@ const LoginForm = () => {
       password: '',
     },
   });
-
-
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setPending(true);
     startTransition(() => {
@@ -34,13 +32,14 @@ const LoginForm = () => {
         .then((data:any) => {
           setPending(false);
           setError(data?.error);
-          setSuccess(data?.message);
+          setSuccess(data?.success);
+          if(data?.success) window.location.reload();          
         })
         .catch(() => {
           setPending(false);
           setError('Something went wrong, please try again.');
         });
-    });
+    });    
   };
   useEffect(() => {
     if (error) {
@@ -50,18 +49,21 @@ const LoginForm = () => {
   }, [error]);
   useEffect(() => {
     if (success) {
+      setTimeout(() => window.location.reload(), 2000);
+      setTimeout(() => {
       toast.success("Welcome back!");
-      router.push('/dashboard');
+      }, 4000);
       setSuccess('');
     }
   }, [success, router]);
 
   useEffect(() => {
     if(!pending && !error) {
-      router.push('/dashboard');
+      if(userRole && JSON.parse(userRole) === 'admin') router.push('/dashboard');
+      if(userRole && JSON.parse(userRole) === 'member') router.push('/addfacility');
     }
   }
-  , [pending, error,router]);
+  , [pending, error,router, success, userRole]);
 
   return (
     <><main className="flex min-h-screen flex-col items-center justify-center bg-white">
@@ -126,7 +128,8 @@ const LoginForm = () => {
           </form>
         </div>
       </div>
-    </main><Footer /></>
+      <Footer />
+    </main></>
 
   );
 };

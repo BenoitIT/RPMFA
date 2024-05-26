@@ -3,9 +3,10 @@ import Link from "next/link";
 
 const Settings = async () => {
   const session: any = await auth();
+  const userRole = JSON.stringify(session?.user?.role);
   return (
     <div className="flex w-full min-h-screen space-y-9 flex-col justify-center items-center text-center text-lg">
-      {JSON.stringify(session)}
+      {JSON.parse(userRole)}
       <form action={
         async () => {
           'use server'
