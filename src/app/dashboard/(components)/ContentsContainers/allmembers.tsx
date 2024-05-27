@@ -10,7 +10,7 @@ import {  memberTableColumns } from "./columns";
 import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import FilterButton from "@/app/(components)/buttons/FilterButton";
 import SearchInput from "@/app/(components)/inputs/SearchInput";
-interface pageProps{
+export interface pageProps{
   Allmembers:any[];
 }
 const AllMembers = ({Allmembers}:pageProps) => {

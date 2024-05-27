@@ -3,7 +3,7 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { ExpandCollapseProps } from "../../../../types";
 import ExpandCollapseButton from "../buttons/ExpandCollapseButton";
 
-const MemberDetails = ({ expanded, handleExpand, }: ExpandCollapseProps) => {
+const MemberDetails = ({ expanded, handleExpand,fistName,lastName,category,email,phoneNumber,facilitityName }: ExpandCollapseProps) => {
   return (
     <div
       className={`relative flex flex-col gap-2 border border-gray-150 p-5 rounded-lg transition-all duration-300 ${
@@ -20,28 +20,28 @@ const MemberDetails = ({ expanded, handleExpand, }: ExpandCollapseProps) => {
         />
       </div>
       {/* profile */}
-      <div className="grid h-16 w-16 rounded-full bg-gray-1 place-content-center">
-        DE
+      <div className="grid h-16 w-16 rounded-full bg-gray-1 place-content-center font-medium uppercase">
+        {fistName[0]+lastName[0]}
       </div>
       {/* clinic name */}
       <h2 className="text-blue-1 text-base font-semibold">
-        Amaris Medical Clinic
+        {facilitityName}
       </h2>
       {/* facility category */}
       <div className={`${expanded ? "block" : "hidden"} grid gap-y-1 text-sm`}>
         <div className="grid gap-y-1">
           <h3 className="text-l">Category of Health Facility</h3>
-          <p className="font-extralight">General Clinic</p>
+          <p className="font-extralight">{category}</p>
         </div>
         {/* Email Address */}
         <div className="grid gap-y-1">
           <h3 className="text-l">Email Address</h3>
-          <p className="font-extralight">angelo.igitego@gmail.com</p>
+          <p className="font-extralight">{email}</p>
         </div>
         {/* Phone Number */}
         <div className="grid gap-y-1">
           <h3 className="text-l">Phone Number</h3>
-          <p className="font-extralight">+250000000123</p>
+          <p className="font-extralight">{phoneNumber}</p>
         </div>
       </div>
     </div>
