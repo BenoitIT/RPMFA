@@ -4,7 +4,13 @@ export interface ExpandCollapseProps {
   expandIcon?: React.ReactNode;
   collapseIcon?: React.ReactNode;
   className?: string;
-} 
+  fistName:string;
+  lastName:string;
+  facilitityName:string;
+  email:string;
+  phoneNumber:string;
+  category:string;
+}
 
 export interface SidebarMenuLinkProps {
   path: string;

@@ -8,7 +8,7 @@ import { FaPlus } from "react-icons/fa6";
 import AnnouncementModal from "@/app/(components)/modals/NewAnnouncement";
 import { useState } from "react";
 import { toast } from "react-toastify";
-interface AnnouncmentProps {
+export interface AnnouncmentProps {
   announcements: {
     id: number;
     subject: String;

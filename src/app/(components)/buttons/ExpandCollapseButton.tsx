@@ -6,7 +6,7 @@ const ExpandCollapseButton = ({
   expandIcon,
   collapseIcon,
   className,
-}: ExpandCollapseProps) => {
+}: any) => {
   return (
     <button
       onClick={handleExpand}
