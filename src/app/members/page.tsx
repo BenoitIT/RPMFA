@@ -1,7 +1,6 @@
 "use server";
 
 import Members from "./contents/members";
-import { TbDatabaseX } from "react-icons/tb";
 
 const Page = async () => {
   const response = await fetch(`${process.env.NEXT_APP_URL}/api/members`, {

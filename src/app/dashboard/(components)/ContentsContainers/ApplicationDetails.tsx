@@ -6,9 +6,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
-const ApplicationDetails = ({ application,category }: any) => {
+import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
+const ApplicationDetails = ({ application, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const [openRejectModal, setRejectModal] = useState(false);
   const router = useRouter();
+  const handleOpenRejectModal = () => {
+    setRejectModal(true);
+  };
   const handleApproveApplication = async () => {
     const response = await fetch(
       `${process.env.NEXT_APP_URL}/api/${category}/${application?.id}`,
@@ -61,16 +66,20 @@ const ApplicationDetails = ({ application,category }: any) => {
       </div>
       <div className="flex flex-col gap-3 my-6">
         {application?.documents?.length > 0 ? (
-          application?.documents?.map((document: string, index: number) =>{
-            const uniqueDocumentPart=document.split("/")[1];
-            return(
-            <Link href={`/dashboard/${category}/${application?.id}/${uniqueDocumentPart}`} key={index}>
-              <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">
-                <FaFile className="text-lg" />
-                <span>document {index + 1}</span>
-              </div>
-            </Link>
-          )})
+          application?.documents?.map((document: string, index: number) => {
+            const uniqueDocumentPart = document.split("/")[1];
+            return (
+              <Link
+                href={`/dashboard/${category}/${application?.id}/${uniqueDocumentPart}`}
+                key={index}
+              >
+                <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">
+                  <FaFile className="text-lg" />
+                  <span>document {index + 1}</span>
+                </div>
+              </Link>
+            );
+          })
         ) : (
           <p className="text-sm">No documents uploaded</p>
         )}
@@ -85,7 +94,7 @@ const ApplicationDetails = ({ application,category }: any) => {
           <Button
             label="Reject"
             customStyle="bg-red-100 py-2 hover:bg-red-300 text-red-800 w-full rounded font-medium"
-            Click={() => {}}
+            Click={handleOpenRejectModal}
           />
         </div>
       ) : application?.status == "approved" ? (
@@ -107,6 +116,11 @@ const ApplicationDetails = ({ application,category }: any) => {
         title="Applicant Approved!"
         message="An email will has been sent to notify them"
         NextPath=""
+      />
+      <ApplicationRejectionModal
+        open={openRejectModal}
+        handleOpen={setRejectModal}
+        appId={application?.id}
       />
     </div>
   );

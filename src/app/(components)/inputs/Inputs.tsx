@@ -26,6 +26,7 @@ export const PrimaryInput = ({
       <input
         type={type}
         name={name}
+        value={value}
         id={name}
         onChange={changeHandler}
         className="bg-gray-1 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"

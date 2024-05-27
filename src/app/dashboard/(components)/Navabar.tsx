@@ -1,21 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  IoIosArrowUp,
-  IoIosArrowDown,
-  IoIosNotificationsOutline,
-} from "react-icons/io";
+import { IoIosArrowUp, IoIosNotificationsOutline } from "react-icons/io";
 import { IoMenuSharp } from "react-icons/io5";
 import SecondBtn from "@/app/(components)/buttons/SecondBtn";
 import { Drawer } from "antd";
+import { useSession } from "next-auth/react";
 import SidebarElements from "./sidebar/SidebarElements";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const session:any=useSession();
   return (
     <div className="h-20 border-b fixed max-sm:gap-10 justify-between max-sm:left-0 left-64 top-0 max-md:left-0 right-0 bg-white z-10 flex items-center max-sm:px-1 max-md:px-2 px-4 py-2">
-      <h1 className="text-lg max-sm:hidden">Dashboard</h1>
+      <h1 className="text-lg max-sm:hidden font-medium">Dashboard</h1>
       <SecondBtn
         customStyle="hidden max-sm:inline-flex items-center mt-1 border  w-10 h-10 hover:bg-blue-1 hover:text-white justify-center rounded"
         onClick={() => {
@@ -48,10 +46,10 @@ const Navbar = () => {
           </div>
           <button>
             <div className="flex gap-3 py-2 px-4 border-2 bg-gray-1 border-blue-1 items-center rounded-3xl">
-              <p className="text-sm bg-blue-1 py-1 px-2 text-white rounded-full">
-                G
+              <p className="text-sm bg-blue-1 py-1 px-2 text-white rounded-full uppercase font-medium">
+                {session?.data?.user?.name?.first[0]||""+""+session?.data?.user?.name?.last[0]||""}
               </p>
-              <p className="text-sm">Grace</p>
+              <p className="text-sm capitalize">{session?.data?.user?.name?.last||""}</p>
               <p className="text-sm">{<IoIosArrowUp className="text-xl" />}</p>
             </div>
           </button>
