@@ -7,6 +7,7 @@ import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import AnnouncementModal from "@/app/(components)/modals/NewAnnouncement";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 export interface AnnouncmentProps {
   announcements: {
@@ -26,9 +27,12 @@ const Announcements = ({ announcements }: AnnouncmentProps) => {
   const [activeAnnouncements, setActiveAnnouncements] = useState(announcements);
   const [AnouncementTitle, setAnnouncementTitle] = useState("");
   const [Anouncementbody, setAnnouncementBody] = useState("");
+  const router = useRouter();
   const handleAnnouncementEdit = async (id: number) => {
     setAnnouncementId(id);
-    const response = await fetch(`/api/announcements/${id}`);
+    const response = await fetch(`/api/announcements/${id}`, {
+      cache: "no-store",
+    });
     const data = await response.json();
     if (data.status != 200) {
       toast.error("Could not fetch this announcement");
@@ -36,6 +40,20 @@ const Announcements = ({ announcements }: AnnouncmentProps) => {
     setAnnouncementTitle(data.announcement?.subject);
     setAnnouncementBody(data.announcement?.announcementbody);
     handleOpenEditAnnouncement(true);
+  };
+  const handleDelete = async (id: number) => {
+    const response = await fetch(`/api/announcements/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (data.status != 200) {
+      toast.error("Could not delete this announcement");
+    }
+    toast.success(data.message);
+    router.refresh();
   };
   return (
     <div className="w-full flex flex-col gap-2 mt-3">
@@ -69,11 +87,14 @@ const Announcements = ({ announcements }: AnnouncmentProps) => {
           announcementId={announcement.id}
           time={announcement.createdAt}
           handleAnnouncementEdit={handleAnnouncementEdit}
+          handleEdit={handleDelete}
         />
       ))}
       <AnnouncementModal
         open={openNewAnnouncement}
         handleOpen={handleOpenNewAnnouncement}
+        subject=""
+        contents=""
       />
       <AnnouncementModal
         open={openEditAnnouncement}

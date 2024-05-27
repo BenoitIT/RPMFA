@@ -143,7 +143,6 @@ const ResetPasswordForm = () => {
                 </div>
             </div>
             <SuccessModal open={isSuccessModalOpen} handleOpen={setIsSuccessModalOpen} message="Password reset successfully." NextPath="login" />
-            <Footer />
         </main>
     );
 };

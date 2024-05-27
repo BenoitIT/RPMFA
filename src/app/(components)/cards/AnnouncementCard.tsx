@@ -14,6 +14,7 @@ interface AnnouncementsProps {
   body?:String;
   time?:any;
   handleAnnouncementEdit?: (val: number) => void;
+  handleEdit?: (val: number) => void;
 }
 const AnnouncementCard = ({
   haveActions,
@@ -21,6 +22,7 @@ const AnnouncementCard = ({
   title,
   body,
   time,
+  handleEdit,
   handleAnnouncementEdit,
 }: AnnouncementsProps) => {
   const [expanded, setExpanded] = useState(false);
@@ -40,7 +42,11 @@ const AnnouncementCard = ({
           />
           {haveActions && (
             <div className="flex gap-2">
-              <span className="text-red-500 text-base hover:cursor-pointer">
+              <span className="text-red-500 text-base hover:cursor-pointer" onClick={() => {
+                  if (handleEdit && announcementId) {
+                    handleEdit(announcementId);
+                  }
+                }}>
                 <RiDeleteBin6Line />
               </span>
               <span

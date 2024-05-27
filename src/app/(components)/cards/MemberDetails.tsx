@@ -6,7 +6,7 @@ import ExpandCollapseButton from "../buttons/ExpandCollapseButton";
 const MemberDetails = ({ expanded, handleExpand,fistName,lastName,category,email,phoneNumber,facilitityName }: ExpandCollapseProps) => {
   return (
     <div
-      className={`relative flex flex-col gap-2 border border-gray-150 p-5 rounded-lg transition-all duration-300 ${
+      className={`relative flex flex-col gap-2 border border-gray-150 w-full p-5 rounded-lg transition-all duration-300 ${
         expanded ? "h-auto" : "h-36"
       }`}
     >

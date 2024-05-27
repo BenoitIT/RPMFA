@@ -3,7 +3,7 @@
 import { Modal } from "antd";
 import { PrimaryInput } from "../inputs/Inputs";
 import Button from "../buttons/primaryBtn";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 interface AnnouncementProps {
@@ -24,10 +24,14 @@ const AnnouncementModal = ({
   contents,
   edit,
 }: AnnouncementProps) => {
-  const [subjectTxt, setSubject] = useState("");
-  const [bodyTxt, setBodyTxt] = useState("");
+  const [subjectTxt, setSubject] = useState(subject);
+  const [bodyTxt, setBodyTxt] = useState(contents);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    setSubject(subject);
+    setBodyTxt(contents);
+  }, [subject, contents]);
   const handleSubmit = async () => {
     setLoading(true);
     try {
@@ -37,7 +41,7 @@ const AnnouncementModal = ({
       } else if (bodyTxt == "") {
         toast.error("Announcement contents must exist");
         setLoading(false);
-      } else if(!edit){
+      } else if (!edit) {
         const response = await fetch(`/api/announcements`, {
           method: "POST",
           headers: {
@@ -63,7 +67,7 @@ const AnnouncementModal = ({
           toast.error(responseData[0].message);
           setLoading(false);
         }
-      }else{
+      } else {
         const response = await fetch(`/api/announcements/${announcementId}`, {
           method: "PUT",
           headers: {
@@ -111,7 +115,7 @@ const AnnouncementModal = ({
         <PrimaryInput
           label="Subject"
           type="text"
-          value={subject ? subject : subjectTxt}
+          value={subjectTxt}
           placeholder="Enter subject here"
           changeHandler={(e) => setSubject(e.target.value)}
         />
@@ -123,7 +127,7 @@ const AnnouncementModal = ({
         </label>
         <textarea
           cols={60}
-          value={contents ? contents : bodyTxt}
+          value={bodyTxt}
           className="bg-gray-1 outline-none text-gray-900 sm:text-sm rounded-lg block w-full h-[250px] p-2 md:p-2.5 placeholder:text-sm"
           name="announcementBody"
           onChange={(e) => setBodyTxt(e.target.value)}

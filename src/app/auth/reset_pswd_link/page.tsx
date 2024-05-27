@@ -51,8 +51,6 @@ const SignUpPage = () => {
                 </div>
             </div>
             <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} NextPath={"forgot_password"}/>
-            {/* <SuccessModal/> */}
-            <Footer />
         </main>
     );
 };
