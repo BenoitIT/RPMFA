@@ -1,13 +1,14 @@
-const AuthLayout = ({
-    children
-}:{
-    children: React.ReactNode
-}) => {
-    return (
-        <div className="w-full flex items-center justify-center">
-            {children}
-        </div>
-    )
-}
+import Footer from "../(components)/navigations/Footer";
 
-export default AuthLayout
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="w-screen">
+      {children}
+      <div className="w-full">
+        <Footer />
+      </div>
+    </div>
+  );
+};
+
+export default AuthLayout;

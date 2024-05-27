@@ -106,7 +106,6 @@ const ForgotForm = () => {
                     </form>
                 </div>
             </div>
-            <Footer />
         </main>
     );
 };

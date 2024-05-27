@@ -33,13 +33,13 @@ const LoginForm = ({userRole}:any) => {
           setPending(false);
           setError(data?.error);
           setSuccess(data?.success);
-          if(data?.success) window.location.reload();          
+          if(data?.success) window.location.reload();
         })
         .catch(() => {
           setPending(false);
           setError('Something went wrong, please try again.');
         });
-    });    
+    });
   };
   useEffect(() => {
     if (error) {
@@ -66,7 +66,7 @@ const LoginForm = ({userRole}:any) => {
   , [pending, error,router, success, userRole]);
 
   return (
-    <><main className="flex min-h-screen flex-col items-center justify-center bg-white">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-white w-full">
       <Link
         href="/"
         className="flex items-center space-x-3 rtl:space-x-reverse my-5"
@@ -128,8 +128,7 @@ const LoginForm = ({userRole}:any) => {
           </form>
         </div>
       </div>
-      <Footer />
-    </main></>
+    </main>
 
   );
 };
