@@ -2,7 +2,7 @@
 interface PrimaryInputProps {
   label: string;
   type: string;
-  name: string;
+  name?: string;
   value?: string;
   placeholder: string;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -8,6 +8,7 @@ const DocumentView = ({ document }: any) => {
         alt="document"
         width={800}
         height={1000}
+        quality={100}
       />
     </div>
   );

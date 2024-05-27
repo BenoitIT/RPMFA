@@ -5,14 +5,23 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
 import ExpandCollapseButton from "../buttons/ExpandCollapseButton";
+import { convertTimestamp } from "@/app/utilities/timeConverters";
 
 interface AnnouncementsProps {
   haveActions?: boolean;
   announcementId?: number;
+  title?:String;
+  body?:String;
+  time?:any;
+  handleAnnouncementEdit?: (val: number) => void;
 }
 const AnnouncementCard = ({
   haveActions,
   announcementId,
+  title,
+  body,
+  time,
+  handleAnnouncementEdit,
 }: AnnouncementsProps) => {
   const [expanded, setExpanded] = useState(false);
   const handleExpand = () => {
@@ -31,30 +40,33 @@ const AnnouncementCard = ({
           />
           {haveActions && (
             <div className="flex gap-2">
-              <span className="text-red-500 text-base">
+              <span className="text-red-500 text-base hover:cursor-pointer">
                 <RiDeleteBin6Line />
               </span>
-              <span className="text-gray-500 text-base">
+              <span
+                className="text-gray-500 text-base hover:cursor-pointer"
+                onClick={() => {
+                  if (handleAnnouncementEdit && announcementId) {
+                    handleAnnouncementEdit(announcementId);
+                  }
+                }}
+              >
                 <GrEdit />
               </span>
             </div>
           )}
         </div>
         <h1 className="font-semibold text-base text-gray-700">
-          Some announcement here
+          {title?title:""}
         </h1>
         <p
           className={`${
             expanded ? "block text-sm text-gray-500" : "hidden text-sm"
           }`}
         >
-          Lorem ipsum dolor sit amet consectetur. Ut tristique sem risus
-          ultrices cras pharetra a sed urna. Lorem molestie morbi est praesent
-          in tempus eu consectetur diam. Penatibus at iaculis amet mauris. Velit
-          aenean ultricies vestibulum condimentum porttitor lectus mattis
-          volutpat commodo.
+          {body?body:""}
         </p>
-        <p className="text-sm">24/04/2024</p>
+        <p className="text-sm">{time?convertTimestamp(time):""}</p>
       </div>
     </div>
   );
