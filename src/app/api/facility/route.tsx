@@ -2,7 +2,7 @@ import prisma from "@/prisma/client";
 import schema from "./validationSchema";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-
+export const revalidate = 0;
 export const POST = async (request: NextRequest) => {
   const headers = request.headers;
   const token = headers.get("Authorization")?.split(" ")[1];

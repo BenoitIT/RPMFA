@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client";
 import { NextResponse } from "next/server";
-
+export const revalidate = 0;
 export async function GET(request: Request) {
   try {
     const id = request.url.split("members/")[1];

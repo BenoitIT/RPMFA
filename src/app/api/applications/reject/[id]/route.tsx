@@ -1,5 +1,6 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+export const revalidate = 0;
 export const PUT = async (request: NextRequest) => {
   try {
     const id = request.url.split("reject/")[1];
