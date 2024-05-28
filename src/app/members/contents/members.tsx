@@ -20,10 +20,10 @@ const Members = ({ Allmembers }: pageProps) => {
     setExpandedClinic(expandedClinic === clinicId ? null : clinicId);
   };
   return (
-    <div className="h-screen">
-      <div className="w-screen px-12">
+    <div className="min-h-screen max-h-fit">
+      <div className="max-w-screen-xl px-12">
         <NavBar />
-        {Allmembers.length > 0 ? (
+        {Allmembers.length < 0 ? (
           <div className="w-full pb-5">
             <div className="mb-5">
               <h1 className="text-blue-1 text-2xl font-semibold mb-3">
@@ -60,7 +60,7 @@ const Members = ({ Allmembers }: pageProps) => {
             </div>
           </div>
         ) : (
-          <div className="h-[40vh] w-screen flex justify-center items-center text-base flex-col gap-3">
+          <div className="h-[40vh] w-screen flex justify-center items-center text-base flex-col gap-3 max-w-screen-xl">
             <TbDatabaseX className="text-4xl text-gray-800" />
             <p className="text-gray-700">
               Members are not found. They will be recorded.
