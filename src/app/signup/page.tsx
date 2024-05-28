@@ -6,8 +6,9 @@ import { EmailConfirmationModal } from "../(components)/modals/EmailConfirmation
 import Footer from "../(components)/navigations/Footer";
 import { FormEvent, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { signIn} from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
+import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
 const SignUpPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -111,6 +112,18 @@ const SignUpPage = () => {
               placeholder="Enter your phone number here"
               changeHandler={() => {}}
             />
+            {/* <PrimarySelectorInput
+                  label="Health Facility Category"
+                  name="facilityCategory"
+                  value={formValues.facilityCategory}
+                  options={[
+                    "Select category here",
+                    "Genaral clinic",
+                    "Polyclinic",
+                    "Hospital",
+                  ]}
+                  changeHandler={handleInputChange}
+                /> */}
             <PrimaryInput
               label="Password"
               type="password"
