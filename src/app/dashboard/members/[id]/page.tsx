@@ -4,7 +4,7 @@ import ApplicationDetails from "../../(components)/ContentsContainers/Applicatio
 
 const Page = async ({ params }: any) => {
   const response = await fetch(
-    `http://localhost:3000/api/members/${params?.id}`,
+    `${process.env.NEXT_APP_URL}/api/members/${params?.id}`,
     { cache: "no-store" }
   );
   const responseBody = await response.json();
