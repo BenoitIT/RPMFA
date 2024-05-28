@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PrimaryInput } from "../(components)/inputs/Inputs";
 import { SuccessModal } from "../(components)/modals/SuccessModal";
 import Footer from "../(components)/navigations/Footer";
-import { Button, Progress} from "antd";
+import { Alert, Button, Progress } from "antd";
 import { FormEvent, useEffect, useState } from "react";
 import { BsUpload } from "react-icons/bs";
 import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
@@ -14,6 +14,7 @@ import districts from "../api/(data)/districts";
 import { toast } from "react-toastify";
 import { CldUploadWidget } from "next-cloudinary";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useSession } from "next-auth/react";
 
 interface FacilityTypes {
   id: number;
@@ -29,14 +30,16 @@ interface FacilityTypes {
 }
 const AddFacility = () => {
   const numberOfSections = 4;
+  const session: any = useSession();
+  const token = session?.data?.user?.name?.accessToken;
   const [currentSection, setCurrentSection] = useState(1);
   const [currentProgress, setCurrentProgress] = useState(25);
   const [disabled, setDisabled] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [Uploadeddocuments, setDocuments] = useState<string[]>([]);
-  const [token, setToken] = useState<any>();
   const [fileList, setFileList] = useState<any>([]);
   const [provinceDistricts, setDistricts] = useState<any[]>([]);
+  const [worning, setWorning] = useState("");
   const [formValues, setFormValues] = useState<FacilityTypes>({
     id: 0,
     facilityName: "",
@@ -50,17 +53,13 @@ const AddFacility = () => {
     documents: [],
   });
   useEffect(() => {
-    if (window !== undefined) {
-      const accessToken = window.localStorage.getItem("token");
-      setToken(accessToken);
-    }
     const handleButtonDisability = () => {
       if (
         currentSection == 1 &&
         formValues.facilityName == "" &&
         formValues.facilityName == ""
       ) {
-        toast.error("Fill the missing data");
+        setWorning("Fill the missing data");
         setDisabled(true);
       } else if (
         currentSection == 2 &&
@@ -68,13 +67,14 @@ const AddFacility = () => {
         formValues.sector == "" &&
         formValues.cell == ""
       ) {
-        toast.error("Fill the missing data");
+        setWorning("Fill the missing data");
         setDisabled(true);
       } else if (currentSection == 3 && Uploadeddocuments.length < 3) {
-        toast.error("Upload the missing documents");
+        setWorning("Upload the missing documents");
         setDisabled(true);
       } else {
         setDisabled(false);
+        setWorning("Upload the missing documents");
       }
     };
     handleButtonDisability();
@@ -99,7 +99,6 @@ const AddFacility = () => {
       setCurrentProgress(currentProgress + 24.9);
     }
   };
-
   const handleInputChange = (e: any) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -167,6 +166,9 @@ const AddFacility = () => {
           Add Your Health Facility
         </h1>
       </div>
+      {worning.length > 0 && (
+        <Alert message={worning} type="warning" showIcon closable />
+      )}
       <div className="w-full bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <Progress

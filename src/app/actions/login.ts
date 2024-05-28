@@ -5,9 +5,6 @@ import * as z from 'zod';
 import { LoginSchema } from '../schemas';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
-import { toast } from 'react-toastify';
-import { auth } from '@/auth';
-
 export const login = async (values: z.infer<typeof LoginSchema>) => {
     const validatedFields = LoginSchema.safeParse(values);
     if (!validatedFields.success) {
@@ -15,7 +12,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     }
     const { email, password } = validatedFields.data;
     try {
-        await signIn('credentials', {
+      await signIn('credentials', {
             email,
             password,
             redirect: false

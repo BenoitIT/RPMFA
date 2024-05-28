@@ -3,7 +3,7 @@ import type { NextAuthConfig } from "next-auth";
 import credentials from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs';
 import { LoginSchema } from './app/schemas';
-// import { getUserByEmail } from "./app/api/users/route";
+
 
 const authConfig: NextAuthConfig = {
     secret: process.env.NEXT_AUTH_SECRET,
@@ -34,7 +34,7 @@ const authConfig: NextAuthConfig = {
                             confirmed: user.confirmed
                         };
                     }
-                } 
+                }
                 return null;
             }
         })
