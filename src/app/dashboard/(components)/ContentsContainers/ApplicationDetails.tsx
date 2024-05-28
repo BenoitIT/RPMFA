@@ -16,7 +16,7 @@ const ApplicationDetails = ({ application, category }: any) => {
   };
   const handleApproveApplication = async () => {
     const response = await fetch(
-      `${process.env.NEXT_APP_URL}/api/${category}/${application?.id}`,
+      `/api/${category}/${application?.id}`,
       {
         method: "PUT",
         headers: {
@@ -29,7 +29,7 @@ const ApplicationDetails = ({ application, category }: any) => {
       setOpenSuccessModal(true);
       setTimeout(() => {
         router.refresh();
-      }, 10000);
+      }, 3000);
     }
   };
   return (
