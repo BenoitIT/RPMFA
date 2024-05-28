@@ -12,8 +12,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-const LoginForm = ({ userRole }: any) => {
-  const router = useRouter();
+const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [pending, setPending] = useState(false);
@@ -25,7 +24,8 @@ const LoginForm = ({ userRole }: any) => {
       password: "",
     },
   });
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof LoginSchema>,e:any) => {
+    e.preventDefault();
     setPending(true);
     startTransition(() => {
       login(values)
@@ -47,25 +47,6 @@ const LoginForm = ({ userRole }: any) => {
       setError("");
     }
   }, [error]);
-  useEffect(() => {
-    if (success) {
-      setTimeout(() => window.location.reload(), 2000);
-      setTimeout(() => {
-        toast.success("Welcome back!");
-      }, 4000);
-      setSuccess("");
-    }
-  }, [success, router]);
-
-  useEffect(() => {
-    if (!pending && !error) {
-      if (userRole && JSON.parse(userRole) === "admin")
-        router.push("/dashboard");
-      if (userRole && JSON.parse(userRole) === "member")
-        router.push("/addfacility");
-    }
-  }, [pending, error, router, success, userRole]);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-white w-full">
       <Link

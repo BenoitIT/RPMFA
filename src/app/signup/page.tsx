@@ -6,6 +6,7 @@ import { EmailConfirmationModal } from "../(components)/modals/EmailConfirmation
 import Footer from "../(components)/navigations/Footer";
 import { FormEvent, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { signIn} from "next-auth/react";
 import { toast } from "react-toastify";
 const SignUpPage = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -40,7 +41,11 @@ const SignUpPage = () => {
         const responseData = await response.json();
         if (responseData.status === 201) {
           toast.success(responseData.message);
-          localStorage.setItem("token",responseData.token)
+          await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: false,
+          });
           setOpenModal(true);
           form.reset();
           setLoading(false);
@@ -129,7 +134,11 @@ const SignUpPage = () => {
           </form>
         </div>
       </div>
-      <EmailConfirmationModal open={openModal} handleOpen={setOpenModal} NextPath={""} />
+      <EmailConfirmationModal
+        open={openModal}
+        handleOpen={setOpenModal}
+        NextPath={""}
+      />
       {/* <SuccessModal/> */}
       <Footer />
     </main>
