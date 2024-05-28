@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/prisma/client";
+export const revalidate = 0;
 export const GET = async () => {
   try {
     const pendingApplications = await prisma.facility.findMany({

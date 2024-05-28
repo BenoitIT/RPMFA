@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse, NextRequest } from "next/server";
-
+export const revalidate = 0;
 export const GET = async () => {
   try {
     const prisma=new PrismaClient();
