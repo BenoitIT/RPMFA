@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/prisma/client";
+export const revalidate = 0;
 export const GET = async () => {
   try {
     const pendingApplications = await prisma.facility.findMany({
@@ -32,7 +33,7 @@ export const GET = async () => {
     const members = approvedApplications.length;
     const application = pendingApplications.length;
     const rejections = rejectedApplications.length;
-    const latestMembers = pendingApplications
+    const latestMembers = approvedApplications
       .slice(0, 6)
       .map((application: any) => ({
         id: application?.id,

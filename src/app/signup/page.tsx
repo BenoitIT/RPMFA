@@ -12,13 +12,24 @@ import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
 const SignUpPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userTitle, setUserTitle] = useState({
+    title: "",
+  });
+  const handleInputChange = (e: any) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setUserTitle((prevFormValues) => ({
+      ...prevFormValues,
+      [name]: value,
+    }));
+  };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
       const form = e.currentTarget;
       const formData = new FormData(e.currentTarget);
-      const values: { [key: string]: any } = {};
+      const values: { [key: string]: any } = { ...userTitle };
       formData.forEach((value, key) => {
         values[key] = value;
       });
@@ -112,18 +123,18 @@ const SignUpPage = () => {
               placeholder="Enter your phone number here"
               changeHandler={() => {}}
             />
-            {/* <PrimarySelectorInput
-                  label="Health Facility Category"
-                  name="facilityCategory"
-                  value={formValues.facilityCategory}
-                  options={[
-                    "Select category here",
-                    "Genaral clinic",
-                    "Polyclinic",
-                    "Hospital",
-                  ]}
-                  changeHandler={handleInputChange}
-                /> */}
+            <PrimarySelectorInput
+              label="Title"
+              name="title"
+              value={userTitle.title}
+              options={[
+                "Select title",
+                "Owner",
+                "Managing director",
+                "Clinical director",
+              ]}
+              changeHandler={handleInputChange}
+            />
             <PrimaryInput
               label="Password"
               type="password"

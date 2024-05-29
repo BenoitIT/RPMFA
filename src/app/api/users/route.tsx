@@ -30,7 +30,8 @@ export const POST = async (request: NextRequest) => {
         lastName: body.lastName,
         password: hashedPassword,
         email: body.email,
-        phone:body.phone
+        phone:body.phone,
+        title:body.title
       },
     });
     const token = jwt.sign(user, process.env.NEXT_JWT_SECRETE!);

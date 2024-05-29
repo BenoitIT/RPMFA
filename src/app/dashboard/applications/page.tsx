@@ -1,6 +1,7 @@
 "use server";
 import { PiGreaterThanLight } from "react-icons/pi";
 import Applications from "../(components)/ContentsContainers/applications";
+import Link from "next/link";
 
 const Page = async () => {
   const response = await fetch(`${process.env.NEXT_APP_URL}/api/applications`, {
@@ -20,14 +21,16 @@ const Page = async () => {
       category: application.facilityCategory,
       email: application.user?.email,
       phone: application.user?.phone,
+      firstName: application.user?.firstName,
+      lastName: application.user?.lastName,
       status: application?.status,
     }));
     return (
       <div className="mt-4 w-full">
         <h3 className="text-gray-600 text-sm flex gap-1">
-          Home
-          <PiGreaterThanLight className="mt-[4px]" />
-          Applications
+        <Link href="/dashboard" className="hover:text-blue-700 hover:cursor-pointer">Home</Link>
+          <PiGreaterThanLight className="mt-[3px]" />
+          <p className="hover:text-blue-700 hover:cursor-pointer">Applications</p>
         </h3>
         <Applications applications={applications} tabs={tabs} />
       </div>

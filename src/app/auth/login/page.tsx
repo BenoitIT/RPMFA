@@ -11,7 +11,7 @@ const LoginPage = () => {
     if (session?.user?.role !== userRole) {
       setUserRole(session?.user?.role);
     }
-  }, [session?.user?.role]);
+  }, [session?.user?.role,userRole]);
   useEffect(() => {
     if (userRole === "member") {
       window.location.href = "/addfacility";

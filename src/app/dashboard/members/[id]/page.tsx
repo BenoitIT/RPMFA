@@ -1,6 +1,7 @@
 "use server";
 import { PiGreaterThanLight } from "react-icons/pi";
 import ApplicationDetails from "../../(components)/ContentsContainers/ApplicationDetails";
+import Link from "next/link";
 
 const Page = async ({ params }: any) => {
   const response = await fetch(
@@ -13,11 +14,23 @@ const Page = async ({ params }: any) => {
     return (
       <div className="mt-4 w-full h-[90vh]">
         <h3 className="text-gray-600 text-sm flex gap-1">
-          Home
-          <PiGreaterThanLight className="mt-[4px]" />
-          Members
-          <PiGreaterThanLight className="mt-[4px]" />
-          Member Details
+          <Link
+            href="/dashboard"
+            className="hover:text-blue-700 hover:cursor-pointer"
+          >
+            Home
+          </Link>
+          <PiGreaterThanLight className="mt-[3px]" />
+          <Link
+            href="/dashboard/members"
+            className="hover:text-blue-700 hover:cursor-pointer"
+          >
+            Members
+          </Link>
+          <PiGreaterThanLight className="mt-[3px]" />
+          <p className="hover:text-blue-700 hover:cursor-pointer">
+            Member Details
+          </p>
         </h3>
         <div className="bg-blue-50 p-6 h-full -ml-4 mt-3">
           <ApplicationDetails application={application} category="members" />

@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   handleAllDataRowsSelection,
   handleSelectedRow,
@@ -12,16 +12,18 @@ import FilterButton from "@/app/(components)/buttons/FilterButton";
 import SearchInput from "@/app/(components)/inputs/SearchInput";
 import TabsNavigation from "../tabs/TabManager";
 import { application } from "@/app/interfaces/applications";
-interface pageProps{
-  applications:application[];
-  tabs:{name:string,counts:number,data:any[]}[]
+import { HandleDataSearch } from "@/app/utilities/applicationManipulators";
+interface pageProps {
+  applications: application[];
+  tabs: { name: string; counts: number; data: any[] }[];
 }
-const Applications = ({applications,tabs}:pageProps) => {
-  const router=useRouter();
+const Applications = ({ applications, tabs }: pageProps) => {
+  const router = useRouter();
   const [selectedTableRow, setSelectedTableRow] = useState<number[]>([]);
   const [allSelected, setAllSelected] = useState(false);
   const [activeTab, setActiveTab] = useState("New Applicants");
-  const [activeData,setActiveData]=useState(applications);
+  const [activeData, setActiveData] = useState<any[]>([]);
+  const [searchValue, setSearchValues] = useState("");
   const handleSelectedRows = (id: number) => {
     handleSelectedRow(id, selectedTableRow, setSelectedTableRow);
   };
@@ -33,17 +35,28 @@ const Applications = ({applications,tabs}:pageProps) => {
       setAllSelected
     );
   };
-  const handleViewApplication=(id:number)=>{
+  useEffect(() => {
+    if (searchValue == "") {
+      setActiveData(applications);
+    }
+  }, [searchValue,applications]);
+  const handleViewApplication = (id: number) => {
     router.push(`/dashboard/applications/${id}`);
-  }
+  };
+  const dataSearchingTrigger = () => {
+    HandleDataSearch(searchValue, applications, setActiveData);
+  };
   return (
     <div className="mt-2 w-full">
       <div className="py-4 flex flex-row gap-2 mb-2">
         <SearchInput
           type="text"
           placeholder="Search application..."
-          value={""}
-          changeHandler={async (e: ChangeEvent<HTMLInputElement>) => {}}
+          value={searchValue}
+          changeHandler={(e: ChangeEvent<HTMLInputElement>) =>
+            setSearchValues(e.target.value)
+          }
+          searchData={dataSearchingTrigger}
         />
         <FilterButton
           className="w-full"

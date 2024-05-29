@@ -100,7 +100,7 @@ const AddFacility = () => {
     const getGroupedSectors = () => {
       const groupedSectors = sectors.filter(
         (sector) =>
-          sector.district.toLowerCase() ==
+          sector?.district?.toLowerCase() ==
           formValues.district.toLocaleLowerCase()
       );
       return setSectors(groupedSectors);
@@ -385,7 +385,7 @@ const AddFacility = () => {
           </form>
         </div>
       </div>
-      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="" />
+      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="/" />
       <Footer />
     </main>
   );
