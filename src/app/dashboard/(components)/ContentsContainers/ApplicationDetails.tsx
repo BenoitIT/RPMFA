@@ -7,23 +7,25 @@ import { useRouter } from "next/navigation";
 import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
+import FeedbackModal from "@/app/(components)/modals/feedbackModal";
 const ApplicationDetails = ({ application, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [openRejectModal, setRejectModal] = useState(false);
+  const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
   const router = useRouter();
   const handleOpenRejectModal = () => {
     setRejectModal(true);
   };
+  const handleFeedbackModal = () => {
+    setOpenFeedbackModal(true);
+  };
   const handleApproveApplication = async () => {
-    const response = await fetch(
-      `/api/${category}/${application?.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`/api/${category}/${application?.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     if (data?.status == 200) {
       setOpenSuccessModal(true);
@@ -34,16 +36,33 @@ const ApplicationDetails = ({ application, category }: any) => {
   };
   return (
     <div className="w-full bg-white p-10 rounded-sm">
-      <div className="h-16 w-16 rounded-full bg-blue-200 flex  text-xl justify-center items-center uppercase font-bold text-blue-950">
-        {application?.user?.firstName[0] + "" + application?.user?.lastName[0]}
+      <div className="flex justify-between">
+        <div className="w-fit flex flex-col">
+          <div className="h-16 w-16 rounded-full bg-blue-200 flex  text-xl justify-center items-center uppercase font-bold text-blue-950">
+            {application?.user?.firstName[0] +
+              "" +
+              application?.user?.lastName[0]}
+          </div>
+          <h1 className="font-medium text-blue-600 my-6 text-base capitalize">
+            {application?.facilityName}
+          </h1>
+        </div>
+        {application?.user?.userType != "admin" && (
+          <Button
+            label="Feedback"
+            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
+            Click={handleFeedbackModal}
+          />
+        )}
       </div>
-      <h1 className="font-medium text-blue-600 my-6 text-base capitalize">
-        {application?.facilityName}
-      </h1>
       <div className="text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
         <AppField
           title="Category of Health Facility"
           decription={application?.facilityCategory}
+        />
+        <AppField
+          title="Health Facility TIN Number"
+          decription={application?.tinNumber}
         />
         <AppField
           title="Contact Person"
@@ -54,6 +73,10 @@ const ApplicationDetails = ({ application, category }: any) => {
           }
         />
         <AppField title="Email Address" decription={application?.user?.email} />
+        <AppField
+          title="Contact Person Title"
+          decription={application?.user?.title}
+        />
         <AppField
           title="Contact Person Email"
           decription={application?.user?.email}
@@ -121,6 +144,11 @@ const ApplicationDetails = ({ application, category }: any) => {
         open={openRejectModal}
         handleOpen={setRejectModal}
         appId={application?.id}
+      />
+      <FeedbackModal
+        open={openFeedbackModal}
+        handleOpen={setOpenFeedbackModal}
+        userId={application?.user?.id}
       />
     </div>
   );

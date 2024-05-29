@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { CldUploadWidget } from "next-cloudinary";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
+import sectors from "../api/(data)/sectors";
 
 interface FacilityTypes {
   id: number;
@@ -24,6 +25,7 @@ interface FacilityTypes {
   district: string;
   sector: string;
   cell: string;
+  tinNumber:string;
   userId: number;
   plotNumber: string;
   documents: number[];
@@ -35,15 +37,18 @@ const AddFacility = () => {
   const [currentSection, setCurrentSection] = useState(1);
   const [currentProgress, setCurrentProgress] = useState(25);
   const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [Uploadeddocuments, setDocuments] = useState<string[]>([]);
   const [fileList, setFileList] = useState<any>([]);
   const [provinceDistricts, setDistricts] = useState<any[]>([]);
+  const [Districtsectors, setSectors] = useState<any[]>([]);
   const [worning, setWorning] = useState("");
   const [formValues, setFormValues] = useState<FacilityTypes>({
     id: 0,
     facilityName: "",
     facilityCategory: "",
+    tinNumber:"",
     province: "",
     district: "",
     sector: "",
@@ -91,6 +96,17 @@ const AddFacility = () => {
     };
     getGroupedDistricts();
   }, [formValues.province]);
+  useEffect(() => {
+    const getGroupedSectors = () => {
+      const groupedSectors = sectors.filter(
+        (sector) =>
+          sector?.district?.toLowerCase() ==
+          formValues.district.toLocaleLowerCase()
+      );
+      return setSectors(groupedSectors);
+    };
+    getGroupedSectors();
+  }, [formValues.district]);
 
   const handleNext = (e: any) => {
     e.preventDefault();
@@ -116,6 +132,7 @@ const AddFacility = () => {
       documents: Uploadeddocuments,
     };
     try {
+      setLoading(true);
       const response = await fetch(`/api/facility`, {
         method: "POST",
         headers: {
@@ -127,8 +144,10 @@ const AddFacility = () => {
       const responseData = await response.json();
       if (responseData.status === 201) {
         setOpenModal(true);
+        setLoading(false);
       } else {
         toast.error(responseData[0].message);
+        setLoading(false);
       }
     } catch (err) {
       toast.error("Unexpected error occurs");
@@ -196,8 +215,15 @@ const AddFacility = () => {
                     "Genaral clinic",
                     "Polyclinic",
                     "Hospital",
-                    "Health center",
                   ]}
+                  changeHandler={handleInputChange}
+                />
+                <PrimaryInput
+                  label="TIN Number"
+                  type="text"
+                  name="tinNumber"
+                  value={formValues.tinNumber}
+                  placeholder="Enter TIN number here"
                   changeHandler={handleInputChange}
                 />
               </>
@@ -217,12 +243,11 @@ const AddFacility = () => {
                   options={provinceDistricts}
                   changeHandler={handleInputChange}
                 />
-                <PrimaryInput
+                <PrimarySelectorInput
                   label="Sector"
-                  type="text"
                   name="sector"
                   value={formValues.sector}
-                  placeholder="Enter sector here"
+                  options={Districtsectors}
                   changeHandler={handleInputChange}
                 />
                 <PrimaryInput
@@ -352,14 +377,15 @@ const AddFacility = () => {
               <button
                 type="submit"
                 className="w-full text-white bg-blue-700 hover:bg-blue-500 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                disabled={loading}
               >
-                Submit
+                {loading ? "submitting" : "submit"}
               </button>
             )}
           </form>
         </div>
       </div>
-      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="" />
+      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="/" />
       <Footer />
     </main>
   );

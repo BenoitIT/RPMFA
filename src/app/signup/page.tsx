@@ -6,18 +6,30 @@ import { EmailConfirmationModal } from "../(components)/modals/EmailConfirmation
 import Footer from "../(components)/navigations/Footer";
 import { FormEvent, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { signIn} from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
+import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
 const SignUpPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userTitle, setUserTitle] = useState({
+    title: "",
+  });
+  const handleInputChange = (e: any) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setUserTitle((prevFormValues) => ({
+      ...prevFormValues,
+      [name]: value,
+    }));
+  };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
       const form = e.currentTarget;
       const formData = new FormData(e.currentTarget);
-      const values: { [key: string]: any } = {};
+      const values: { [key: string]: any } = { ...userTitle };
       formData.forEach((value, key) => {
         values[key] = value;
       });
@@ -110,6 +122,18 @@ const SignUpPage = () => {
               name="phone"
               placeholder="Enter your phone number here"
               changeHandler={() => {}}
+            />
+            <PrimarySelectorInput
+              label="Title"
+              name="title"
+              value={userTitle.title}
+              options={[
+                "Select title",
+                "Owner",
+                "Managing director",
+                "Clinical director",
+              ]}
+              changeHandler={handleInputChange}
             />
             <PrimaryInput
               label="Password"

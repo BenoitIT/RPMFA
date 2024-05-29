@@ -19,6 +19,7 @@ model User {
   firstName    String
   lastName     String
   password     String
+  title        String     @default("")
   phone        String     @default("+25000000000")
   profileImage String?
   confirmed    Boolean?   @default(false)
@@ -31,6 +32,7 @@ model Facility {
   facilityName     String   @unique
   facilityCategory String
   province         String
+  tinNumber        String   @unique
   district         String
   sector           String
   cell             String
@@ -52,7 +54,7 @@ model passwordResetToken {
 
 model Announcement {
   id               Int      @id @unique @default(autoincrement())
-  subject          String  @unique
+  subject          String   @unique
   announcementbody String
   createdAt        DateTime @default(now())
 }

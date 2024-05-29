@@ -20,6 +20,7 @@ export const POST = async (request: NextRequest) => {
           facilityCategory: body.facilityCategory,
           province: body.province,
           district: body.district,
+          tinNumber:body.tinNumber,
           sector: body.sector,
           plotNumber: body.plotNumber,
           cell: body.cell,

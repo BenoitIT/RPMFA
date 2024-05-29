@@ -15,9 +15,6 @@ const NavBar = ({isLoggedin}:any) => {
   const handleMoveSignUp = () => {
     router.push("/signup");
   };
-  const handleMoveLogin = () => {
-    router.push("/auth/login");
-  };
   const handleSignOut = async () => {
     await signOut();
     window.location.href="/auth/login"

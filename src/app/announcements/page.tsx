@@ -1,5 +1,4 @@
-import FilterButton from "../(components)/buttons/FilterButton";
-import AnnouncementCard from "../(components)/cards/AnnouncementCard";
+
 import Footer from "../(components)/navigations/Footer";
 import NavBar from "../(components)/navigations/NavBar";
 import AnnouncementContents from "./(contents)/AnnouncementContents";
