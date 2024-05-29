@@ -11,6 +11,7 @@ import SecondBtn from "@/app/(components)/buttons/SecondBtn";
 import { Drawer } from "antd";
 import { signOut, useSession } from "next-auth/react";
 import SidebarElements from "./sidebar/SidebarElements";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +80,7 @@ const Navbar = () => {
         {openProfileMenus && (
           <div className="bg-white py-4 flex flex-col gap-2 absolute right-2 w-[150px] rounded shadow text-sm">
             <p className="text-center w-full py-1 hover:bg-blue-700 hover:text-white rounded-sm hover:cursor-pointer">
-              Profile
+              <Link href="/dashboard/profile">Profile</Link>
             </p>
             <p
               className="text-center w-full py-1 hover:bg-blue-700 hover:text-white rounded-sm hover:cursor-pointer"

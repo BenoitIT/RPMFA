@@ -2,13 +2,15 @@
 interface buttonProps {
   label: string;
   customStyle: string;
-  Click: () => void;
+  Click?: () => void;
+  type?: "button" | "submit" | "reset";
 }
-const Button = ({ customStyle, label, Click }: buttonProps) => {
+const Button = ({ customStyle, label, Click, type }: buttonProps) => {
   return (
     <button
+      type={type ? type : "button"}
       className={`
-       ${customStyle} 
+       ${customStyle}
        focus:outline-none  font-normal rounded lg:rounded-lg text-xs md:text-sm px-3 h-fit text-center
       `}
       onClick={Click}

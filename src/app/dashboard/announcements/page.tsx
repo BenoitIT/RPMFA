@@ -3,6 +3,7 @@ import { PiGreaterThanLight } from "react-icons/pi";
 import Announcements from "../(components)/ContentsContainers/anouncements";
 
 
+
 const Page =async() => {
     const response = await fetch(`${process.env.NEXT_APP_URL}/api/announcements`, {
       cache: "no-store",
