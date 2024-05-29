@@ -3,6 +3,7 @@ import { PiGreaterThanLight } from "react-icons/pi";
 import Applications from "../(components)/ContentsContainers/applications";
 import Link from "next/link";
 
+
 const Page = async () => {
   const response = await fetch(`${process.env.NEXT_APP_URL}/api/applications`, {
     cache: "no-store",

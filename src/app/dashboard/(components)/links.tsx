@@ -36,7 +36,7 @@ export const DashboardLinks = [
 export const profileAndSupportLinks = [
   {
     name: "Settings",
-    path: "#profile",
+    path: "/dashboard/profile",
     icon: <CiSettings />,
   },
   {
