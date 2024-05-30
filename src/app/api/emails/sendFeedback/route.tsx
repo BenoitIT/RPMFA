@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 
-export const POST= async (req:NextRequest) => {
+export const POST = async (req: NextRequest) => {
   const body = await req.json();
   const { data, error } = await resend.emails.send({
-    from: process.env.NEXT_RESEND_APP_DOMAIN!,
+    from: "onboarding@resend.dev",
     to: body.email,
     subject: "RPMFA application feedback",
     react: EmailTemplate({

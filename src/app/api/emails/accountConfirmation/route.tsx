@@ -8,7 +8,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const body = await req.json();
   const APPURL = process.env.NEXT_APP_URL!;
   const { data, error } = await resend.emails.send({
-    from: process.env.NEXT_RESEND_APP_DOMAIN!,
+    from: "onboarding@resend.dev",
     to: body.email,
     subject: "Confirm your account",
     react: EmailTemplate({
