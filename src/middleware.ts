@@ -29,9 +29,7 @@ export default auth((req) => {
         }
         return null;
     }
-    if (!isPublicRoute && !isLoggedin) {
-        return Response.redirect(new URL("/auth/login", nextUrl));
-    }
+
     if (pathname.startsWith('/dashboard') && userRole !== 'admin') {
         toast.error('You are not authorized to access this page');
         return Response.redirect(new URL('/', req.url));
