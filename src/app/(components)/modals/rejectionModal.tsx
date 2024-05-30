@@ -10,11 +10,15 @@ interface ModalProps {
   open: boolean;
   handleOpen: (val: boolean) => void;
   appId: Number;
+  applicantEmail: string;
+  applicantName: string;
 }
 export const ApplicationRejectionModal = ({
   open,
   handleOpen,
   appId,
+  applicantEmail,
+  applicantName,
 }: ModalProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -22,22 +26,35 @@ export const ApplicationRejectionModal = ({
   const handleRejection = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        `/api/applications/reject/${appId}`,
-        {
+      if (message == "") {
+        toast.error("Provide reason for rejection!");
+        setLoading(false);
+      } else {
+        const response = await fetch(`/api/applications/reject/${appId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
+        });
+        const data = await response.json();
+        if (data.status == 200) {
+          setLoading(false);
+          await fetch("/api/emails/rejection", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              firstName: applicantName,
+              email: applicantEmail,
+              message: message,
+            }),
+          });
+          handleOpen(false);
+          router.refresh();
+        } else {
+          toast.error("Unexpected error occurs");
         }
-      );
-      const data = await response.json();
-      if (data.status == 200) {
-        setLoading(false);
-        handleOpen(false);
-        router.refresh();
-      } else {
-        toast.error("Unexpected error occurs");
       }
     } catch (err) {
       toast.error("Unexpected error occurs");

@@ -202,7 +202,7 @@ const Table = ({
                             data.status?.toLowerCase() === "canceled" ||
                             data.status?.toLowerCase() == "closed" ||
                             data.status?.toLowerCase() == "rejected"
-                              ? "border-red-300 bg-red-400 text-red-300"
+                              ? "border-red-300 bg-red-400 text-white"
                               : ""
                           }`}
                         >
