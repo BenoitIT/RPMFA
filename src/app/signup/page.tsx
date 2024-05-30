@@ -58,8 +58,24 @@ const SignUpPage = () => {
             password: values.password,
             redirect: false,
           });
-          setOpenModal(true);
           form.reset();
+          const emailResponse = await fetch("/api/emails/accountConfirmation", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              fistName: values.firstName,
+              email: values.email,
+              token: responseData.token,
+            }),
+          });
+          const data = await emailResponse.json();
+          if (data.status == 200) {
+            setOpenModal(true);
+          } else {
+            toast.error("Could not send now!");
+          }
           setLoading(false);
         } else if (responseData.status === 400) {
           toast.error(responseData.message);

@@ -29,6 +29,16 @@ const ApplicationDetails = ({ application, category }: any) => {
     const data = await response.json();
     if (data?.status == 200) {
       setOpenSuccessModal(true);
+      await fetch("/api/emails/approval", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: application?.user?.firstName,
+          email: application?.user?.email,
+        }),
+      });
       setTimeout(() => {
         router.refresh();
       }, 3000);
@@ -144,11 +154,15 @@ const ApplicationDetails = ({ application, category }: any) => {
         open={openRejectModal}
         handleOpen={setRejectModal}
         appId={application?.id}
+        applicantEmail={application?.user?.email}
+        applicantName={application?.user?.firstName}
       />
       <FeedbackModal
         open={openFeedbackModal}
         handleOpen={setOpenFeedbackModal}
         userId={application?.user?.id}
+        applicantEmail={application?.user?.email}
+        applicantName={application?.user?.firstName}
       />
     </div>
   );

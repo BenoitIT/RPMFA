@@ -11,11 +11,15 @@ interface feedbackModalProps {
   open: boolean;
   handleOpen: (val: boolean) => void;
   userId?: Number | string;
+  applicantEmail: string;
+  applicantName: string;
 }
 const FeedbackModal = ({
   title,
   open,
   handleOpen,
+  applicantEmail,
+  applicantName,
   userId,
 }: feedbackModalProps) => {
   const [subjectTxt, setSubject] = useState("");
@@ -31,10 +35,29 @@ const FeedbackModal = ({
         toast.error("Message contents must exist");
         setLoading(false);
       } else {
-        toast.success("Feedback email is sent");
-        setLoading(false);
-        setSubject("");
-        setBodyTxt("");
+        const response = await fetch("/api/emails/sendFeedback", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: applicantName,
+            email: applicantEmail,
+            message: bodyTxt,
+            subject: subjectTxt,
+          }),
+        });
+        if (response.ok) {
+          toast.success("Feedback email is sent");
+          setLoading(false);
+          setSubject("");
+          setBodyTxt("");
+        } else {
+          toast.error("Unable to send email");
+          setLoading(false);
+          setSubject("");
+          setBodyTxt("");
+        }
       }
     } catch (error) {
       toast.error("Some error occured");
