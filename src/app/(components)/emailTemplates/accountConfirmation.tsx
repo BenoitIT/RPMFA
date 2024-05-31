@@ -90,7 +90,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          paddingLeft:"20%",
+          paddingLeft:"35%",
         }}
       >
         <a
