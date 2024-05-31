@@ -25,7 +25,7 @@ export const PrimarySelectorInput = ({
 
       <select
         name={name}
-        className="bg-green-50 outline-none text-gray-900 text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
+        className="bg-gray-1 outline-none text-gray-900 text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
         onChange={changeHandler}
       >
         {options.map((option: any, index: number) => (

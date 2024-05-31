@@ -25,7 +25,7 @@ export default auth((req) => {
             if (userRole === "admin") {
                 return Response.redirect(new URL("/dashboard", nextUrl));
             }
-            return Response.redirect(new URL("/addfacility", nextUrl));
+            return Response.redirect(new URL("/member/dashboard", nextUrl));
         }
         return null;
     }

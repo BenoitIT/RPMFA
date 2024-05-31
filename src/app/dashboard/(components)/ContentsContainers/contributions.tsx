@@ -46,7 +46,7 @@ const Contributions = () => {
         activeTab={activeTab}
         tabs={tabs}
         setActiveTab={setActiveTab}
-        setActiveData={()=>{}}
+        setActiveData={() => {}}
       />
       <Table
         data={ContributionDummyData}

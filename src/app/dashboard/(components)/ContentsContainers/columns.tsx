@@ -25,6 +25,86 @@ export const ApplicationTableColumns = [
   { field: "Action", header: "Action" },
 ];
 
+export const memberContributionTableColumns = [
+  { field: "created_at", header: "Contribution Date" },
+  { field: "contributionAmount", header: "Contribution Amount" },
+  { field: "depositReceiptNumber", header: "Deposit Receipt Number" },
+];
+
+export const memberContributionDummyData = [
+  {
+    id: 1,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 2,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 3,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 4,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 5,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 6,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 7,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 8,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 9,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 10,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 11,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+  {
+    id: 12,
+    created_at: "16/03/2024",
+    contributionAmount: "Rwf 600,000",
+    depositReceiptNumber: "1234LG56667TG",
+  },
+];
 
 export const ContributionDummyData = [
   {

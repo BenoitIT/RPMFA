@@ -44,17 +44,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             marginBottom: "10px",
           }}
         >
-          THANKS FOR SIGNING UP!
-        </div>
-        <div
-          style={{
-            fontSize: "1.25rem",
-            lineHeight: "1.75rem",
-            fontWeight: "700",
-            textTransform: "capitalize",
-          }}
-        >
-          Confirm your E-mail Address
+          THANKS FOR SENDING APPLICATION!
         </div>
       </div>
     </div>

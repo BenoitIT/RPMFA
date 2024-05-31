@@ -1,39 +1,47 @@
 "use client";
-import { RxDashboard } from "react-icons/rx";
-import { DashboardLinks, profileAndSupportLinks } from "../links";
 import Link from "next/link";
 import Image from "next/image";
 import { SidebarMenuLinkProps } from "../../../../../types";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
+import { SidebarMenu, sideBarMenus } from "./Sidebar";
 
 interface SidebarElementsProps {
   className?: string;
+  DashboardLinks: SidebarMenu[];
+  SidebarFooterMenu: SidebarMenu[];
+  HomeMenu: SidebarMenu;
   onclick?: () => void;
 }
 
-const SidebarElements = ({ className, onclick }: SidebarElementsProps) => {
+const SidebarElements = ({
+  className,
+  onclick,
+  DashboardLinks,
+  SidebarFooterMenu,
+  HomeMenu,
+}: SidebarElementsProps) => {
   const currentPath = usePathname();
-
+  console.log(currentPath);
   return (
     <div className={`${className} w-full p-4`}>
       <div>
         <LogoSidebar />
         <SidebarMenuLink
-          path={"/dashboard"}
-          name={"Dashboard"}
-          icon={<RxDashboard />}
+          path={HomeMenu.path}
+          name={HomeMenu.name}
+          icon={HomeMenu.icon}
           onclick={onclick}
           className={classNames(
             "flex gap-3 p-3 items-center mt-4",
-            currentPath === "/dashboard"
+            currentPath === HomeMenu.path
               ? "bg-blue-1 text-white rounded-lg"
               : ""
           )}
         />
       </div>
       <div className="flex flex-col gap-2 justify-center border-y mt-10 py-4">
-        {DashboardLinks.map((link, index) => (
+        {DashboardLinks.map((link: SidebarMenu, index: number) => (
           <SidebarMenuLink
             key={index}
             path={link.path}
@@ -42,18 +50,20 @@ const SidebarElements = ({ className, onclick }: SidebarElementsProps) => {
             onclick={onclick}
             className={classNames(
               "flex gap-3 p-3 items-center",
-              currentPath === link.path ? "bg-blue-1 text-white rounded-lg" : ""
+              currentPath === link.path
+                ? "bg-blue-800 text-white rounded-lg"
+                : ""
             )}
           />
         ))}
       </div>
       <div className="flex flex-col gap-3 justify-center mt-14">
-        {profileAndSupportLinks.map((link, index) => (
+        {SidebarFooterMenu.map((link, index) => (
           <Link href={link.path} key={index} onClick={onclick}>
             <div
               className={classNames(
                 "flex gap-2 p-3 items-center text-sm text-gray-500",
-                currentPath === link.path
+                currentPath == link.path
                   ? "bg-blue-1 text-white rounded-lg"
                   : ""
               )}

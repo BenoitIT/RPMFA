@@ -8,8 +8,10 @@ import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
 import FeedbackModal from "@/app/(components)/modals/feedbackModal";
+import { useSession } from "next-auth/react";
 const ApplicationDetails = ({ application, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const session: any = useSession();
   const [openRejectModal, setRejectModal] = useState(false);
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
   const router = useRouter();
@@ -57,12 +59,34 @@ const ApplicationDetails = ({ application, category }: any) => {
             {application?.facilityName}
           </h1>
         </div>
-        {application?.user?.userType != "admin" && (
+        {session?.data?.user?.role == "admin" &&
+        application.status == "pending" ? (
           <Button
             label="Feedback"
             customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
             Click={handleFeedbackModal}
           />
+        ) : (
+          <div className="flex flex-col gap-1 text-black text-sm">
+            <h3 className="font-semibold">Application Status</h3>
+            <p
+              className={` text-xs text-center rounded py-[5px] capitalize ${
+                application.status?.toLowerCase() == "approved"
+                  ? "text-blue-400 bg-green-100 font-medium"
+                  : ""
+              }${
+                application.status?.toLowerCase() == "rejected"
+                  ? "border-red-300 bg-red-400 text-white"
+                  : ""
+              } ${
+                application.status?.toLowerCase().includes("pending")
+                  ? "border-yellow-100 font-medium  text-yellow-600 bg-yellow-100"
+                  : ""
+              }`}
+            >
+              {application.status}
+            </p>
+          </div>
         )}
       </div>
       <div className="text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
@@ -117,7 +141,33 @@ const ApplicationDetails = ({ application, category }: any) => {
           <p className="text-sm">No documents uploaded</p>
         )}
       </div>
-      {application?.status == "pending" ? (
+      {application?.status !== "rejected" &&
+      session?.data?.user?.role == "admin" ? (
+        ""
+      ) : (
+        <div className="text-sm">
+          <AppField
+            title="Reason for rejection"
+            decription="Provide all necessary documents"
+          />
+        </div>
+      )}
+      {(application?.status == "pending" &&
+        session?.data?.user?.role !== "admin") ||
+      (application?.status == "rejected" &&
+        session?.data?.user?.role !== "admin") ? (
+        <div className="w-full flex justify-end">
+          <Button
+            label="Update Info"
+            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
+            Click={() => {}}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {application?.status == "pending" &&
+      session?.data?.user?.role == "admin" ? (
         <div className="flex flex-row gap-4 p-2 w-full">
           <Button
             label="Approve"
@@ -136,12 +186,14 @@ const ApplicationDetails = ({ application, category }: any) => {
           type="success"
           showIcon
         />
-      ) : (
+      ) : application?.status == "approved" ? (
         <Alert
           message="Applicant rejected! An email has been sent to notify them"
           type="error"
           showIcon
         />
+      ) : (
+        ""
       )}
       <SuccessModal
         open={openSuccessModal}
