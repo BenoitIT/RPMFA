@@ -58,19 +58,19 @@ const SignUpPage = () => {
             password: values.password,
             redirect: false,
           });
-          form.reset();
           const emailResponse = await fetch("/api/emails/accountConfirmation", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              fistName: values.firstName,
+              firstName: values.firstName,
               email: values.email,
               token: responseData.token,
             }),
           });
           const data = await emailResponse.json();
+          form.reset();
           if (data.status == 200) {
             setOpenModal(true);
           } else {
