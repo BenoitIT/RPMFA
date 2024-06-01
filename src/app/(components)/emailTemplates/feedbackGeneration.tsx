@@ -46,7 +46,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             marginBottom:"10px"
           }}
         >
-          THANKS FOR SIGNING UP!
+          THANKS FOR YOUR INTEREST FROM RPMFA!
         </div>
         <div
           style={{
@@ -56,7 +56,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             textTransform: "capitalize",
           }}
         >
-          Confirm your E-mail Address
+         Below are some feedback
         </div>
       </div>
     </div>

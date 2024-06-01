@@ -25,7 +25,7 @@ interface FacilityTypes {
   district: string;
   sector: string;
   cell: string;
-  tinNumber:string;
+  tinNumber: string;
   userId: number;
   plotNumber: string;
   documents: number[];
@@ -48,7 +48,7 @@ const AddFacility = () => {
     id: 0,
     facilityName: "",
     facilityCategory: "",
-    tinNumber:"",
+    tinNumber: "",
     province: "",
     district: "",
     sector: "",
@@ -385,7 +385,7 @@ const AddFacility = () => {
           </form>
         </div>
       </div>
-      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="/" />
+      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="/member/dashboard" />
       <Footer />
     </main>
   );

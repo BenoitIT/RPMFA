@@ -48,15 +48,6 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         >
           THANKS FOR SENDING APPLICATION!
         </div>
-        <div
-          style={{
-            fontSize: "1.25rem",
-            lineHeight: "1.75rem",
-            fontWeight: "700",
-            textTransform: "capitalize",
-          }}
-        >
-        </div>
       </div>
     </div>
     <main

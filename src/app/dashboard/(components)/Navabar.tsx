@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IoIosArrowUp,
   IoIosNotificationsOutline,
@@ -12,10 +12,22 @@ import { Drawer } from "antd";
 import { signOut, useSession } from "next-auth/react";
 import SidebarElements from "./sidebar/SidebarElements";
 import Link from "next/link";
+import {
+  DashboardLinks,
+  adminHomeMenu,
+  profileAndSupportLinks,
+  memberHomeMenu,
+  membersDashboardLinks,
+  memberProfileAndSupportLinks,
+} from "./links";
+import { SidebarMenu } from "./sidebar/Sidebar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openProfileMenus, setProfileMenus] = useState(false);
+  const [DashLinks,setDashLinks]=useState<SidebarMenu[]>([]);
+  const [dashBordMainMenu,setDashBordMainMenu]=useState<SidebarMenu>(adminHomeMenu);
+  const [profile,setDashProfile]=useState<SidebarMenu[]>([]);
   const session: any = useSession();
   const handleModalDisplay = () => {
     setProfileMenus(!openProfileMenus);
@@ -24,6 +36,17 @@ const Navbar = () => {
     await signOut();
     window.location.href = "/auth/login";
   };
+ useEffect(()=>{
+  if (session?.user?.role == "admin") {
+    setDashLinks(DashboardLinks);
+    setDashBordMainMenu(adminHomeMenu);
+    setDashProfile(profileAndSupportLinks);
+  } else {
+    setDashLinks(membersDashboardLinks);
+    setDashBordMainMenu(memberHomeMenu);
+    setDashProfile(membersDashboardLinks);
+  }
+},[session?.user?.role])
   return (
     <div className="h-20 border-b fixed max-sm:gap-10 justify-between max-sm:left-0 left-64 top-0 max-md:left-0 right-0 bg-white z-10 flex items-center max-sm:px-1 max-md:px-2 px-4 py-2">
       <h1 className="text-lg max-sm:hidden font-normal uppercase">Dashboard</h1>
@@ -49,6 +72,9 @@ const Navbar = () => {
         <SidebarElements
           className="max-h-screen"
           onclick={() => setIsOpen(!isOpen)}
+          DashboardLinks={DashLinks}
+          SidebarFooterMenu={profile}
+          HomeMenu={dashBordMainMenu}
         />
       </Drawer>
       <div className="relative">
@@ -80,7 +106,11 @@ const Navbar = () => {
         {openProfileMenus && (
           <div className="bg-white py-4 flex flex-col gap-2 absolute right-2 w-[150px] rounded shadow text-sm">
             <p className="text-center w-full py-1 hover:bg-blue-700 hover:text-white rounded-sm hover:cursor-pointer">
-              <Link href="/dashboard/profile">Profile</Link>
+              {session?.user?.role == "member" ? (
+                <Link href="/member/dashboard/profile">Profile</Link>
+              ) : (
+                <Link href="/dashboard/profile">Profile</Link>
+              )}
             </p>
             <p
               className="text-center w-full py-1 hover:bg-blue-700 hover:text-white rounded-sm hover:cursor-pointer"

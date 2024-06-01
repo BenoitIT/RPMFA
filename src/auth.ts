@@ -33,7 +33,7 @@ export const {
           first: existingUser.firstName,
           last: existingUser.lastName,
           role: existingUser.userType,
-          accessToken:accessToken
+          accessToken:accessToken,
         };
         token.role = existingUser.userType;
         token.email = existingUser.email;

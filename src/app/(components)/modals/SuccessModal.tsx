@@ -3,6 +3,7 @@ import { Modal } from "antd";
 import { HiCheckBadge } from "react-icons/hi2";
 import Button from "../buttons/primaryBtn";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 export interface ModalProps {
   open: boolean;
   handleOpen: (val: boolean) => void;
@@ -17,6 +18,7 @@ export const SuccessModal = ({
   message,
   title,
 }: ModalProps) => {
+  const router=useRouter();
   return (
     <Modal
       open={open}
@@ -44,6 +46,7 @@ export const SuccessModal = ({
                 customStyle="bg-blue-700 py-1 hover:bg-blue-800 text-white border border-blue-700 mt-1 md:mt-0 w-40"
                 Click={() => {
                   handleOpen(false);
+                  router.back()
                 }}
               />
             ) : (
