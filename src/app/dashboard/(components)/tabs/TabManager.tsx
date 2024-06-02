@@ -7,7 +7,7 @@ interface TabProps {
 const TabsNavigation = ({ activeTab, setActiveTab, tabs,setActiveData }: TabProps) => {
   return (
     <div className="flex gap-3 text-sm my-3">
-      {tabs.map((tab,index:number) => (
+      {tabs?.map((tab,index:number) => (
         <p
           className={
             activeTab == tab.name
