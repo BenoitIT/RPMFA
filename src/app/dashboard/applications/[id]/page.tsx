@@ -29,7 +29,7 @@ const Page = async ({ params }: any) => {
           </Link>
           <PiGreaterThanLight className="mt-[3px]" />
           <p className="text-blue-700 hover:cursor-pointer">
-            Applications Details
+            Application Details
           </p>
         </h3>
         <div className="bg-blue-50 p-6 h-full -ml-4 mt-3">

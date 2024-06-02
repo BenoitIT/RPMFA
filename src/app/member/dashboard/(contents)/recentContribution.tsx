@@ -8,8 +8,6 @@ import Table from "@/app/(components)/tables/table";
 import {
   memberContributionTableColumns,
 } from "@/app/dashboard/(components)/ContentsContainers/columns";
-import Button from "@/app/(components)/buttons/primaryBtn";
-import { useRouter } from "next/navigation";
 interface memberContribution
   {
     id: number;
@@ -22,7 +20,6 @@ interface memberContributions{
 }
 
 const Contribution = ({ contributions}:memberContributions) => {
-  const router = useRouter();
   const [selectedTableRow, setSelectedTableRow] = useState<number[]>([]);
   const [allSelected, setAllSelected] = useState(false);
   const handleSelectedRows = (id: number) => {
@@ -36,19 +33,8 @@ const Contribution = ({ contributions}:memberContributions) => {
       setAllSelected
     );
   };
-  const handleViewSingleContribution=(id:number)=>{
-    router.push(`/member/dashboard/contributions/${id}`);
-  }
   return (
-    <div className="mt-3 w-full bg-white pr-10 p-6">
-      <div className="flex justify-between my-4">
-        <h1 className="text-xl font-medium text-blue-1">Contributions</h1>
-        <Button
-          label="Add New Contribution"
-          customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white  rounded font-medium h-fit -mt-1"
-          Click={() => router.push("contributions/addnew")}
-        />
-      </div>
+    <div className="mt-6 w-full">
       <Table
         data={contributions}
         columns={memberContributionTableColumns}
@@ -56,7 +42,6 @@ const Contribution = ({ contributions}:memberContributions) => {
         selectAllRow={handleAllRowsSelection}
         isSelectAll={allSelected}
         selectedRow={selectedTableRow}
-        handleView={handleViewSingleContribution}
       />
     </div>
   );

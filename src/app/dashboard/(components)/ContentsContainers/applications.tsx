@@ -24,7 +24,7 @@ const Applications = ({ applications, tabs }: pageProps) => {
   const session = useSession();
   const [selectedTableRow, setSelectedTableRow] = useState<number[]>([]);
   const [allSelected, setAllSelected] = useState(false);
-  const [activeTab, setActiveTab] = useState("New Applicants");
+  const [activeTab, setActiveTab] = useState("Pending Applicantion");
   const [activeData, setActiveData] = useState<any[]>([]);
   const [searchValue, setSearchValues] = useState("");
   const handleSelectedRows = (id: number) => {

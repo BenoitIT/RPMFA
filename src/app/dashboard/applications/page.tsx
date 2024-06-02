@@ -31,7 +31,7 @@ const Page = async () => {
         <h3 className="text-gray-600 text-sm flex gap-1">
         <Link href="/dashboard" className="hover:text-blue-700 hover:cursor-pointer">Home</Link>
           <PiGreaterThanLight className="mt-[3px]" />
-          <p className="hover:text-blue-700 hover:cursor-pointer">Applications</p>
+          <p className="text-blue-700 ">Applications</p>
         </h3>
         <Applications applications={applications} tabs={tabs} />
       </div>

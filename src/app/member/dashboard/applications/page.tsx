@@ -2,14 +2,19 @@
 import { PiGreaterThanLight } from "react-icons/pi";
 import Applications from "@/app/dashboard/(components)/ContentsContainers/applications";
 import Link from "next/link";
-
+import { auth } from "@/auth";
 
 const Page = async () => {
-  const response = await fetch(`${process.env.NEXT_APP_URL}/api/applications`, {
-    cache: "no-store",
-  });
+  const session: any = await auth();
+  const userId = session?.user?.id;
+  const response = await fetch(
+    `${process.env.NEXT_APP_URL}/api/applications/user/${userId}`,
+    {
+      cache: "no-store",
+    }
+  );
   const statsResponse = await fetch(
-    `${process.env.NEXT_APP_URL}/api/applications/stats`,
+    `${process.env.NEXT_APP_URL}/api/applications/stats/user/${userId}`,
     { cache: "no-store" }
   );
   const data = await response.json();
@@ -19,7 +24,7 @@ const Page = async () => {
     const applications = data.applications?.map((application: any) => ({
       id: application?.id,
       facilityName: application?.facilityName?.toLowerCase(),
-      category: application.facilityCategory,
+      category: application?.facilityCategory,
       email: application.user?.email,
       phone: application.user?.phone,
       firstName: application.user?.firstName,
@@ -29,9 +34,16 @@ const Page = async () => {
     return (
       <div className="mt-4 w-full">
         <h3 className="text-gray-600 text-sm flex gap-1">
-        <Link href="/dashboard" className="hover:text-blue-700 hover:cursor-pointer">Home</Link>
+          <Link
+            href="/dashboard"
+            className="hover:text-blue-700 hover:cursor-pointer"
+          >
+            Home
+          </Link>
           <PiGreaterThanLight className="mt-[3px]" />
-          <p className="hover:text-blue-700 hover:cursor-pointer">Applications</p>
+          <p className="text-blue-700">
+            Applications
+          </p>
         </h3>
         <Applications applications={applications} tabs={tabs} />
       </div>
