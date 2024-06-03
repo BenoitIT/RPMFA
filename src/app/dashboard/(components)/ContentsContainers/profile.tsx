@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/app/(components)/buttons/primaryBtn";
+import { useSession } from "next-auth/react";
 import { CldImage } from "next-cloudinary";
 import Link from "next/link";
 interface User {
@@ -11,6 +12,7 @@ interface User {
   profileImage: any;
 }
 const ProfileInfo = ({ user }: User | any) => {
+  const session: any = useSession();
   return (
     <div className="flex bg-white justify-center items-center w-full min-h-[80vh] flex-col gap-3">
       <div className="border border-blue-100 shadow rounded w-[280px] md:w-[380px] p-6">
@@ -19,7 +21,7 @@ const ProfileInfo = ({ user }: User | any) => {
             {user?.profileImage ? (
               <CldImage
                 src={user?.profileImage}
-                alt="document"
+                alt="image"
                 width={150}
                 height={150}
                 quality={100}
@@ -35,12 +37,21 @@ const ProfileInfo = ({ user }: User | any) => {
           <AppField title="Phone Number" decription={user?.phone} />
         </div>
       </div>
-      <Link href="/dashboard/profile/edit">
-        <Button
-          label="Edit Profile"
-          customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
-        />
-      </Link>
+      {session?.data?.user?.role == "admin" ? (
+        <Link href="/dashboard/profile/edit">
+          <Button
+            label="Edit Profile"
+            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
+          />
+        </Link>
+      ) : (
+        <Link href="/member/dashboard/profile/edit">
+          <Button
+            label="Edit Profile"
+            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
+          />
+        </Link>
+      )}
     </div>
   );
 };

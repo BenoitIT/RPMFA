@@ -283,7 +283,7 @@ const AddFacility = () => {
             ) : currentSection === 3 ? (
               <>
                 <CldUploadWidget
-                  uploadPreset="ny2jj7zl"
+                  uploadPreset="emrtyzay"
                   options={{
                     sources: ["local", "google_drive"],
                     cropping: false,

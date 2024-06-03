@@ -160,7 +160,7 @@ const Page = () => {
                 Reciept Image
               </label>
               <CldUploadWidget
-                uploadPreset="ny2jj7zl"
+                uploadPreset="emrtyzay"
                 options={{
                   sources: ["local"],
                   cropping: false,

@@ -18,7 +18,7 @@ const Page = async() => {
     <div className="mt-4 w-full">
       <h3 className="text-gray-600 text-sm flex gap-1">
         <Link
-          href="/dashboard"
+          href="/member/dashboard"
           className="hover:text-blue-700 hover:cursor-pointer"
         >
           Home
