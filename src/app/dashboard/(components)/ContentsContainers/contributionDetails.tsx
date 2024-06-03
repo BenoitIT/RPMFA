@@ -100,7 +100,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
         />
         <AppField
           title="Contribution Amount"
-          decription={contribution?.contributionAmount}
+          decription={`RWF ${contribution?.contributionAmount}`}
         />
         <AppField
           title="Contribution Reciept Number"
@@ -164,7 +164,11 @@ const ContributionDetails = ({ contribution, category }: any) => {
           <Button
             label="Update Info"
             customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
-            Click={() => {}}
+            Click={() =>
+              router.push(
+                `/member/dashboard/contributions/${contribution?.id}/edit/${contribution?.id}`
+              )
+            }
           />
         </div>
       ) : (

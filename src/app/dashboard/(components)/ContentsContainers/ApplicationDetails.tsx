@@ -195,6 +195,22 @@ const ApplicationDetails = ({ application, category }: any) => {
       ) : (
         ""
       )}
+      {application?.status == "rejected" &&
+      session?.data?.user?.role !== "admin" ? (
+        <div className="flex justify-end  p-2 w-full py-2">
+          <Button
+            label="Update and Apply"
+            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-fit rounded font-medium"
+            Click={() =>
+              router.push(
+                `/member/dashboard/applications/${application?.id}/edit/${application?.id}`
+              )
+            }
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <SuccessModal
         open={openSuccessModal}
         handleOpen={setOpenSuccessModal}
