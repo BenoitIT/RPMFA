@@ -104,7 +104,7 @@ const Page = () => {
                 Image
               </label>
               <CldUploadWidget
-                uploadPreset="ny2jj7zl"
+                uploadPreset="emrtyzay"
                 options={{
                   sources: ["local"],
                   cropping: false,
@@ -137,7 +137,7 @@ const Page = () => {
                         <div className="w-full flex items-center">
                           <CldImage
                             src={image}
-                            alt="document"
+                            alt="image"
                             width={200}
                             height={300}
                             quality={100}

@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import { IoMenuSharp } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
-import { signOut } from "next-auth/react";
-import { toast } from "react-toastify";
+import { signOut, useSession } from "next-auth/react";
 
-const NavBar = ({isLoggedin}:any) => {
+const NavBar = ({ isLoggedin }: any) => {
+  const session: any = useSession();
   const currentPath = usePathname();
   const router = useRouter();
   const handleMoveSignUp = () => {
@@ -17,7 +17,14 @@ const NavBar = ({isLoggedin}:any) => {
   };
   const handleSignOut = async () => {
     await signOut();
-    window.location.href="/auth/login"
+    window.location.href = "/auth/login";
+  };
+  const handleDashbordRedirection = () => {
+    if (session?.data?.user?.role == "admin") {
+      router.push("/dashboard");
+    } else {
+      router.push("/member/dashboard");
+    }
   };
   const menus = [
     {
@@ -54,15 +61,23 @@ const NavBar = ({isLoggedin}:any) => {
         </Link>
         <div className="flex md:order-2 space-x-2 lg:space-x-3 rtl:space-x-reverse">
           <Button
-            label= {isLoggedin ? "Log out" : "Login"}
+            label={isLoggedin ? "Log out" : "Login"}
             customStyle="border text-blue-1 py-1 border-blue-700 hover:bg-blue-1 hover:text-white mt-1 md:mt-0"
             Click={handleSignOut}
           />
-          <Button
-            label="Get started"
-            customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0"
-            Click={handleMoveSignUp}
-          />
+          {session?.data?.user ? (
+            <Button
+              label="Dashboard"
+              customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0"
+              Click={handleDashbordRedirection}
+            />
+          ) : (
+            <Button
+              label="Get started"
+              customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0"
+              Click={handleMoveSignUp}
+            />
+          )}
           <button
             data-collapse-toggle="navbar-cta"
             type="button"

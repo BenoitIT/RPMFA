@@ -126,15 +126,29 @@ const ApplicationDetails = ({ application, category }: any) => {
           application?.documents?.map((document: string, index: number) => {
             const uniqueDocumentPart = document.split("/")[1];
             return (
-              <Link
-                href={`/dashboard/contributions/${application?.id}/${uniqueDocumentPart}`}
-                key={index}
-              >
-                <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">
-                  <FaFile className="text-lg" />
-                  <span>document {index + 1}</span>
-                </div>
-              </Link>
+              <>
+                {session?.data?.user?.role == "admin" ? (
+                  <Link
+                    href={`/dashboard/applications/${application?.id}/${uniqueDocumentPart}`}
+                    key={index}
+                  >
+                    <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">
+                      <FaFile className="text-lg" />
+                      <span>document {index + 1}</span>
+                    </div>
+                  </Link>
+                ) : (
+                  <Link
+                    href={`/member/dashboard/applications/${application?.id}/${uniqueDocumentPart}`}
+                    key={index}
+                  >
+                    <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">
+                      <FaFile className="text-lg" />
+                      <span>document {index + 1}</span>
+                    </div>
+                  </Link>
+                )}
+              </>
             );
           })
         ) : (
