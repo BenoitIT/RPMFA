@@ -18,7 +18,6 @@ import {
   profileAndSupportLinks,
   memberHomeMenu,
   membersDashboardLinks,
-  memberProfileAndSupportLinks,
 } from "./links";
 import { SidebarMenu } from "./sidebar/Sidebar";
 
@@ -106,7 +105,7 @@ const Navbar = () => {
         {openProfileMenus && (
           <div className="bg-white py-4 flex flex-col gap-2 absolute right-2 w-[150px] rounded shadow text-sm">
             <p className="text-center w-full py-1 hover:bg-blue-700 hover:text-white rounded-sm hover:cursor-pointer">
-              {session?.user?.role == "member" ? (
+              {session?.data?.user?.role == "member" ? (
                 <Link href="/member/dashboard/profile">Profile</Link>
               ) : (
                 <Link href="/dashboard/profile">Profile</Link>
