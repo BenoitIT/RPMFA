@@ -6,7 +6,7 @@ import { PrimaryInput } from "@/app/(components)/inputs/Inputs";
 import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { Alert, Button } from "antd";
+import { Alert, Button, DatePicker } from "antd";
 import { BsUpload } from "react-icons/bs";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,7 @@ const Page = () => {
   const [image, setImage] = useState<any>([]);
   const [facilties, setFacilities] = useState<any[]>([]);
   const [worning, setWorning] = useState("");
+  const [dateValue, setDateValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     recieptAmount: "",
@@ -56,13 +57,14 @@ const Page = () => {
       } else if (formValues.recieptNumber == "") {
         setWorning("Receipt number should not be empty!");
       } else if (image.length < 1) {
-        setWorning("Reciept image should be selected");
+        setWorning("Receipt image should be selected");
       } else {
         setWorning("");
         const payload = {
           depositRecieptNumber: formValues.recieptNumber,
           depositReciept: image,
           contributionAmount: Number(formValues.recieptAmount),
+          YearOfContributionStart:dateValue,
           facilityId: Number(formValues.faciltyId),
           userId: Number(userId),
         };
@@ -99,6 +101,7 @@ const Page = () => {
       [name]: value,
     }));
   };
+  const onOk = (value: any) => {};
   return (
     <div className="mt-4 w-full">
       <h3 className="text-gray-600 text-sm flex gap-1">
@@ -155,6 +158,17 @@ const Page = () => {
                 value=""
                 options={facilties}
                 changeHandler={handleInputChange}
+              />
+              <label className="block mb-2 text-sm font-medium text-gray-900">
+                Year Of Contribution Start
+              </label>
+              <DatePicker
+                onChange={(value: any, dateString) => {
+                  const datee = new Date(value).toISOString();
+                  setDateValue(datee);
+                }}
+                onOk={onOk}
+                className="bg-gray-1  text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm outline-none"
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
                 Reciept Image

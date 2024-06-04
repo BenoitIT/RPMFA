@@ -100,11 +100,19 @@ const ContributionDetails = ({ contribution, category }: any) => {
         />
         <AppField
           title="Contribution Amount"
-          decription={`RWF ${contribution?.contributionAmount}`}
+          decription={`RWF ${new Intl.NumberFormat("en-US").format(
+            contribution?.contributionAmount
+          )}`}
         />
         <AppField
           title="Contribution Reciept Number"
           decription={contribution?.depositRecieptNumber}
+        />
+        <AppField
+          title="Contribution Due"
+          decription={`RWF ${new Intl.NumberFormat("en-US").format(
+            contribution?.unpaidContribution
+          )}`}
         />
         <AppField title="Phone Number" decription={contribution?.user?.phone} />
       </div>

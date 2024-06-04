@@ -10,12 +10,14 @@ import {
 } from "@/app/dashboard/(components)/ContentsContainers/columns";
 import Button from "@/app/(components)/buttons/primaryBtn";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 interface memberContribution
   {
     id: number;
     created_at: string;
     contributionAmount: string;
     depositReceiptNumber: string;
+    defaultcontribution:number;
 }
 interface memberContributions{
   contributions:memberContribution[]
@@ -23,6 +25,7 @@ interface memberContributions{
 
 const Contribution = ({ contributions}:memberContributions) => {
   const router = useRouter();
+  const session:any=useSession();
   const [selectedTableRow, setSelectedTableRow] = useState<number[]>([]);
   const [allSelected, setAllSelected] = useState(false);
   const handleSelectedRows = (id: number) => {
@@ -43,6 +46,7 @@ const Contribution = ({ contributions}:memberContributions) => {
     <div className="mt-3 w-full bg-white pr-10 p-6">
       <div className="flex justify-between my-4">
         <h1 className="text-xl font-medium text-blue-1">Contributions</h1>
+        {session?.data?.user?.role=="member" &&contributions[0].defaultcontribution?(<h1 className="text-sm uppercase mt-1">ANNUAL CONTRIBUTION: <span className="font-bold">{new Intl.NumberFormat('en-US').format(contributions[0].defaultcontribution)} RWF</span></h1>):("")}
         <Button
           label="Add New Contribution"
           customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white  rounded font-medium h-fit -mt-1"

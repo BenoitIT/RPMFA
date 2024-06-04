@@ -24,9 +24,10 @@ import { SidebarMenu } from "./sidebar/Sidebar";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openProfileMenus, setProfileMenus] = useState(false);
-  const [DashLinks,setDashLinks]=useState<SidebarMenu[]>([]);
-  const [dashBordMainMenu,setDashBordMainMenu]=useState<SidebarMenu>(adminHomeMenu);
-  const [profile,setDashProfile]=useState<SidebarMenu[]>([]);
+  const [DashLinks, setDashLinks] = useState<SidebarMenu[]>([]);
+  const [dashBordMainMenu, setDashBordMainMenu] =
+    useState<SidebarMenu>(adminHomeMenu);
+  const [profile, setDashProfile] = useState<SidebarMenu[]>([]);
   const session: any = useSession();
   const handleModalDisplay = () => {
     setProfileMenus(!openProfileMenus);
@@ -35,20 +36,25 @@ const Navbar = () => {
     await signOut();
     window.location.href = "/auth/login";
   };
- useEffect(()=>{
-  if (session?.user?.role == "admin") {
-    setDashLinks(DashboardLinks);
-    setDashBordMainMenu(adminHomeMenu);
-    setDashProfile(profileAndSupportLinks);
-  } else {
-    setDashLinks(membersDashboardLinks);
-    setDashBordMainMenu(memberHomeMenu);
-    setDashProfile(membersDashboardLinks);
-  }
-},[session?.user?.role])
+  useEffect(() => {
+    if (session?.user?.role == "admin") {
+      setDashLinks(DashboardLinks);
+      setDashBordMainMenu(adminHomeMenu);
+      setDashProfile(profileAndSupportLinks);
+    } else {
+      setDashLinks(membersDashboardLinks);
+      setDashBordMainMenu(memberHomeMenu);
+      setDashProfile(membersDashboardLinks);
+    }
+  }, [session?.user?.role]);
   return (
     <div className="h-20 border-b fixed max-sm:gap-10 justify-between max-sm:left-0 left-64 top-0 max-md:left-0 right-0 bg-white z-10 flex items-center max-sm:px-1 max-md:px-2 px-4 py-2">
-      <h1 className="text-lg max-sm:hidden font-normal uppercase">Dashboard</h1>
+      <h1 className="text-lg max-sm:hidden font-normal uppercase">
+        {" "}
+        {session?.data?.user?.role == "member"
+          ? "Member's Dashboard"
+          : "Dashboard"}
+      </h1>
       <SecondBtn
         customStyle="hidden max-sm:inline-flex items-center mt-1 border  w-10 h-10 hover:bg-blue-1 hover:text-white justify-center rounded"
         onClick={() => {

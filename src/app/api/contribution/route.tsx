@@ -17,25 +17,98 @@ export const POST = async (request: NextRequest) => {
     });
     if (isRecieptRegistered) {
       return NextResponse.json({
-        message: "Reciept with this number has arleady registred",
+        message: "Receipt with this number has arleady registred",
         status: 400,
       });
     }
-    const contribution = await prisma.contribution.create({
-      data: {
-        contributionAmount: body.contributionAmount,
-        depositRecieptNumber: body.depositRecieptNumber,
-        facilityId: body.facilityId,
-        depositReciept: body.depositReciept,
-        userId: body.userId,
+    const verifiedMembership = await prisma.facility.findFirst({
+      where: {
+        status: "approved",
+        contributionChecked: true,
       },
     });
-    return NextResponse.json({
-      status: 201,
-      data: contribution,
-      message: "Your contribution is sent successfully",
-    });
+    if (verifiedMembership) {
+      const checkInitialContributionInfo = await prisma.contribution.findFirst({
+        where: {
+          facilityId: body.facilityId,
+          userId: body.userId,
+        },
+        orderBy: {
+          id: "desc",
+        },
+        take: 1,
+      });
+      if (
+        checkInitialContributionInfo &&
+        checkInitialContributionInfo.unpaidContribution > 0
+      ) {
+        let balanceExtraAmount: number = 0;
+        let contributionBalance =
+          checkInitialContributionInfo.unpaidContribution -
+          body.contributionAmount;
+        if (contributionBalance < 0) {
+          balanceExtraAmount = Math.abs(contributionBalance);
+          contributionBalance =
+            balanceExtraAmount - verifiedMembership.defaultContribution;
+        }
+        const amountBalance =
+          body.contributionAmount +
+          checkInitialContributionInfo.contributionAmount;
+        const contribution = await prisma.contribution.update({
+          where: {
+            id: checkInitialContributionInfo.id,
+          },
+          data: {
+            contributionAmount: amountBalance,
+            depositRecieptNumber: body.depositRecieptNumber,
+            depositReciept: [
+              ...checkInitialContributionInfo.depositReciept,
+              ...body.depositReciept,
+            ],
+            unpaidContribution: contributionBalance,
+          },
+        });
+        return NextResponse.json({
+          status: 201,
+          data: contribution,
+          message:
+            "Your contribution is sent successfully and unpaid contribution balance is changed",
+        });
+      } else {
+        let updatedUnPaidContributionBal: number;
+        if (verifiedMembership.defaultContribution < body.contributionAmount) {
+          updatedUnPaidContributionBal = 0;
+        } else {
+          updatedUnPaidContributionBal =
+            verifiedMembership.defaultContribution - body.contributionAmount;
+        }
+        const contribution = await prisma.contribution.create({
+          data: {
+            contributionAmount: body.contributionAmount,
+            depositRecieptNumber: body.depositRecieptNumber,
+            facilityId: body.facilityId,
+            depositReciept: body.depositReciept,
+            YearOfContributionStart: body.YearOfContributionStart,
+            userId: body.userId,
+            unpaidContribution: updatedUnPaidContributionBal,
+          },
+        });
+        return NextResponse.json({
+          status: 201,
+          data: contribution,
+          message: "Your contribution is sent successfully",
+        });
+      }
+    }
+    {
+      return NextResponse.json({
+        status: 400,
+        data: null,
+        message: "You have not yet been verified to start contributing",
+      });
+    }
   } catch (err) {
+    console.log(err);
     return NextResponse.json({
       message: "unexpected issue occurs",
       status: 400,
@@ -73,6 +146,7 @@ export const GET = async () => {
           category: contribution?.facility?.facilityCategory,
           amountPaid: contribution?.contributionAmount,
           image: contribution?.user?.profileImage,
+          amountDue: "RWF" + " " + contribution?.unpaidContribution,
           dueDate: convertTimestamp(contribution?.createdAt),
           status: contribution?.status,
         })),
@@ -86,6 +160,7 @@ export const GET = async () => {
           category: contribution?.facility?.facilityCategory,
           amountPaid: contribution?.contributionAmount,
           image: contribution?.user?.profileImage,
+          amountDue: "RWF" + " " + contribution?.unpaidContribution,
           dueDate: convertTimestamp(contribution?.createdAt),
           status: contribution?.status,
         })),

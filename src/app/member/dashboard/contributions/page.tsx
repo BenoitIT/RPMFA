@@ -17,9 +17,11 @@ const Page = async () => {
   if (data.status === 200) {
     const contributions = data.contributions.map((contribution?: any) => ({
       id: contribution?.id,
-      contributionAmount: "RWF" + " " + contribution?.contributionAmount,
+      contributionAmount: "RWF" + " " + new Intl.NumberFormat('en-US').format(contribution?.contributionAmount),
       depositReceiptNumber: contribution?.depositRecieptNumber,
       status: contribution?.status,
+      defaultcontribution:contribution?.facility?.defaultContribution,
+      amountDue:"RWF" + " " +new Intl.NumberFormat('en-US').format(contribution?.unpaidContribution),
       created_at: convertTimestamp(contribution?.createdAt),
     }));
 

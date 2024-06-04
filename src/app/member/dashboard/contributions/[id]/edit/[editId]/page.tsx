@@ -181,7 +181,7 @@ const Page = () => {
                   },
                 }}
                 onUpload={(result: any, widget) => {
-                  toast.success("Reciept image is uploaded");
+                  toast.success("Receipt image is uploaded");
                   setImage((prev: any[]) => [...prev, result?.info?.public_id]);
                 }}
               >

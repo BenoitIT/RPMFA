@@ -9,11 +9,15 @@ import Link from "next/link";
 import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
 import FeedbackModal from "@/app/(components)/modals/feedbackModal";
 import { useSession } from "next-auth/react";
+import MemberShipExtraInfo from "./modals/memberShipExtraInfo";
+import MemberShipCertificateUploader from "./modals/certificateUpload";
 const ApplicationDetails = ({ application, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();
   const [openRejectModal, setRejectModal] = useState(false);
+  const [deliverCerticate, setDeliverCertificate] = useState(false);
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
+  const [openMembershipModal, setMembershipModal] = useState(false);
   const router = useRouter();
   const handleOpenRejectModal = () => {
     setRejectModal(true);
@@ -209,6 +213,30 @@ const ApplicationDetails = ({ application, category }: any) => {
       ) : (
         ""
       )}
+      {application?.contributionChecked &&
+      application.membershipCertificate == "" ? (
+        <div className="w-full flex justify-end pt-4">
+          <Button
+            label="Deliver Certificate"
+            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[170px] rounded font-medium"
+            Click={() => setDeliverCertificate(true)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {application?.status == "approved" &&
+      !application?.contributionChecked ? (
+        <div className="w-full flex justify-end pt-4">
+          <Button
+            label="Complete Membership Info."
+            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[220px] rounded font-medium"
+            Click={() => setMembershipModal(true)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       {application?.status == "rejected" &&
       session?.data?.user?.role !== "admin" ? (
         <div className="flex justify-end  p-2 w-full py-2">
@@ -239,12 +267,22 @@ const ApplicationDetails = ({ application, category }: any) => {
         applicantEmail={application?.user?.email}
         applicantName={application?.user?.firstName}
       />
+      <MemberShipCertificateUploader
+        open={deliverCerticate}
+        setOpen={setDeliverCertificate}
+        id={application?.id}
+      />
       <FeedbackModal
         open={openFeedbackModal}
         handleOpen={setOpenFeedbackModal}
         userId={application?.user?.id}
         applicantEmail={application?.user?.email}
         applicantName={application?.user?.firstName}
+      />
+      <MemberShipExtraInfo
+        open={openMembershipModal}
+        setOpen={setMembershipModal}
+        id={application?.id}
       />
     </div>
   );

@@ -29,20 +29,25 @@ model User {
 }
 
 model Facility {
-  id               Int            @id @default(autoincrement())
-  facilityName     String         @unique
-  facilityCategory String
-  province         String
-  tinNumber        String         @unique
-  district         String
-  sector           String
-  cell             String
-  plotNumber       String
-  user             User           @relation(fields: [userId], references: [id])
-  userId           Int
-  documents        String[]
-  Contribution     Contribution[]
-  status           String         @default("pending")
+  id                    Int            @id @default(autoincrement())
+  facilityName          String         @unique
+  facilityCategory      String
+  province              String
+  tinNumber             String         @unique
+  district              String
+  sector                String
+  cell                  String
+  plotNumber            String
+  user                  User           @relation(fields: [userId], references: [id])
+  userId                Int
+  documents             String[]
+  membershipCertificate String         @default("")
+  Contribution          Contribution[]
+  status                String         @default("pending")
+  joinedAt              DateTime       @default(now())
+  defaultContribution   Int            @default(0)
+  contributionChecked   Boolean        @default(false)
+  createdAt             DateTime       @default(now())
 }
 
 model passwordResetToken {
@@ -62,14 +67,16 @@ model Announcement {
 }
 
 model Contribution {
-  id                   Int      @id @unique @default(autoincrement())
-  contributionAmount   Int
-  depositRecieptNumber String      @unique
-  depositReciept       String[]
-  status               String   @default("pending")
-  userId               Int
-  user                 User     @relation(fields: [userId], references: [id])
-  facility             Facility @relation(fields: [facilityId], references: [id])
-  facilityId           Int
-  createdAt            DateTime @default(now())
+  id                      Int      @id @unique @default(autoincrement())
+  contributionAmount      Int
+  depositRecieptNumber    String   @unique
+  depositReciept          String[]
+  status                  String   @default("pending")
+  userId                  Int
+  user                    User     @relation(fields: [userId], references: [id])
+  facility                Facility @relation(fields: [facilityId], references: [id])
+  facilityId              Int
+  YearOfContributionStart DateTime @default(now())
+  createdAt               DateTime @default(now())
+  unpaidContribution      Int      @default(0)
 }
