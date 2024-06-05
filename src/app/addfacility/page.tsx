@@ -214,6 +214,7 @@ const AddFacility = () => {
                     "Select category here",
                     "Genaral clinic",
                     "Polyclinic",
+                    "Specialized Clinic",
                     "Hospital",
                   ]}
                   changeHandler={handleInputChange}

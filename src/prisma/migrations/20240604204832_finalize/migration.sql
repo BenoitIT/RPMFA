@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Contribution" ADD COLUMN     "YearOfContributionStart" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "Facility" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

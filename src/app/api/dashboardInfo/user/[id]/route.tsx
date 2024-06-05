@@ -20,6 +20,12 @@ export const GET = async (request: Request) => {
         userId: Number(id),
       },
     });
+    const totalContributionDue=await prisma.contribution.findMany({
+      orderBy:{
+        id:"desc"
+      }
+    });
+    const contributionDue=totalContributionDue[0].unpaidContribution;
     const pendingContributionsValue = pendingContributions.reduce(
       (acc: any, value: any) => acc + value?.contributionAmount,
       0
@@ -47,6 +53,7 @@ export const GET = async (request: Request) => {
       Approvedcontribution,
       latestContributionList,
       latestContributionListValue,
+      contributionDue
     });
   } catch (err) {
     return NextResponse.json({

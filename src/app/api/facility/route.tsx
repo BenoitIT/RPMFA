@@ -14,18 +14,31 @@ export const POST = async (request: NextRequest) => {
       if (!validation.success) {
         return NextResponse.json(validation.error.errors, { status: 400 });
       }
+      let defaultContributionAmount: number;
+      if (body.facilityCategory == "Genaral clinic") {
+        defaultContributionAmount = 600000;
+      } else if (body.facilityCategory == "Polyclinic") {
+        defaultContributionAmount = 900000;
+      } else if (body.facilityCategory == "Specialized Clinic") {
+        defaultContributionAmount = 720000;
+      } else if (body.facilityCategory == "Hospital") {
+        defaultContributionAmount = 1200000;
+      } else {
+        defaultContributionAmount = 0;
+      }
       const facility = await prisma.facility.create({
         data: {
           facilityName: body.facilityName,
           facilityCategory: body.facilityCategory,
           province: body.province,
           district: body.district,
-          tinNumber:body.tinNumber,
+          tinNumber: body.tinNumber,
           sector: body.sector,
           plotNumber: body.plotNumber,
           cell: body.cell,
           documents: body.documents,
-          userId:payload.id
+          userId: payload.id,
+          defaultContribution: defaultContributionAmount,
         },
       });
       return NextResponse.json({
@@ -41,5 +54,3 @@ export const POST = async (request: NextRequest) => {
     });
   }
 };
-
-

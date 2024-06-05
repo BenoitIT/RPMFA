@@ -4,6 +4,7 @@ import { FcFlashOn } from "react-icons/fc";
 import { MdOutlineRecentActors } from "react-icons/md";
 import Link from "next/link";
 import { PiCertificate, PiHouseLine } from "react-icons/pi";
+import { MdOutlineCreditCardOff } from "react-icons/md";
 import { auth } from "@/auth";
 import Contribution from "./(contents)/recentContribution";
 
@@ -23,7 +24,14 @@ const Dashboard = async () => {
         <h1 className="text-2xl text-blue-1 font-semibold">
           Quick Insight <FcFlashOn className="inline text-2xl" />
         </h1>
-        <div className="grid md:grid-cols-3 max:md:grid-cols-2 max-sm:grid-cols-1 gap-10 mt-8">
+        <div className="grid md:grid-cols-4 max:md:grid-cols-4 max-sm:grid-cols-1 gap-4 mt-8">
+        <Link href={"/member/dashboard/contributions"}>
+            <DashbordCard
+              title="Contributions Due"
+              value={`RWF ${data?.contributionDue}`}
+              icon={<MdOutlineCreditCardOff className="text-2xl text-blue-1" />}
+            />
+          </Link>
           <Link href={"/member/dashboard/contributions"}>
             <DashbordCard
               title="Pending Contributions"
