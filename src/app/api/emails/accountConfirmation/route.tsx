@@ -3,12 +3,13 @@ import { EmailTemplate } from "@/app/(components)/emailTemplates/accountConfirma
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
+const emailServer=process.env.NEXT_RESEND_APP_DOMAIN!;
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const body = await req.json();
   const APPURL = process.env.NEXT_APP_URL!;
   const { data, error } = await resend.emails.send({
-    from: "onboarding@resend.dev",
+    from: emailServer,
     to: body.email,
     subject: "Confirm your account",
     react: EmailTemplate({
