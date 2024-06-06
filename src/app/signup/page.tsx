@@ -81,7 +81,7 @@ const SignUpPage = () => {
           toast.error(responseData.message);
           setLoading(false);
         } else {
-          toast.error(responseData[0].message);
+          toast.error(responseData[0]?.path[0]+' '+responseData[0].message);
           setLoading(false);
         }
       }

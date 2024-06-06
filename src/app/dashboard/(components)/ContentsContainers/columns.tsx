@@ -13,6 +13,8 @@ export const ContributionTableColumns = [
   { field: "amountPaid", header: "Amount Paid" },
   { field: "dueDate", header: "Due Date" },
   { field: "amountDue", header: "Amount Due" },
+  { field: "numberOfPeriod", header: "Number of Seasons" },
+  { field: "paymentYear", header: "Payment Year" },
   { field: "status", header: "Status" },
   { field: "Action", header: "Action" },
 ];
@@ -31,9 +33,8 @@ export const memberContributionTableColumns = [
   { field: "contributionAmount", header: "Contribution Amount" },
   { field: "depositReceiptNumber", header: "Deposit Receipt Number" },
   { field: "amountDue", header: "Amount Due" },
+  { field: "contributionPeriod", header: "Number of Seasons" },
+  { field: "paymentYear", header: "Payment Year" },
   { field: "status", header: "Status" },
   { field: "Action", header: "Action" },
 ];
-
-
-

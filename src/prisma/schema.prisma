@@ -76,7 +76,14 @@ model Contribution {
   user                    User     @relation(fields: [userId], references: [id])
   facility                Facility @relation(fields: [facilityId], references: [id])
   facilityId              Int
+  contributionPeriod      Int      @default(1)
   YearOfContributionStart DateTime @default(now())
   createdAt               DateTime @default(now())
   unpaidContribution      Int      @default(0)
+}
+
+model ContributingYearsMonitor{
+  id                      Int      @id @unique @default(autoincrement())
+  year                    Int
+  initialized             Boolean @default(false)
 }

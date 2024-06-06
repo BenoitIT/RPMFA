@@ -6,6 +6,7 @@ interface PrimaryInputProps {
   value?: string;
   placeholder: string;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?:boolean;
 }
 export const PrimaryInput = ({
   label,
@@ -14,14 +15,15 @@ export const PrimaryInput = ({
   changeHandler,
   placeholder,
   value,
+  required
 }: PrimaryInputProps) => {
   return (
     <div>
       <label
         htmlFor={name}
-        className="block mb-2 text-sm font-medium text-gray-900"
+        className="flex mb-2 text-sm font-medium text-gray-900 gap-4"
       >
-        {label}
+        <span>{label}</span><span className={required!=null?"hidden":"text-red-400 text-xs mt-[2.5px]"}>Required</span>
       </label>
       <input
         type={type}

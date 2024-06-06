@@ -8,34 +8,37 @@ import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import FeedbackModal from "@/app/(components)/modals/feedbackModal";
 import { useSession } from "next-auth/react";
-const  ContributionDetails = ({ contribution, category }: any) => {
+import { extractYear } from "@/app/utilities/timeParser";
+import { toast } from "react-toastify";
+const ContributionDetails = ({ contribution, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleFeedbackModal = () => {
     setOpenFeedbackModal(true);
   };
   const handleApproveContribution = async () => {
-    const response = await fetch(`/api/${category}/${contribution?.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
-    if (data?.status == 200) {
-      setOpenSuccessModal(true);
-      await fetch("/api/emails/approval", {
-        method: "POST",
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/${category}/${contribution?.id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({}),
       });
-      setTimeout(() => {
-        router.refresh();
-      }, 3000);
+      const data = await response.json();
+      if (data?.status == 200) {
+        setOpenSuccessModal(true);
+        setTimeout(() => {
+          router.refresh();
+        }, 3000);
+        setLoading(false);
+      }
+    } catch (err) {
+      toast.error("unexpected error occurs");
+      setLoading(false);
     }
   };
   return (
@@ -105,7 +108,7 @@ const  ContributionDetails = ({ contribution, category }: any) => {
           )}`}
         />
         <AppField
-          title="Contribution Reciept Number"
+          title="Contribution Receipt Number"
           decription={contribution?.depositRecieptNumber}
         />
         <AppField
@@ -115,9 +118,17 @@ const  ContributionDetails = ({ contribution, category }: any) => {
           )}`}
         />
         <AppField title="Phone Number" decription={contribution?.user?.phone} />
+        <AppField
+          title="Contribution Seasons covered"
+          decription={contribution?.contributionPeriod}
+        />
+        <AppField
+          title="Payment year"
+          decription={extractYear(contribution?.YearOfContributionStart)}
+        />
       </div>
       <div className="flex flex-col gap-3 my-6">
-        <h1 className="text-sm font-medium">Contribution Reciepts</h1>
+        <h1 className="text-sm font-medium">Contribution Receipts</h1>
         {contribution?.depositReciept?.length > 0 ? (
           contribution?.depositReciept.map(
             (document: string, index: number) => {
@@ -131,7 +142,7 @@ const  ContributionDetails = ({ contribution, category }: any) => {
                     >
                       <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">
                         <FaFile className="text-lg" />
-                        <span>Reciept {index + 1}</span>
+                        <span>Receipt {index + 1}</span>
                       </div>
                     </Link>
                   ) : (
@@ -141,7 +152,7 @@ const  ContributionDetails = ({ contribution, category }: any) => {
                     >
                       <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">
                         <FaFile className="text-lg" />
-                        <span>Reciept {index + 1}</span>
+                        <span>Receipt {index + 1}</span>
                       </div>
                     </Link>
                   )}
@@ -186,7 +197,7 @@ const  ContributionDetails = ({ contribution, category }: any) => {
       session?.data?.user?.role == "admin" ? (
         <div className="flex flex-row justify-end  gap-4 p-2 w-full">
           <Button
-            label="Approve Contribution"
+            label={loading ? "Approving..." : "Approve Contribution"}
             customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-fit rounded font-medium"
             Click={handleApproveContribution}
           />

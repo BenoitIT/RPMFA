@@ -62,7 +62,8 @@ const AddFacility = () => {
       if (
         currentSection == 1 &&
         formValues.facilityName == "" &&
-        formValues.facilityName == ""
+        formValues.facilityName == "" &&
+        formValues.tinNumber == ""
       ) {
         setWorning("Fill the missing data");
         setDisabled(true);
@@ -79,7 +80,6 @@ const AddFacility = () => {
         setDisabled(true);
       } else {
         setDisabled(false);
-        setWorning("Upload the supporting documents");
       }
     };
     handleButtonDisability();
@@ -146,7 +146,7 @@ const AddFacility = () => {
         setOpenModal(true);
         setLoading(false);
       } else {
-        toast.error(responseData[0].message);
+        toast.error(responseData[0]?.path[0]+' '+responseData[0].message);
         setLoading(false);
       }
     } catch (err) {
@@ -258,6 +258,7 @@ const AddFacility = () => {
                   value={formValues.cell}
                   placeholder="Enter cell here"
                   changeHandler={handleInputChange}
+                  required={false}
                 />
                 <PrimaryInput
                   label="Plot Number"
@@ -266,6 +267,7 @@ const AddFacility = () => {
                   value={formValues.plotNumber}
                   placeholder="Enter plot number here"
                   changeHandler={handleInputChange}
+                  required={false}
                 />
               </>
             ) : currentSection === 3 ? (
@@ -307,6 +309,10 @@ const AddFacility = () => {
                     Upload the following documents if available
                   </p>
                   <ul className="text-sm text-black opacity-85 ml-4">
+                    <li className="list-disc">
+                      Only upload membership certificate.if you are already
+                      member of rpmfa.
+                    </li>
                     <li className="list-disc">
                       Application letter addressed to RPMFA President
                     </li>
@@ -386,7 +392,11 @@ const AddFacility = () => {
           </form>
         </div>
       </div>
-      <SuccessModal open={openModal} handleOpen={setOpenModal} NextPath="/member/dashboard" />
+      <SuccessModal
+        open={openModal}
+        handleOpen={setOpenModal}
+        NextPath="/member/dashboard"
+      />
       <Footer />
     </main>
   );

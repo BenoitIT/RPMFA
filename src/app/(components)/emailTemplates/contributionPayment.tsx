@@ -2,16 +2,12 @@ import * as React from "react";
 import { SlEnvolope } from "react-icons/sl";
 
 interface EmailTemplateProps {
-  firstName: string;
-  subject: string;
-  message: string;
+  subject: string|number;
 }
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-  firstName,
-  subject,
-  message,
-}) => (
+export const EmailContributionTemplate: React.FC<
+  Readonly<EmailTemplateProps>
+> = ({ subject }) => (
   <div style={{ width: "100%" }}>
     <div
       style={{
@@ -46,7 +42,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             marginBottom: "10px",
           }}
         >
-          THANKS FOR SENDING APPLICATION!
+          Thank you for being impeccable member of RPMFA!
         </div>
       </div>
     </div>
@@ -61,7 +57,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       }}
     >
       <h2 style={{ color: "#4A5568", textAlign: "center" }}>
-        Hello {firstName}!
+        Hello !
       </h2>
       <p
         style={{
@@ -71,7 +67,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           textAlign: "center",
         }}
       >
-        {subject}.
+        Payment of membership contribution {subject} is up.
       </p>
       <p
         style={{
@@ -81,7 +77,10 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           textAlign: "center",
         }}
       >
-        {message}.
+        We hope this message finds you well. We are writing to remind you that
+        your membership with RPMFA is due for renewal on for {subject}. As a
+        valued member, your support is crucial to our community, and we truly
+        appreciate your contributions over the past year.
       </p>
       <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
         Thank you, <br />

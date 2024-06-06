@@ -64,7 +64,7 @@ const Page = () => {
           depositRecieptNumber: formValues.recieptNumber,
           depositReciept: image,
           contributionAmount: Number(formValues.recieptAmount),
-          YearOfContributionStart:dateValue,
+          YearOfContributionStart: dateValue,
           facilityId: Number(formValues.faciltyId),
           userId: Number(userId),
         };
@@ -81,7 +81,7 @@ const Page = () => {
           router.refresh();
           setLoading(false);
         } else if (data[0]?.message) {
-          toast.success(data[0]?.message);
+          toast.success(data[0]?.path[0] + " " + data[0]?.message);
           setLoading(false);
         } else {
           toast.error(data.message);
@@ -160,7 +160,7 @@ const Page = () => {
                 changeHandler={handleInputChange}
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Year Of Contribution Start
+                Date Of Contribution Start
               </label>
               <DatePicker
                 onChange={(value: any, dateString) => {
@@ -171,7 +171,7 @@ const Page = () => {
                 className="bg-gray-1  text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm outline-none"
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Reciept Image
+                Receipt Image
               </label>
               <CldUploadWidget
                 uploadPreset="emrtyzay"
@@ -188,7 +188,7 @@ const Page = () => {
                   },
                 }}
                 onUpload={(result: any, widget) => {
-                  toast.success("Reciept image is uploaded");
+                  toast.success("Receipt image is uploaded");
                   setImage((prev: any[]) => [...prev, result?.info?.public_id]);
                 }}
               >
@@ -202,7 +202,7 @@ const Page = () => {
                           className="h-[150px] w-[449px] bg-gray-1 flex flex-col justify-center items-center"
                         >
                           <p className="text-sm opacity-85">
-                            Upload a reciept here
+                            Upload a receipt here
                           </p>
                         </Button>
                       ) : (

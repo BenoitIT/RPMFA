@@ -20,7 +20,7 @@ const Certificates = ({ memberships }: certificate) => {
   const [certificate, setCertificate] = useState("");
   useEffect(() => {
     setCertificate(memberships[0]?.membershipCertificate);
-  }, [memberships[0]?.membershipCertificate]);
+  }, [memberships[0]?.membershipCertificate,memberships]);
   const handleDownload = async () => {
     const imageUrl = cld.url(certificate, {
       width: 800,

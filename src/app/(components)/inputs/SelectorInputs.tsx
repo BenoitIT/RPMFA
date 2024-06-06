@@ -7,20 +7,29 @@ interface PrimaryInputProps {
   changeHandler: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
+  required?: boolean;
 }
 export const PrimarySelectorInput = ({
   label,
   name,
   options,
   changeHandler,
+  required,
 }: PrimaryInputProps) => {
   return (
     <div>
       <label
         htmlFor={name}
-        className="block mb-2 text-sm font-medium text-gray-900"
+        className="flex gap-4 mb-2 text-sm font-medium text-gray-900"
       >
-        {label}
+        <span>{label}</span>
+        <span
+          className={
+            required != null ? "hidden" : "text-red-400 text-xs mt-[2.5px]"
+          }
+        >
+          Required
+        </span>
       </label>
 
       <select
