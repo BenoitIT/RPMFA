@@ -3,11 +3,11 @@ import { EmailTemplate } from "@/app/(components)/emailTemplates/rejectApplicati
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
-
+const emailServer=process.env.NEXT_RESEND_APP_DOMAIN!;
 export const POST= async (req:NextRequest) => {
   const body = await req.json();
   const { data, error } = await resend.emails.send({
-    from: "onboarding@resend.dev",
+    from: emailServer,
     to: body.email,
     subject: "Application has been rejected!",
     react: EmailTemplate({
