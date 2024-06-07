@@ -74,7 +74,7 @@ const SignUpPage = () => {
           if (data.status == 200) {
             setOpenModal(true);
           } else {
-            toast.error("Could not send now!");
+            toast.error("Could not send an email to you now!");
           }
           setLoading(false);
         } else if (responseData.status === 400) {

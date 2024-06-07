@@ -25,7 +25,7 @@ const Dashboard = async () => {
           Quick Insight <FcFlashOn className="inline text-2xl" />
         </h1>
         <div className="grid md:grid-cols-4 max:md:grid-cols-4 max-sm:grid-cols-1 gap-4 mt-8">
-        <Link href={"/member/dashboard/contributions"}>
+          <Link href={"/member/dashboard/contributions"}>
             <DashbordCard
               title="Contributions Due"
               value={`RWF ${data?.contributionDue}`}
@@ -60,6 +60,26 @@ const Dashboard = async () => {
         <Contribution contributions={data?.latestContributionList} />
       </div>
     );
+  } else {
+    <div className="wfull h-[70vh] flex justify-center items-center">
+      <h1 className="text-2xl text-blue-1 font-semibold">
+        Could not find any statistics. Follow the instructions below
+      </h1>
+      <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5 text-center shadow">
+        <li className="list-disc">
+          Click on application tab to and create new application for your health
+          facility
+        </li>
+        <li className="list-disc">
+          Your application will be reviewed and confirmed by RPMFA admin. this
+          will directly confirm your membership
+        </li>
+        <li className="list-disc">
+          Once you are a member you can start find some statistics on the
+          dashboard
+        </li>
+      </div>
+    </div>;
   }
 };
 export default Dashboard;
