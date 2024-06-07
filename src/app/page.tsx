@@ -18,11 +18,11 @@ import Footer from "./(components)/navigations/Footer";
 import { auth, signOut } from "@/auth"
 
 export default async function Home() {
-  const session: any = await auth();  
-  const isLoggedin = !!session;  
+  const session: any = await auth();
+  const isLoggedin = !!session;
   return (
     <main className="flex min-h-screen flex-col items-center bg-white">
-      <div className="sticky w-full top-0 z-40">
+      <div className="sticky w-full top-0 z-40 px-12">
         <NavBar isLoggedin= {isLoggedin}/>
       </div>
       <div className="p-4 w-full mt-6">
