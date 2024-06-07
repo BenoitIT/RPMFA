@@ -14,12 +14,14 @@ interface certificateCard {
   onDownload: () => void;
 }
 const Certificates = ({ memberships }: certificate) => {
-  const cld = new Cloudinary({ cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME });
+  const cld = new Cloudinary({
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  });
   const [certificate, setCertificate] = useState("");
   useEffect(() => {
     setCertificate(memberships[0]?.membershipCertificate);
   }, [memberships[0]?.membershipCertificate]);
-  const handleDownload =async () => {
+  const handleDownload = async () => {
     const imageUrl = cld.url(certificate, {
       width: 800,
       height: 600,
@@ -28,9 +30,9 @@ const Certificates = ({ memberships }: certificate) => {
     });
     const response = await fetch(imageUrl);
     const blob = await response.blob();
-    const contentType = blob.type.split('/')[1]; 
+    const contentType = blob.type.split("/")[1];
     const blobUrl = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = blobUrl;
     link.download = `certificate.${contentType}`;
     document.body.appendChild(link);
@@ -54,14 +56,22 @@ const Certificates = ({ memberships }: certificate) => {
           ))}
         </div>
         <div className="w-fit border border-blue-200 h-[80vh] overflow-scroll ml-2">
-          <CldImage
-            src={certificate}
-            alt="certificate"
-            width={700}
-            height={600}
-            quality={100}
-            className="w-full"
-          />
+          {certificate == "" ? (
+            <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5 text-center shadow">
+              <li className="list-disc">
+                Membership certificate has not yet been sent from Admin
+              </li>
+            </div>
+          ) : (
+            <CldImage
+              src={certificate}
+              alt="certificate"
+              width={700}
+              height={600}
+              quality={100}
+              className="w-full"
+            />
+          )}
         </div>
       </div>
     );

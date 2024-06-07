@@ -18,7 +18,7 @@ const Dashboard = async () => {
     }
   );
   const data = await response.json();
-  if (data.status == 200) {
+  if (data.status == 200 && data?.contributionDue) {
     return (
       <div className="mt-4 w-full">
         <h1 className="text-2xl text-blue-1 font-semibold">
