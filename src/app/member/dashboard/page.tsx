@@ -18,7 +18,7 @@ const Dashboard = async () => {
     }
   );
   const data = await response.json();
-  if (data.status == 200 && data?.contributionDue) {
+  if (data.status == 200) {
     return (
       <div className="mt-4 w-full">
         <h1 className="text-2xl text-blue-1 font-semibold">
@@ -61,11 +61,12 @@ const Dashboard = async () => {
       </div>
     );
   } else {
-    <div className="wfull h-[70vh] flex justify-center items-center">
+    return(
+    <div className="wfull h-[70vh] flex flex-col justify-center items-center gap-4">
       <h1 className="text-2xl text-blue-1 font-semibold">
         Could not find any statistics. Follow the instructions below
       </h1>
-      <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5 text-center shadow">
+      <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5  shadow">
         <li className="list-disc">
           Click on application tab to and create new application for your health
           facility
@@ -75,11 +76,12 @@ const Dashboard = async () => {
           will directly confirm your membership
         </li>
         <li className="list-disc">
-          Once you are a member you can start find some statistics on the
+          Once you are a member you can start to find some statistics on the
           dashboard
         </li>
       </div>
-    </div>;
+    </div>
+    )
   }
 };
 export default Dashboard;
