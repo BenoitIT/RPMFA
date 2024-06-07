@@ -8,7 +8,7 @@ import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import FeedbackModal from "@/app/(components)/modals/feedbackModal";
 import { useSession } from "next-auth/react";
-const ContributionDetails = ({ contribution, category }: any) => {
+const  ContributionDetails = ({ contribution, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
@@ -136,7 +136,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
                     </Link>
                   ) : (
                     <Link
-                      href={`/member/dashboard/${category}/${contribution?.id}/${uniqueDocumentPart}`}
+                      href={`/member/dashboard/contributions/${contribution?.id}/${uniqueDocumentPart}`}
                       key={index}
                     >
                       <div className="flex flex-row gap-3 p-2 w-full bg-blue-50 rounded text-blue-700 font-medium text-xs">

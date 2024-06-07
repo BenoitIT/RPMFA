@@ -36,7 +36,7 @@ const Footer = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 w-[280px]">
             <p className="text-black my-2 text-sm font-medium">Contact</p>
             <p className="text-black  text-sm opacity-90">+250 788 515 358</p>
             <p className="text-black text-sm opacity-90">info@rpmfa.rw</p>
@@ -46,7 +46,7 @@ const Footer = () => {
               <IoLogoTwitter />
             </div>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 w-[280px]">
             <p className="text-black my-2 text-sm font-medium">Quick Links</p>
             <p className="text-black  text-sm opacity-90">Library</p>
             <p className="text-black text-sm opacity-90">Members</p>

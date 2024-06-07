@@ -23,25 +23,13 @@ const Members = ({ Allmembers }: pageProps) => {
     <div className="min-h-screen max-h-fit">
       <div className="max-w-screen-xl px-12">
         <NavBar />
-        {Allmembers.length < 0 ? (
+        {Allmembers.length > 0 ? (
           <div className="w-full pb-5">
-            <div className="mb-5">
-              <h1 className="text-blue-1 text-2xl font-semibold mb-3">
+            <div className="mb-6">
+              <h1 className="text-blue-1 text2xl font-semibold mb-3">
                 Members
               </h1>
-              <div className="flex gap-3 max-sm:flex-col">
-                <SearchInput
-                  type="text"
-                  value={searchValue}
-                  placeholder="Search members..."
-                  changeHandler={handleSearch}
-                />
-                <FilterButton
-                  className="w-full"
-                  icon={<VscSettings />}
-                  btnText="Filter by"
-                />
-              </div>
+
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-3">
               {Allmembers.map((member) => (
@@ -60,9 +48,9 @@ const Members = ({ Allmembers }: pageProps) => {
             </div>
           </div>
         ) : (
-          <div className="h-[40vh] w-screen flex justify-center items-center text-base flex-col gap-3 max-w-screen-xl">
-            <TbDatabaseX className="text-4xl text-gray-800" />
-            <p className="text-gray-700">
+          <div className="h-[40vh] w-screen flex justify-center items-center text-sm flex-col gap-3 max-w-full">
+            <TbDatabaseX className="text-4xl text-blue-300" />
+            <p className="text-gray-700 font-light">
               Members are not found. They will be recorded.
             </p>
           </div>

@@ -68,8 +68,8 @@ const Dashboard = async () => {
       </h1>
       <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5  shadow">
         <li className="list-disc">
-          Click on application tab to and create new application for your health
-          facility
+          Click on application tab  and create new application for your health
+          facility.if you have not done. otherwise wait for being approved.
         </li>
         <li className="list-disc">
           Your application will be reviewed and confirmed by RPMFA admin. this
