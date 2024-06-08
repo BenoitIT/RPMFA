@@ -9,7 +9,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const body = await req.json();
   const APPURL = process.env.NEXT_APP_URL!;
   const { data, error } = await resend.emails.send({
-    from: emailServer,
+    from: `no-reply@${emailServer}`,
     to: body.email,
     subject: "Confirm your account",
     react: EmailTemplate({
