@@ -7,7 +7,7 @@ const emailServer=process.env.NEXT_RESEND_APP_DOMAIN!;
 export const POST= async (req:NextRequest) => {
   const body = await req.json();
   const { data, error } = await resend.emails.send({
-    from: emailServer,
+    from:`no-reply@${emailServer}`,
     to: body.email,
     subject: "Application has been rejected!",
     react: EmailTemplate({
