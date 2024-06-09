@@ -7,9 +7,9 @@ export const sendPasswordResetEmail = async(
     token: string,
 ) => {
     const resetLink = `${process.env.NEXT_APP_URL}/auth/reset_password?token=${token}`;
-       
+
     await resend.emails.send({
-        from: 'onboarding@resend.dev',
+        from: 'rpmfa@rpmfa.org',
         to: email,
         subject: "Reset your password",
         html: `
@@ -20,7 +20,7 @@ export const sendPasswordResetEmail = async(
         <p>If you don’t use this link within 1 hour, it will expire.</p>
         `,
     });
-    
+
 
 
 }
