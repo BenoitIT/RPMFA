@@ -8,7 +8,7 @@ const emailServer=process.env.NEXT_RESEND_APP_DOMAIN!;
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
   const { data, error } = await resend.emails.send({
-    from: `no-reply@${emailServer}`,
+    from: "rpmfa@rpmfa.org",
     to: body.email,
     subject: "RPMFA application feedback",
     react: EmailTemplate({
