@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { EmailTemplate } from "@/app/(components)/emailTemplates/rejectApplication";
 import { Resend } from "resend";
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 const emailServer=process.env.NEXT_RESEND_APP_DOMAIN!;
