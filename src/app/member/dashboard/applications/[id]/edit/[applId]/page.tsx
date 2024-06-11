@@ -225,7 +225,7 @@ const AddFacility = () => {
                   value={formValues.facilityCategory}
                   options={[
                     "Select category here",
-                    "Genaral clinic",
+                    "General clinic",
                     "Polyclinic",
                     "Hospital",
                   ]}

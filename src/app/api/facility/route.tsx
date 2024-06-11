@@ -15,7 +15,7 @@ export const POST = async (request: NextRequest) => {
         return NextResponse.json(validation.error.errors, { status: 400 });
       }
       let defaultContributionAmount: number;
-      if (body.facilityCategory == "Genaral clinic") {
+      if (body.facilityCategory == "General clinic") {
         defaultContributionAmount = 600000;
       } else if (body.facilityCategory == "Polyclinic") {
         defaultContributionAmount = 900000;
