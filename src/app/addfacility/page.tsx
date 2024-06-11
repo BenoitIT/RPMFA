@@ -74,12 +74,12 @@ const AddFacility = () => {
       ) {
         setWorning("Fill the missing data");
         setDisabled(true);
-      } else if (currentSection == 3 && Uploadeddocuments.length < 3) {
-        setWorning("Upload the missing documents");
+      } else if (currentSection == 3 && Uploadeddocuments.length < 1) {
+        setWorning("Upload the supporting documents");
         setDisabled(true);
       } else {
         setDisabled(false);
-        setWorning("Upload the missing documents");
+        setWorning("Upload the supporting documents");
       }
     };
     handleButtonDisability();
@@ -212,7 +212,7 @@ const AddFacility = () => {
                   value={formValues.facilityCategory}
                   options={[
                     "Select category here",
-                    "Genaral clinic",
+                    "General clinic",
                     "Polyclinic",
                     "Specialized Clinic",
                     "Hospital",

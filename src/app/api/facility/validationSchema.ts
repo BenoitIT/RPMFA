@@ -6,7 +6,6 @@ const schema = z.object({
   province: z.string().min(2),
   district: z.string().min(2),
   sector: z.string().min(2),
-  tinNumber:z.string().min(6),
   plotNumber: z.string().min(2),
   cell: z.string().min(2),
 });
