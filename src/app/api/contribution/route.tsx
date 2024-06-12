@@ -145,13 +145,23 @@ export const GET = async () => {
           id: contribution?.id,
           facilityName: contribution?.facility?.facilityName,
           category: contribution?.facility?.facilityCategory,
-          amountPaid: contribution?.contributionAmount,
+          amountPaid:
+            "RWF" +
+            " " +
+            new Intl.NumberFormat("en-US").format(
+              contribution?.contributionAmount
+            ),
           image: contribution?.user?.profileImage,
-          amountDue: "RWF" + " " + contribution?.unpaidContribution,
+          amountDue:
+            "RWF" +
+            " " +
+            new Intl.NumberFormat("en-US").format(
+              contribution?.unpaidContribution
+            ),
           dueDate: convertTimestamp(contribution?.createdAt),
           status: contribution?.status,
-          numberOfPeriod:contribution?.contributionPeriod,
-          paymentYear:extractYear(contribution?.YearOfContributionStart)
+          numberOfPeriod: contribution?.contributionPeriod,
+          paymentYear: extractYear(contribution?.YearOfContributionStart),
         })),
       },
       {
@@ -161,13 +171,23 @@ export const GET = async () => {
           id: contribution?.id,
           facilityName: contribution?.facility?.facilityName,
           category: contribution?.facility?.facilityCategory,
-          amountPaid: contribution?.contributionAmount,
+          amountPaid:
+            "RWF" +
+            " " +
+            new Intl.NumberFormat("en-US").format(
+              contribution?.contributionAmount
+            ),
           image: contribution?.user?.profileImage,
-          amountDue: "RWF" + " " + contribution?.unpaidContribution,
+          amountDue:
+            "RWF" +
+            " " +
+            new Intl.NumberFormat("en-US").format(
+              contribution?.unpaidContribution
+            ),
           dueDate: convertTimestamp(contribution?.createdAt),
           status: contribution?.status,
-          numberOfPeriod:contribution?.contributionPeriod,
-          paymentYear:extractYear(contribution?.YearOfContributionStart)
+          numberOfPeriod: contribution?.contributionPeriod,
+          paymentYear: extractYear(contribution?.YearOfContributionStart),
         })),
       },
     ];

@@ -57,15 +57,16 @@ export const PUT = async (request: NextRequest) => {
             status: "approved",
           },
         });
-        await resend.emails.send({
+       const result=await resend.emails.send({
           from: "rpmfa@rpmfa.org",
           to: contribution.user.email,
           subject: "Your membership contribution is approved",
           react: EmailContApproveTemplate({
             firstName: contribution.user.firstName,
           }),
-          text:"",
+          text:"Your membership contribution is approved",
         });
+        console.log("emaillss",result)
         return NextResponse.json({
           status: 200,
           contribution: updatedcontribution,
