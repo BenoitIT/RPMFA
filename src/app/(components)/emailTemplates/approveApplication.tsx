@@ -79,8 +79,12 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           textAlign: "center",
         }}
       >
-        we are grad to let you know that your application has been approved by
-        RPMFA.
+        We are delighted to inform you that your application to become a Rwanda
+        Private Medical Facilities Association (RPMFA) has been approved! Your
+        commitment to excellence and your contributions to the field of
+        mechanical engineering are truly commendable. As an RPMFA, you now join
+        an elite group of professionals who are recognized for their expertise,
+        leadership, and dedication to advancing the profession.
       </p>
       <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
         Thank you, <br />

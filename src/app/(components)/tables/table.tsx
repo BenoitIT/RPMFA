@@ -86,8 +86,8 @@ const Table = ({
                   className={`md:py-3 xs:py-2 xs:px-1 text-left md:text-sm  xs:text-xs font-normal text-gray-700 capitalize`}
                   key={column.field}
                 >
-                  {column.header.length > 25
-                    ? column.header.slice(0, 25) + "..."
+                  {column.header.length > 28
+                    ? column.header.slice(0, 28) + "..."
                     : column.header}
                 </th>
               ))}

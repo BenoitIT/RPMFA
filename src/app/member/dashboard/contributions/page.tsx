@@ -3,6 +3,7 @@ import { PiGreaterThanLight } from "react-icons/pi";
 import Contribution from "../(contents)/contributions";
 import { auth } from "@/auth";
 import { convertTimestamp } from "@/app/utilities/timeConverters";
+import { extractYear } from "@/app/utilities/timeParser";
 
 const Page = async () => {
   const session: any = await auth();
@@ -23,6 +24,8 @@ const Page = async () => {
       defaultcontribution:contribution?.facility?.defaultContribution,
       amountDue:"RWF" + " " +new Intl.NumberFormat('en-US').format(contribution?.unpaidContribution),
       created_at: convertTimestamp(contribution?.createdAt),
+      contributionPeriod:contribution?.contributionPeriod,
+      paymentYear:extractYear(contribution?.YearOfContributionStart)
     }));
 
     return (

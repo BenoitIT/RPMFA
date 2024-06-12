@@ -164,7 +164,7 @@ const Page = () => {
                 changeHandler={handleInputChange}
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Reciept Image
+                Receipt Image
               </label>
               <CldUploadWidget
                 uploadPreset="emrtyzay"

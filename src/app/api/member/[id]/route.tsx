@@ -21,7 +21,6 @@ export const PUT = async (request: NextRequest) => {
         },
       });
       if (member) {
-        const registeredAt = extractYear(member.createdAt);
         const contributionExistanceDiff =
           extractYear(member.createdAt) - extractYear(body.joinedAt)+1;
         const unPaidContribution =
@@ -32,6 +31,7 @@ export const PUT = async (request: NextRequest) => {
               contributionAmount: 0,
               depositRecieptNumber: "00000",
               facilityId: member?.id,
+              contributionPeriod:contributionExistanceDiff,
               depositReciept: ["xxxxxxx"],
               userId: member.userId,
               unpaidContribution: unPaidContribution,

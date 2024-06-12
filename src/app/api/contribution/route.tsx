@@ -2,6 +2,7 @@ import prisma from "@/prisma/client";
 import schema from "./validationSchema";
 import { NextRequest, NextResponse } from "next/server";
 import { convertTimestamp } from "@/app/utilities/timeConverters";
+import { extractYear } from "@/app/utilities/timeParser";
 export const revalidate = 0;
 export const POST = async (request: NextRequest) => {
   try {
@@ -149,6 +150,8 @@ export const GET = async () => {
           amountDue: "RWF" + " " + contribution?.unpaidContribution,
           dueDate: convertTimestamp(contribution?.createdAt),
           status: contribution?.status,
+          numberOfPeriod:contribution?.contributionPeriod,
+          paymentYear:extractYear(contribution?.YearOfContributionStart)
         })),
       },
       {
@@ -163,6 +166,8 @@ export const GET = async () => {
           amountDue: "RWF" + " " + contribution?.unpaidContribution,
           dueDate: convertTimestamp(contribution?.createdAt),
           status: contribution?.status,
+          numberOfPeriod:contribution?.contributionPeriod,
+          paymentYear:extractYear(contribution?.YearOfContributionStart)
         })),
       },
     ];

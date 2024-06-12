@@ -1,6 +1,9 @@
+import { EmailContApproveTemplate } from "@/app/(components)/emailTemplates/contributionApprove";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
+import { Resend } from "resend";
+export const revalidate=0;
+const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 export async function GET(request: Request) {
   try {
     const id = request.url.split("contribution/")[1];
@@ -54,7 +57,15 @@ export const PUT = async (request: NextRequest) => {
             status: "approved",
           },
         });
-
+        await resend.emails.send({
+          from: "rpmfa@rpmfa.org",
+          to: contribution.user.email,
+          subject: "Your membership contribution is approved",
+          react: EmailContApproveTemplate({
+            firstName: contribution.user.firstName,
+          }),
+          text:"",
+        });
         return NextResponse.json({
           status: 200,
           contribution: updatedcontribution,

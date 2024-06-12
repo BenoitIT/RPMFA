@@ -3,15 +3,11 @@ import { SlEnvolope } from "react-icons/sl";
 
 interface EmailTemplateProps {
   firstName: string;
-  subject: string;
-  message: string;
 }
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-  firstName,
-  subject,
-  message,
-}) => (
+export const EmailContApproveTemplate: React.FC<
+  Readonly<EmailTemplateProps>
+> = ({ firstName }) => (
   <div style={{ width: "100%" }}>
     <div
       style={{
@@ -46,7 +42,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             marginBottom: "10px",
           }}
         >
-          THANKS FOR SENDING APPLICATION!
+          Thank you for being impeccable member of RPMFA!
         </div>
       </div>
     </div>
@@ -71,7 +67,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           textAlign: "center",
         }}
       >
-        {subject}.
+        Payment of membership contribution is approved!
       </p>
       <p
         style={{
@@ -81,7 +77,10 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           textAlign: "center",
         }}
       >
-        {message}.
+        We are delighted to inform you that your contribution fees have been
+        successfully processed and approved. Your membership is now active. We
+        are excited to have you on board and look forward to your valuable
+        contributions.
       </p>
       <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
         Thank you, <br />
