@@ -43,6 +43,7 @@ const MemberShipExtraInfo = ({ setOpen, open, id }: Modal) => {
         if (data.status == 200) {
           toast.success(data.message);
           router.refresh();
+          setOpen(false)
         } else {
           toast.error(data.message);
         }
@@ -101,7 +102,7 @@ const MemberShipExtraInfo = ({ setOpen, open, id }: Modal) => {
                 : "hidden"
             }
           >
-            <p>Select the latest contribution date</p>
+            <p>Select the date next to thelatest contribution date</p>
             <DatePicker
               onChange={(value: any, dateString) => {
                 const datee = new Date(value).toISOString();

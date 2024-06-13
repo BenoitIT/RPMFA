@@ -34,9 +34,11 @@ const MemberShipCertificateUploader = ({ setOpen, open, id }: Modal) => {
         toast.success(data.message);
         router.refresh();
         setLoading(false);
+        setOpen(false)
       } else {
         toast.success(data.message);
         setLoading(false);
+        setOpen(false)
       }
     } catch (err) {}
   };
@@ -79,7 +81,7 @@ const MemberShipCertificateUploader = ({ setOpen, open, id }: Modal) => {
                     className="min-h-[300px] w-full bg-green-50 flex flex-col justify-center items-center"
                   >
                     <p className="text-sm opacity-85 font-medium">
-                      Upload certicate here
+                      Upload certificate here
                     </p>
                   </Button>
                 ) : (
