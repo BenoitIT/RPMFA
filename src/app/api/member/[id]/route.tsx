@@ -22,16 +22,17 @@ export const PUT = async (request: NextRequest) => {
       });
       if (member) {
         const contributionExistanceDiff =
-          extractYear(member.createdAt) - extractYear(body.joinedAt)+1;
+          extractYear(member.createdAt) - extractYear(body.joinedAt) + 1;
         const unPaidContribution =
           member.defaultContribution * contributionExistanceDiff;
         if (!memberContribution && unPaidContribution > 0) {
           const updatedContri = await prisma.contribution.create({
             data: {
               contributionAmount: 0,
-              depositRecieptNumber: "00000",
+              depositRecieptNumber:
+                Date.now() + "fake" + member?.userId?.toString(),
               facilityId: member?.id,
-              contributionPeriod:contributionExistanceDiff,
+              contributionPeriod: contributionExistanceDiff,
               depositReciept: ["xxxxxxx"],
               userId: member.userId,
               unpaidContribution: unPaidContribution,
