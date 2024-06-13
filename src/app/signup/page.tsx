@@ -33,7 +33,7 @@ const SignUpPage = () => {
       formData.forEach((value, key) => {
         values[key] = value;
       });
-      if (!values.password === values.Confirmpassword) {
+      if (values.password !== values.Confirmpassword) {
         toast.error("Password is not confirmed");
         setLoading(false);
       } else if (!values.email) {

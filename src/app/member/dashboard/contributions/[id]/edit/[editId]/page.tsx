@@ -26,6 +26,7 @@ const Page = () => {
     recieptAmount: "",
     faciltyId: 0,
     recieptNumber: "",
+    unpaidAmount:0,
     image: [],
   });
   useEffect(() => {
@@ -59,6 +60,7 @@ const Page = () => {
           ...prevFormValues,
           recieptNumber: contribution.depositRecieptNumber,
           recieptAmount: contribution.contributionAmount,
+          unpaidAmount:contribution.unpaidContribution
         }));
         setImage(contribution.depositReciept);
       }
@@ -154,6 +156,7 @@ const Page = () => {
                 value={formValues.recieptAmount}
                 placeholder="Enter your contribution amount"
                 changeHandler={handleInputChange}
+                disabled={Number(formValues.recieptAmount)<formValues.unpaidAmount}
               />
               <PrimaryInput
                 label="Deposit Receipt Number"
@@ -162,6 +165,7 @@ const Page = () => {
                 value={formValues.recieptNumber}
                 placeholder="Enter your deposit receipt Number"
                 changeHandler={handleInputChange}
+                disabled={Number(formValues.recieptAmount)<formValues.unpaidAmount}
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
                 Receipt Image
@@ -195,7 +199,7 @@ const Page = () => {
                           className="h-[150px] w-[449px] bg-gray-1 flex flex-col justify-center items-center"
                         >
                           <p className="text-sm opacity-85">
-                            Upload a reciept here
+                            Upload a receipt here
                           </p>
                         </Button>
                       ) : (

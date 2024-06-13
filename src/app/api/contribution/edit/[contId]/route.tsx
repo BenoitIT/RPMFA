@@ -14,7 +14,10 @@ export const PUT = async (request: NextRequest) => {
           user: true,
         },
       });
-      if (contribution) {
+      if (
+        contribution &&
+        contribution.contributionAmount > contribution.unpaidContribution
+      ) {
         const updatedcontribution = await prisma.contribution.update({
           where: {
             id: Number(id),
@@ -30,6 +33,13 @@ export const PUT = async (request: NextRequest) => {
           status: 200,
           contribution: updatedcontribution,
           message: "Contribution Info are updated successfully.",
+        });
+      } else {
+        return NextResponse.json({
+          status: 403,
+          contribution: null,
+          message:
+            "This can not happen.Kindly clear unpaid contribution amount first!",
         });
       }
     }
