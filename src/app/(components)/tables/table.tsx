@@ -83,7 +83,7 @@ const Table = ({
               </th>
               {columns?.map((column: any) => (
                 <th
-                  className={`md:py-3 xs:py-2 xs:px-1 text-left md:text-sm  xs:text-xs font-normal text-gray-700 capitalize`}
+                  className={`md:py-3 xs:py-2 xs:px-1 text-left md:text-sm  xs:text-xs font-normal text-gray-700 capitalize ${column.hideOnMobile ? 'hidden md:table-cell' : ''}`}
                   key={column.field}
                 >
                   {column.header.length > 28
@@ -114,7 +114,7 @@ const Table = ({
                         col.field === "image" || col.field === "logo"
                           ? " md:py-2 xs:py-2  font-normal h-[30px] pl-1"
                           : `  md:py-2 xs:py-1 text-left text-xs md:text-sm font-normal text-grey-800`
-                      } ${col.field === "email" ? "" : "capitalize"} `}
+                      } ${col.field === "email" ? "" : "capitalize"} ${col.hideOnMobile ? 'hidden md:table-cell' : ''}`}
                     >
                       {col.field === "image" && (
                         <div className="flex items-center h-[30px] rounded-full">
