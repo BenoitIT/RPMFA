@@ -44,7 +44,7 @@ const Contribution = ({ contributions}:memberContributions) => {
   }
   return (
     <div className="mt-3 w-full bg-white pr-10 p-6">
-      <div className="flex justify-between my-4">
+      <div className="flex justify-between my-4 flex-col lg:flex-row">
         <h1 className="text-xl font-medium text-blue-1">Contributions</h1>
         {session?.data?.user?.role=="member" &&contributions.length>0&&contributions[0]?.defaultcontribution?(<h1 className="text-sm uppercase mt-1">ANNUAL CONTRIBUTION: <span className="font-bold">{new Intl.NumberFormat('en-US').format(contributions[0].defaultcontribution)} RWF</span></h1>):("")}
         <Button
