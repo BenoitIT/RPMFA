@@ -15,7 +15,6 @@ const Contact = () => {
       const form = e.currentTarget;
       const formData = new FormData(e.currentTarget);
       const formEntries = Object.fromEntries(formData.entries());
-      console.log("sgdgdgd", formEntries);
       const response = await fetch(`/api/contact`, {
         method: "POST",
         headers: {
@@ -37,7 +36,7 @@ const Contact = () => {
         setLoading(false);
       }
     } catch (err) {
-      console.log("eerir", err);
+      return;
     }
   };
 
@@ -79,7 +78,7 @@ const Contact = () => {
               changeHandler={() => {}}
             />
             <div className="grid gap-2">
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message text-sm">Message</label>
               <textarea
                 id="message"
                 name="message"
