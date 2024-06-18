@@ -82,8 +82,19 @@ model Contribution {
   unpaidContribution      Int      @default(0)
 }
 
-model ContributingYearsMonitor{
-  id                      Int      @id @unique @default(autoincrement())
-  year                    Int
-  initialized             Boolean @default(false)
+model ContributingYearsMonitor {
+  id          Int     @id @unique @default(autoincrement())
+  year        Int
+  initialized Boolean @default(false)
+}
+
+model Messages {
+  id        Int     @id @unique @default(autoincrement())
+  email     String
+  firstName String
+  lastName  String
+  subject   String
+  message   String
+  responded Boolean @default(false)
+  response  String  @default("")
 }

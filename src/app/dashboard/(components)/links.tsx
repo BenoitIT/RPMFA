@@ -1,6 +1,6 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { PiHouseLine, PiChartLineUpBold } from "react-icons/pi";
-import { FaRegEnvelope } from "react-icons/fa";
+import { FaRegMessage } from "react-icons/fa6";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { CiSettings } from "react-icons/ci";
 import { PiFolderSimpleUserFill } from "react-icons/pi";
@@ -29,10 +29,15 @@ export const DashboardLinks = [
     path: "/dashboard/announcements",
     icon: <TfiAnnouncement />,
   },
+  // {
+  //   name: "Performance",
+  //   path: "/dashboard/performance",
+  //   icon: <PiChartLineUpBold />,
+  // },
   {
-    name: "Performance",
-    path: "/dashboard/performance",
-    icon: <PiChartLineUpBold />,
+    name: "Cantacts",
+    path: "/dashboard/contacts",
+    icon: <FaRegMessage />,
   },
 ];
 export const adminHomeMenu = {
