@@ -28,7 +28,9 @@ const Dashboard = async () => {
           <Link href={"/member/dashboard/contributions"}>
             <DashbordCard
               title="Contributions Due"
-              value={`RWF ${data?.contributionDue}`}
+              value={`RWF ${new Intl.NumberFormat("en-US").format(
+                data?.contributionDue
+              )}`}
               icon={<MdOutlineCreditCardOff className="text-2xl text-blue-1" />}
             />
           </Link>
@@ -61,27 +63,27 @@ const Dashboard = async () => {
       </div>
     );
   } else {
-    return(
-    <div className="wfull h-[70vh] flex flex-col justify-center items-center gap-4">
-      <h1 className="text-2xl text-blue-1 font-semibold">
-        Could not find any statistics. Follow the instructions below
-      </h1>
-      <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5  shadow">
-        <li className="list-disc">
-          Click on application tab  and create new application for your health
-          facility.if you have not done. otherwise wait for being approved.
-        </li>
-        <li className="list-disc">
-          Your application will be reviewed and confirmed by RPMFA admin. this
-          will directly confirm your membership
-        </li>
-        <li className="list-disc">
-          Once you are a member you can start to find some statistics on the
-          dashboard
-        </li>
+    return (
+      <div className="wfull h-[70vh] flex flex-col justify-center items-center gap-4">
+        <h1 className="text-2xl text-blue-1 font-semibold">
+          Could not find any statistics. Follow the instructions below
+        </h1>
+        <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5  shadow">
+          <li className="list-disc">
+            Click on application tab and create new application for your health
+            facility.if you have not done. otherwise wait for being approved.
+          </li>
+          <li className="list-disc">
+            Your application will be reviewed and confirmed by RPMFA admin. this
+            will directly confirm your membership
+          </li>
+          <li className="list-disc">
+            Once you are a member you can start to find some statistics on the
+            dashboard
+          </li>
+        </div>
       </div>
-    </div>
-    )
+    );
   }
 };
 export default Dashboard;
@@ -97,7 +99,7 @@ const DashbordCard = ({ title, value, icon }: DashbordCardProps) => {
     <div className="w-full flex gap-1 p-4 rounded-md shadow bg-white items-center hover:cursor-pointer hover:bg-blue-50">
       <div className="flex items-center">{icon}</div>
       <div className="p-4">
-        <h1 className="text-lg font-semibold">{value}</h1>
+        <h1 className="text-lg font-medium text-gray-700">{value}</h1>
         <p className="text-sm font-light">{title}</p>
       </div>
     </div>
