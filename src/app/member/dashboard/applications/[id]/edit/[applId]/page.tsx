@@ -99,7 +99,7 @@ const AddFacility = () => {
       ) {
         setWorning("Fill the missing data");
         setDisabled(true);
-      } else if (currentSection == 3 && Uploadeddocuments.length < 3) {
+      } else if (currentSection == 3 && Uploadeddocuments.length < 1) {
         setWorning("Upload the missing documents");
         setDisabled(true);
       } else {

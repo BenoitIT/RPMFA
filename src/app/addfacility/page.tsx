@@ -79,6 +79,7 @@ const AddFacility = () => {
         setWorning("Upload the supporting documents");
         setDisabled(true);
       } else {
+        setWorning("");
         setDisabled(false);
       }
     };
