@@ -69,6 +69,13 @@ export const POST = async (request: NextRequest) => {
             unpaidContribution: contributionBalance,
           },
         });
+        await prisma.notification.create({
+          data: {
+            notification: `New membership contribution has been raised!`,
+            senderId: body.userId,
+            reciverId: 1,
+          },
+        });
         return NextResponse.json({
           status: 201,
           data: contribution,
@@ -92,6 +99,13 @@ export const POST = async (request: NextRequest) => {
             YearOfContributionStart: body.YearOfContributionStart,
             userId: body.userId,
             unpaidContribution: updatedUnPaidContributionBal,
+          },
+        });
+        await prisma.notification.create({
+          data: {
+            notification: `New membership contribution has been raised!`,
+            senderId: body.userId,
+            reciverId: 1,
           },
         });
         return NextResponse.json({

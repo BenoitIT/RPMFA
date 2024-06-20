@@ -22,10 +22,17 @@ export const PUT = async (request: NextRequest) => {
             status: "rejected",
           },
         });
-
+        const notification =await prisma.notification.create({
+          data: {
+            notification: `Your application has been rejected!`,
+            senderId: 1,
+            reciverId: application.user.id,
+          },
+        });
         return NextResponse.json({
           status: 200,
           application: updatedApplication,
+          notification
         });
       }
     }

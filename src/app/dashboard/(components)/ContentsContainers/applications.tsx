@@ -70,6 +70,7 @@ const Applications = ({ applications, tabs }: pageProps) => {
             className="w-[200px]"
             icon={<MdOutlineSettingsInputComposite />}
             btnText="Filter"
+            onClick={dataSearchingTrigger}
           />
         </div>
         {session?.data?.user?.role !== "admin" ? (

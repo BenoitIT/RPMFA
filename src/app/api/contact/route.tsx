@@ -19,10 +19,18 @@ export const POST = async (req: NextRequest) => {
       },
     });
     if (contact) {
+      const notification =await prisma.notification.create({
+        data: {
+          notification: `New incomming message!`,
+          senderId: 1,
+          reciverId: 1,
+        },
+      });
       return NextResponse.json({
         status: 201,
         message:
           "Your message has been delivered.Expect to hear from us very soon!",
+        notification
       });
     } else {
       return NextResponse.json({
@@ -37,7 +45,11 @@ export const POST = async (req: NextRequest) => {
 
 export const GET = async () => {
   try {
-    const messages = await prisma.messages.findMany({});
+    const messages = await prisma.messages.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     return NextResponse.json({
       status: 200,
       data: messages,

@@ -23,7 +23,6 @@ const Contact = () => {
         body: JSON.stringify(formEntries),
       });
       const data = await response.json();
-      console.log(data);
       if (data.status == 201) {
         toast.success(data?.message);
         form.reset();

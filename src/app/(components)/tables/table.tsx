@@ -64,9 +64,9 @@ const Table = ({
     <div className="w-full text-sm ">
       {data?.length < 1 ? (
         <div className="flex h-[50vh] bg-transparent w-full justify-center items-center">
-          <p className="text-base text-gray-900">
+          <div className="text-base text-gray-900">
             <Empty />
-          </p>
+          </div>
         </div>
       ) : (
         <>

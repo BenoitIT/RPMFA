@@ -1,4 +1,5 @@
 "use client";
+import Paginator from "@/app/(components)/pagination/generalPaginator";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaCheckDouble } from "react-icons/fa6";
@@ -18,10 +19,32 @@ interface messageProps {
 }
 const Messages = ({ messages }: messagePageProps) => {
   const [messageToReply, setMsgToreply] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  const lastPage =  null;
+  const NextPage = null;
+  const currentPageLink = NextPage ? NextPage - 1 : lastPage;
+  const totalPages = Math.ceil(messages?.length / itemsPerPage || 1);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = messages?.slice(indexOfFirstItem, indexOfLastItem);
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const handleNextPage = () => {
+    if (totalPages > currentPage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
   return (
     <div className="flex flex-col gap-3 mt-6">
-      {messages.length > 0 ? (
-        messages.map((message: any) => (
+      {currentItems.length > 0 ? (
+        currentItems.map((message: any) => (
           <Message
             email={message.email}
             subject={message.subject}
@@ -38,6 +61,19 @@ const Messages = ({ messages }: messagePageProps) => {
           We have not yet been contacted by someone..
         </div>
       )}
+      <div
+        className={
+          messages?.length > 0 ? "flex justify-end py-4 w-full" : "hidden"
+        }
+      >
+        <Paginator
+          activePage={currentPageLink ? currentPageLink : currentPage}
+          totalPages={lastPage ? lastPage : totalPages}
+          onPageChange={handlePageChange}
+          onPreviousPageChange={handlePreviousPage}
+          onNextPageChange={handleNextPage}
+        />
+      </div>
     </div>
   );
 };
