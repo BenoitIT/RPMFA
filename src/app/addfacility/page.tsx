@@ -152,6 +152,7 @@ const AddFacility = () => {
       }
     } catch (err) {
       toast.error("Unexpected error occurs");
+      setLoading(false);
     }
   };
 
@@ -384,10 +385,10 @@ const AddFacility = () => {
             ) : (
               <button
                 type="submit"
-                className="w-full text-white bg-blue-700 hover:bg-blue-500 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-blue-700 hover:bg-blue-500 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:cursor-not-allowed disabled:opacity-85"
                 disabled={loading}
               >
-                {loading ? "submitting" : "submit"}
+                {loading ? "Loading.." : "submit"}
               </button>
             )}
           </form>
