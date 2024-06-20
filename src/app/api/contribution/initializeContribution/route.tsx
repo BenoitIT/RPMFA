@@ -58,6 +58,13 @@ export const POST = async () => {
           text: "RPMFA membership contribution season is started",
         });
         console.log(result);
+        const notification=await prisma.notification.create({
+          data: {
+            notification: `place your ${currentYear} contribution!`,
+            senderId: 1,
+            reciverId: facilityContribution.user.id,
+          },
+        });
         await prisma.contribution.update({
           where: {
             facilityId: facility?.id,

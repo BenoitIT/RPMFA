@@ -40,7 +40,6 @@ const AllMembers = ({ Allmembers }: pageProps) => {
     }
   }, [searchValue,Allmembers]);
   const dataSearchingTrigger = () => {
-    alert(searchValue)
     HandleDataSearch(searchValue, Allmembers, setActiveData);
   };
   return (
@@ -59,6 +58,7 @@ const AllMembers = ({ Allmembers }: pageProps) => {
           className="w-full"
           icon={<MdOutlineSettingsInputComposite />}
           btnText="Filter"
+          onClick={dataSearchingTrigger}
         />
       </div>
       <Table

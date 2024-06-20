@@ -26,7 +26,6 @@ export const POST = async (request: NextRequest) => {
         announcementbody: body.announcementbody,
       },
     });
-
     return NextResponse.json({
       message: "New announcement is created successfully",
       status: 201,

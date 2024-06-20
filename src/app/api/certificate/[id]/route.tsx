@@ -24,10 +24,18 @@ export const PUT = async (request: NextRequest) => {
             membershipCertificate: body.certificate,
           },
         });
+        const notification=await prisma.notification.create({
+          data: {
+            notification: "Your membership certificate is ready!",
+            senderId: 1,
+            reciverId: member.user.id,
+          },
+        });
         return NextResponse.json({
           status: 200,
           data: updatedmember,
           message: `Membership certificate is successfully ${updatedmember.facilityName} ${updatedmember.facilityCategory}`,
+          notification
         });
       } else {
         return NextResponse.json({

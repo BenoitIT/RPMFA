@@ -47,7 +47,13 @@ export const PUT = async (request: NextRequest) => {
               contributionChecked: true,
             },
           });
-
+          await prisma.notification.create({
+            data: {
+              notification: `You can start contributing from now!`,
+              senderId: 1,
+              reciverId: member.user.id,
+            },
+          });
           return NextResponse.json({
             status: 200,
             application: updatedmember,

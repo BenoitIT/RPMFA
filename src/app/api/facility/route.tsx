@@ -41,6 +41,13 @@ export const POST = async (request: NextRequest) => {
           defaultContribution: defaultContributionAmount,
         },
       });
+      await prisma.notification.create({
+        data: {
+          notification: `New application has been sent from ${body.facilityName}!`,
+          senderId: payload.id,
+          reciverId: 1,
+        },
+      });
       return NextResponse.json({
         status: 201,
         data: facility,
@@ -54,5 +61,3 @@ export const POST = async (request: NextRequest) => {
     });
   }
 };
-
-

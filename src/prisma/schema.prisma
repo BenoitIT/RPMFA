@@ -26,6 +26,7 @@ model User {
   Facility     Facility[]
   Contribution Contribution[]
   userType     String?        @default("member")
+  Notification Notification[]
 }
 
 model Facility {
@@ -89,12 +90,22 @@ model ContributingYearsMonitor {
 }
 
 model Messages {
-  id        Int     @id @unique @default(autoincrement())
+  id        Int      @id @unique @default(autoincrement())
   email     String
   firstName String
   lastName  String
   subject   String
   message   String
-  responded Boolean @default(false)
-  response  String  @default("")
+  responded Boolean  @default(false)
+  response  String   @default("")
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id           Int    @id @unique @default(autoincrement())
+  notification String
+  user         User   @relation(fields: [senderId], references: [id])
+  senderId     Int
+  reciverId    Int
+  createdAt DateTime @default(now())
 }
