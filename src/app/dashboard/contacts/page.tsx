@@ -29,7 +29,7 @@ const Page = async() => {
 }else{
   <div className="bg-blue-50 pt-6 -mx-4 mt-2 flex justify-center items-center h-[85vh]">
   <div className="text-black flex justify-center items-center bg-white rounded p-[20vw]">
-    Something went wrong while processing contributions!
+    Something went wrong while processing contacts!
   </div>
 </div>
 }

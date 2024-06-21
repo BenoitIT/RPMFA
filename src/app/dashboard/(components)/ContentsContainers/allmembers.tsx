@@ -44,7 +44,7 @@ const AllMembers = ({ Allmembers }: pageProps) => {
   };
   return (
     <div className="mt-2 w-full">
-      <div className="py-4 flex flex-row gap-2 mb-2">
+      <div className="py-4 flex lg:flex-row gap-2 mb-2 flex-col">
         <SearchInput
           type="text"
           placeholder="Search a member..."

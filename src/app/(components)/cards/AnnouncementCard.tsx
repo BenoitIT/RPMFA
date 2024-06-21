@@ -62,7 +62,7 @@ const AnnouncementCard = ({
             </div>
           )}
         </div>
-        <h1 className="font-semibold text-base text-gray-700">
+        <h1 className="lg:font-semibold md:text-base text-gray-700 font-medium text-sm">
           {title?title:""}
         </h1>
         <p

@@ -56,7 +56,7 @@ const Applications = ({ applications, tabs }: pageProps) => {
   return (
     <div className="mt-2 w-full">
       <div className="py-4 flex flex-row gap-2 mb-2 justify-between">
-        <div className="py-4 flex flex-row gap-2">
+        <div className="py-4 flex ld:flex-row gap-2 flex-col">
           <SearchInput
             type="text"
             placeholder="Search application..."
