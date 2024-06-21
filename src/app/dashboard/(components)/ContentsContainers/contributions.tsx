@@ -12,6 +12,7 @@ import SearchInput from "@/app/(components)/inputs/SearchInput";
 import TabsNavigation from "../tabs/TabManager";
 import { useRouter } from "next/navigation";
 import InitializeAnnualContribs from "./modals/InitContribution";
+import { HandleContrDataSearch } from "@/app/utilities/contributionSearch";
 interface TabsInfo {
   name: string;
   counts: number;
@@ -68,6 +69,9 @@ const Contributions = ({ contributions }: contributionTabs) => {
     checkCurrentYearContributionStatus();
   }, [currentYear]);
 
+  const dataSearchingTrigger = () => {
+    HandleContrDataSearch(searchValue, contributions, setActiveData);
+  };
   return (
     <div className="mt-2 w-full">
       <div className="py-4 flex flex-col lg:flex-row md:justify-between mb-2 w-full gap-2">
@@ -75,13 +79,17 @@ const Contributions = ({ contributions }: contributionTabs) => {
           <SearchInput
             type="text"
             placeholder="Search contribution..."
-            value={""}
-            changeHandler={async (e: ChangeEvent<HTMLInputElement>) => {}}
+            value={searchValue}
+            changeHandler={(e: ChangeEvent<HTMLInputElement>) =>
+              setSearchValues(e.target.value)
+            }
+            searchData={dataSearchingTrigger}
           />
           <FilterButton
             className="w-full "
             icon={<MdOutlineSettingsInputComposite />}
             btnText="Filter"
+            onClick={dataSearchingTrigger}
           />
         </div>
         <div className="w-full flex justify-start lg:justify-end">
