@@ -87,6 +87,9 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         Thank you, <br />
         RPMFA Regards
       </p>
+      <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
+        For any support or more information, contact: <b>+250 788 597 772</b>
+      </p>
     </main>
   </div>
 );
