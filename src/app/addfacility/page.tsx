@@ -146,13 +146,21 @@ const AddFacility = () => {
       if (responseData.status === 201) {
         setOpenModal(true);
         setLoading(false);
-      }
-      else if(responseData.status == 400){
+        const emailResponse = await fetch("/api/emails/facilityaccount", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+          }),
+        });
+        const data = await emailResponse.json();
+      } else if (responseData.status == 400) {
         toast.error(responseData.message);
         setLoading(false);
-      }
-       else {
-        toast.error(responseData[0]?.path[0]+' '+responseData[0].message);
+      } else {
+        toast.error(responseData[0]?.path[0] + " " + responseData[0].message);
         setLoading(false);
       }
     } catch (err) {
