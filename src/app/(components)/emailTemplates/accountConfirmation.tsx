@@ -13,7 +13,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   appUrl,
 }) => {
   return (
-    <div style={{ width: "80%" }}>
+    <div style={{ width: "50%" }}>
       <main
         style={{
           marginTop: "10px",
@@ -25,7 +25,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           marginLeft: "5px",
         }}
       >
-        <h2 style={{ color: "#4A5568", textAlign: "left" }}>
+        <h2 style={{ color: "#2A5568", textAlign: "left" }}>
           Dear {firstName},
         </h2>
         <p style={{ textAlign: "left", color: "#718096" }}>
@@ -33,7 +33,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         </p>
         <p
           style={{
-            marginTop: "4px",
+            marginTop: "2px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
@@ -44,7 +44,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         </p>
         <p
           style={{
-            marginTop: "4px",
+            marginTop: "2px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
@@ -68,11 +68,11 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           >
             <button
               style={{
-                paddingLeft: "24px",
-                paddingRight: "24px",
+                paddingLeft: "22px",
+                paddingRight: "22px",
                 paddingTop: "8px",
                 paddingBottom: "8px",
-                marginTop: "24px",
+                marginTop: "22px",
                 fontSize: "0.875rem",
                 fontWeight: "700",
                 textTransform: "capitalize",
@@ -96,23 +96,65 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         </div> */}
         <p
           style={{
-            marginTop: "4px",
+            marginTop: "2px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
           }}
         >
-          In case you need support, please contact:
+          Please expect to receive further communication from us informing you
+          about the next steps and guide on how to use the platform.
         </p>
-        <p style={{ marginTop: "5px", color: "#718096", textAlign: "left" }}>
+        <p
+          style={{
+            marginTop: "2px",
+            lineHeight: "1.75",
+            color: "#718096",
+            textAlign: "left",
+          }}
+        >
+          For any support or clarification, you may contact the following
+          people:
+        </p>
+        <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
           1. Angelo Igitego, Software Engineer, <b>+250 788 597 772</b>
         </p>
-        <p style={{ marginTop: "5px", color: "#718096", textAlign: "left" }}>
-          2. Henriette Iradukunda, Admin, <b>+250 785 143 731</b>
+        <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
+          2. Henriette Iradukunda, Admin, <b>+250 785 123 731</b>
         </p>
-        <p style={{ marginTop: "5px", color: "#718096", textAlign: "left" }}>
+        <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
           3. Christian Ntakirutimana, Executive Secretary,{" "}
           <b>+250 788 515 358</b>
+        </p>
+        <p
+          style={{
+            marginTop: "2px",
+            lineHeight: "1.75",
+            color: "#718096",
+            textAlign: "left",
+          }}
+        >
+          We wish you a productive day.
+        </p>
+        <p
+          style={{
+            marginTop: "2px",
+            lineHeight: "1.75",
+            color: "#718096",
+            textAlign: "left",
+          }}
+        >
+          Best regards,
+        </p>
+        <p
+          style={{
+            marginTop: "2px",
+            lineHeight: "1.75",
+            color: "#718096",
+            textAlign: "left",
+          }}
+        >
+          RPMFA Secretariat.
         </p>
       </main>
     </div>
