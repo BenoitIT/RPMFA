@@ -26,15 +26,37 @@ export const POST = async (request: NextRequest) => {
       } else {
         defaultContributionAmount = 0;
       }
+      const facilityExistance = await prisma.facility.findFirst({
+        where: {
+          facilityName: body.facilityName,
+        },
+      });
+      const tinExistance = await prisma.facility.findFirst({
+        where: {
+          tinNumber: body.tinNumber,
+        },
+      });
+      if (facilityExistance) {
+        return NextResponse.json({
+          status: 400,
+          message: "Another facility was registred with the same name!",
+        });
+      }
+      if (tinExistance) {
+        return NextResponse.json({
+          status: 400,
+          message: "Another facility was registred with the same TIN Number!",
+        });
+      }
       const facility = await prisma.facility.create({
         data: {
           facilityName: body.facilityName,
           facilityCategory: body.facilityCategory,
           province: body.province,
           district: body.district,
-          tinNumber: body.tinNumber,
+          tinNumber: body.tinNumber||"",
           sector: body.sector,
-          plotNumber: body.plotNumber,
+          plotNumber: body.plotNumber||"",
           cell: body.cell,
           documents: body.documents,
           userId: payload.id,
@@ -55,6 +77,7 @@ export const POST = async (request: NextRequest) => {
       });
     }
   } catch (err) {
+    console.log("errr", err);
     return NextResponse.json({
       message: "unexpected issue occurs",
       status: 400,

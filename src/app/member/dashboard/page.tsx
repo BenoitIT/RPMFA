@@ -10,7 +10,6 @@ import Contribution from "./(contents)/recentContribution";
 
 const Dashboard = async () => {
   const session: any = await auth();
-  console.log("session",session?.user)
   const userId = session?.user?.id;
   const response = await fetch(
     `${process.env.NEXT_APP_URL}/api/dashboardInfo/user/${userId}`,
