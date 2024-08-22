@@ -12,7 +12,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const { data, error } = await resend.emails.send({
     from: "rpmfa@rpmfa.org",
     to: body.email,
-    subject: "Confirm your account",
+    subject: "Account creation",
     react: EmailTemplate({
       firstName: body.firstName,
       token: body.token,
