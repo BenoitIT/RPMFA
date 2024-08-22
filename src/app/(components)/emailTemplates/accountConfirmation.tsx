@@ -13,83 +13,47 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   appUrl,
 }) => {
   return (
-    <div style={{ width: "100%" }}>
-      <div
-        style={{
-          height: "150px",
-          backgroundColor: "#365CCE",
-          width: "100%",
-          color: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          gap: "20px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div
-            style={{ width: "40px", height: "1px", backgroundColor: "white" }}
-          ></div>
-          <SlEnvolope style={{ fontSize: "1.125rem", color: "blue" }} />
-          <div
-            style={{ width: "40px", height: "1px", backgroundColor: "white" }}
-          ></div>
-        </div>
-        <div style={{ marginTop: "40px" }}>
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
-              letterSpacing: "0.1em",
-              fontWeight: "400",
-              marginBottom: "10px",
-            }}
-          >
-            THANKS FOR SIGNING UP!
-          </div>
-          <div
-            style={{
-              fontSize: "1.25rem",
-              lineHeight: "1.75rem",
-              fontWeight: "700",
-              textTransform: "capitalize",
-            }}
-          >
-            Confirm your E-mail Address
-          </div>
-        </div>
-      </div>
+    <div style={{ width: "80%" }}>
       <main
         style={{
-          marginTop: "32px",
+          marginTop: "10px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          paddingRight: "20px",
+          marginRight: "20px",
+          marginLeft: "5px",
         }}
       >
-        <h2 style={{ color: "#4A5568", textAlign: "center" }}>
-          Hello {firstName}!
+        <h2 style={{ color: "#4A5568", textAlign: "left" }}>
+          Dear {firstName},
         </h2>
+        <p style={{ textAlign: "left", color: "#718096" }}>
+          We trust this email finds you well.
+        </p>
         <p
           style={{
-            marginTop: "8px",
+            marginTop: "4px",
             lineHeight: "1.75",
             color: "#718096",
-            textAlign: "center",
+            textAlign: "left",
           }}
         >
-          Congratulations on your successful application to become a Rwanda
-          Medical Facilities Association (RPMFA)! We are thrilled to welcome you
-          to our esteemed community. To complete your registration , we need you
-          to confirm your email address. This is an important step to ensure the
-          security and accuracy of your account information. Please click the
-          button below to confirm your email address:
+          This serves to notify you that an account has been created for you on
+          RPMFA Member Management System (RPMFA MIS).
         </p>
-        <div
+        <p
+          style={{
+            marginTop: "4px",
+            lineHeight: "1.75",
+            color: "#718096",
+            textAlign: "left",
+          }}
+        >
+          The purpose of the system is to improve service delivery to the
+          members of RPMFA through digitization.
+        </p>
+        {/* <div
           style={{
             width: "100%",
             display: "flex",
@@ -129,14 +93,27 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
               Confirm your email
             </button>
           </a>
-        </div>
-        <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
-          Thank you, <br />
-          RPMFA Regards
+        </div> */}
+        <p
+          style={{
+            marginTop: "4px",
+            lineHeight: "1.75",
+            color: "#718096",
+            textAlign: "left",
+          }}
+        >
+          In case you need support, please contact:
         </p>
-        <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
-        For any support or more information, contact: <b>+250 788 597 772</b>
-      </p>
+        <p style={{ marginTop: "5px", color: "#718096", textAlign: "left" }}>
+          1. Angelo Igitego, Software Engineer, <b>+250 788 597 772</b>
+        </p>
+        <p style={{ marginTop: "5px", color: "#718096", textAlign: "left" }}>
+          2. Henriette Iradukunda, Admin, <b>+250 785 143 731</b>
+        </p>
+        <p style={{ marginTop: "5px", color: "#718096", textAlign: "left" }}>
+          3. Christian Ntakirutimana, Executive Secretary,{" "}
+          <b>+250 788 515 358</b>
+        </p>
       </main>
     </div>
   );
