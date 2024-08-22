@@ -38,19 +38,35 @@ const ProfileInfo = ({ user }: User | any) => {
         </div>
       </div>
       {session?.data?.user?.role == "admin" ? (
-        <Link href="/dashboard/profile/edit">
-          <Button
-            label="Edit Profile"
-            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
-          />
-        </Link>
+        <div className="flex flex-col gap-2">
+          <Link href="/dashboard/profile/edit">
+            <Button
+              label="Edit Profile"
+              customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
+            />
+          </Link>
+          <Link href="/dashboard/profile/editpassword">
+            <Button
+              label="Edit Password"
+              customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
+            />
+          </Link>
+        </div>
       ) : (
-        <Link href="/member/dashboard/profile/edit">
-          <Button
-            label="Edit Profile"
-            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
-          />
-        </Link>
+        <div className="flex flex-col gap-2">
+          <Link href="/member/dashboard/profile/edit">
+            <Button
+              label="Edit Profile"
+              customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
+            />
+          </Link>
+          <Link href="/member/dashboard/profile/editpassword">
+            <Button
+              label="Edit Password"
+              customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[280px] md:w-[380px] rounded font-medium"
+            />
+          </Link>
+        </div>
       )}
     </div>
   );

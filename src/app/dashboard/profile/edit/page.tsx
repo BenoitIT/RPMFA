@@ -33,7 +33,7 @@ const Page = () => {
     };
     fetchUser();
   }, [userId]);
-  const handleUpdateUser = async (e:any) => {
+  const handleUpdateUser = async (e: any) => {
     e?.preventDefault();
     const response = await fetch(`/api/users/${userId}`, {
       method: "PUT",
@@ -63,19 +63,31 @@ const Page = () => {
           Home
         </Link>
         <PiGreaterThanLight className="mt-[3px]" />
-        <Link
-          href="/dashboard/profile"
-          className="hover:text-blue-700 hover:cursor-pointer"
-        >
-          Profile
-        </Link>
+        {session?.data?.user?.role == "admin" ? (
+          <Link
+            href="/dashboard/profile"
+            className="hover:text-blue-700 hover:cursor-pointer"
+          >
+            Profile
+          </Link>
+        ) : (
+          <Link
+            href="/dashboard/member/profile"
+            className="hover:text-blue-700 hover:cursor-pointer"
+          >
+            Profile
+          </Link>
+        )}
         <PiGreaterThanLight className="mt-[3px]" />
         <p className="text-blue-700 hover:cursor-pointer">Edit Profile</p>
       </h3>
       <div className="w-full flex justify-center items-center min-h-[80vh]">
         <div className=" w-full bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <form className="space-y-4 md:space-y-6" onSubmit={handleUpdateUser}>
+            <form
+              className="space-y-4 md:space-y-6"
+              onSubmit={handleUpdateUser}
+            >
               <PrimaryInput
                 label="First Name"
                 type="text"
