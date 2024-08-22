@@ -263,7 +263,7 @@ const AddFacility = () => {
                   required={false}
                 />
                 <PrimaryInput
-                  label="Plot Number"
+                  label="UPI Number"
                   type="text"
                   name="plotNumber"
                   value={formValues.plotNumber}

@@ -3,11 +3,8 @@ import { PiGreaterThanLight } from "react-icons/pi";
 import CustomBtn from "@/app/(components)/buttons/primaryBtn";
 import Link from "next/link";
 import { PrimaryInput } from "@/app/(components)/inputs/Inputs";
-import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { Button } from "antd";
-import { BsUpload } from "react-icons/bs";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -19,20 +16,24 @@ const Page = () => {
   const [password, setPassword] = useState("");
   const handleUpdateUserPassword = async (e: any) => {
     e?.preventDefault();
-    const response = await fetch(`/api/users/creds/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        currentPassword: currentPassword,
-        password: password,
-      }),
-    });
-    const data = await response.json();
-    if (data.status == 200) {
-      toast.success("Password is updated successfully");
-      router.refresh();
+    try {
+      const response = await fetch(`/api/users/creds/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currentPassword: currentPassword,
+          password: password,
+        }),
+      });
+      const data = await response.json();
+      if (data.status == 200) {
+        toast.success("Password is updated successfully");
+        router.refresh();
+      }
+    } catch (err: any) {
+      toast.error("Could not update password. something went wrong");
     }
   };
   return (

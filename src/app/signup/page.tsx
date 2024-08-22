@@ -53,11 +53,6 @@ const SignUpPage = () => {
         const responseData = await response.json();
         if (responseData.status === 201) {
           toast.success(responseData.message);
-          await signIn("credentials", {
-            email: values.email,
-            password: values.password,
-            redirect: false,
-          });
           const emailResponse = await fetch("/api/emails/accountConfirmation", {
             method: "POST",
             headers: {
@@ -81,7 +76,7 @@ const SignUpPage = () => {
           toast.error(responseData.message);
           setLoading(false);
         } else {
-          toast.error(responseData[0]?.path[0]+' '+responseData[0].message);
+          toast.error(responseData[0]?.path[0] + " " + responseData[0].message);
           setLoading(false);
         }
       }
