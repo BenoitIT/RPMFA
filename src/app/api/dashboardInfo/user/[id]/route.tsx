@@ -21,6 +21,10 @@ export const GET = async (request: Request) => {
       },
     });
     const totalContributionDue = await prisma.contribution.findMany({
+      where:{
+        status: "pending",
+        userId: Number(id),
+      },
       orderBy: {
         id: "desc",
       },
