@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 export const revalidate = 0;
 export const GET = async () => {
   try {
-    const prisma=new PrismaClient();
+    const prisma = new PrismaClient();
     const applications = await prisma.facility.findMany({
       where: {
         status: "pending",
@@ -13,8 +13,11 @@ export const GET = async () => {
       },
     });
     const response = NextResponse.json({ status: 200, applications });
-    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    response.headers.set('Expires', '0');
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate"
+    );
+    response.headers.set("Expires", "0");
 
     return response;
   } catch (err) {
@@ -24,5 +27,3 @@ export const GET = async () => {
     });
   }
 };
-
-

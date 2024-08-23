@@ -77,7 +77,6 @@ export const POST = async (request: NextRequest) => {
       });
     }
   } catch (err) {
-    console.log("errr", err);
     return NextResponse.json({
       message: "unexpected issue occurs",
       status: 400,

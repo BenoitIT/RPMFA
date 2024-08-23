@@ -88,3 +88,35 @@ export const PUT = async (request: NextRequest) => {
     });
   }
 };
+
+export const DELETE = async (request: NextRequest) => {
+  try {
+    const id = request.url.split("contribution/")[1];
+    if (id) {
+      const contribution = await prisma.contribution.findFirst({
+        where: {
+          id: Number(id),
+        },
+        include: {
+          user: true,
+        },
+      });
+      if (contribution) {
+        const updatedcontribution = await prisma.contribution.delete({
+          where: {
+            id: Number(id),
+          },
+        });
+        return NextResponse.json({
+          status: 200,
+          contribution: updatedcontribution,
+        });
+      }
+    }
+  } catch (err) {
+    return NextResponse.json({
+      message: "unexpected issue occurs",
+      status: 400,
+    });
+  }
+};
