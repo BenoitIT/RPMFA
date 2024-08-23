@@ -37,6 +37,7 @@ export const PrimarySelectorInput = ({
         className="bg-gray-1 outline-none text-gray-900 text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
         onChange={changeHandler}
       >
+        <option value="">please select...</option>
         {options.map((option: any, index: number) => (
           <option key={index} value={option?.name ? option?.name : option}>
             {option?.name ? option?.name : option}
