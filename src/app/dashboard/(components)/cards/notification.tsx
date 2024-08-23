@@ -13,7 +13,7 @@ const Notifcations = ({
     <div
       className={
         displayNotification
-          ? "md:w-[400px] w-[320px] bg-white shadow rounded-lg shadow-lightblue py-2 px-3 z-50 absolute top-[56px] lg:right-[52px] right-[10px] border border-lightblue flex flex-col gap-2"
+          ? "md:w-[400px] w-[320px] bg-white shadow rounded-lg shadow-lightblue py-2 px-3 z-50 absolute top-[56px] lg:right-[52px] right-[10px] border border-lightblue flex flex-col gap-2 max-h-[85vh] overflow-y-auto"
           : "hidden"
       }
     >
