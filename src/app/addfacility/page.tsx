@@ -35,6 +35,7 @@ const AddFacility = () => {
   const session: any = useSession();
   const token = session?.data?.user?.name?.accessToken;
   const facilityOwner = session?.data?.user?.id;
+  const username=session?.data?.user?.name?.first;
   const [currentSection, setCurrentSection] = useState(1);
   const [currentProgress, setCurrentProgress] = useState(25);
   const [disabled, setDisabled] = useState(false);
@@ -154,6 +155,7 @@ const AddFacility = () => {
           },
           body: JSON.stringify({
             userId: facilityOwner,
+            username:username
           }),
         });
         const data = await emailResponse.json();
@@ -165,7 +167,6 @@ const AddFacility = () => {
         setLoading(false);
       }
     } catch (err) {
-      console.log("errr", err);
       toast.error("Unexpected error occurs");
       setLoading(false);
     }

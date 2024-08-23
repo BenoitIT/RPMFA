@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       to: userEmail,
       subject: "Health facility registration",
       react: EmailFacilityCreationTemplate({
-        firstName: body.firstName,
+        firstName: body.username,
         email: userEmail,
       }),
       html: ``,
