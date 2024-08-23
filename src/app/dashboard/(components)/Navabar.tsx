@@ -94,7 +94,7 @@ const Navbar = () => {
     }
   };
   return (
-    <div className="h-20 fixed w-full lg:w-5/6">
+    <div className="h-20 fixed w-full lg:w-5/6 z-10">
       <div className="h-20 border-b flex max-sm:gap-10 justify-between max-sm:left-0 left-64 top-0 max-md:left-0 right-0 bg-white z-50  items-center max-sm:px-1 max-md:px-2 px-4 py-2 w-full lg:w-[97%]">
         <h1 className="text-lg max-sm:hidden font-normal uppercase">
           {" "}
