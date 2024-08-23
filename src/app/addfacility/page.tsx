@@ -154,7 +154,8 @@ const AddFacility = () => {
           body: JSON.stringify({
             userId: facilityOwner,
             username: username,
-            facilityName:formValues.facilityName
+            facilityName: formValues.facilityName,
+            facId: responseData?.data?.id,
           }),
         });
         const data = await emailResponse.json();

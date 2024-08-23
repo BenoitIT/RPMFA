@@ -3,7 +3,7 @@ import Button from "@/app/(components)/buttons/primaryBtn";
 import { SuccessModal } from "@/app/(components)/modals/SuccessModal";
 import { Alert } from "antd";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
@@ -14,6 +14,7 @@ import MemberShipCertificateUploader from "./modals/certificateUpload";
 const ApplicationDetails = ({ application, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();
+  const currentPath = usePathname();
   const [openRejectModal, setRejectModal] = useState(false);
   const [deliverCerticate, setDeliverCertificate] = useState(false);
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
@@ -178,7 +179,7 @@ const ApplicationDetails = ({ application, category }: any) => {
           <Button
             label="Update Info"
             customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
-            Click={() => {}}
+            Click={() => router.push(`${currentPath}/edit/${application?.id}`)}
           />
         </div>
       ) : (

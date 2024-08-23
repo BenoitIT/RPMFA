@@ -25,7 +25,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         firstName: body.username,
         email: userEmail,
         appUrl: APPURL,
-        facilityName:body.facilityName
+        facilityName:body.facilityName,
+        facId:body.facId
       }),
       html: ``,
     });
