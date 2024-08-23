@@ -5,7 +5,7 @@ import prisma from "@/prisma/client";
 export const dynamic = "force-dynamic";
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
-
+const APPURL = process.env.NEXT_APP_URL!;
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const body = await req.json();
 
@@ -24,6 +24,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       react: EmailFacilityCreationTemplate({
         firstName: body.username,
         email: userEmail,
+        appUrl: APPURL,
       }),
       html: ``,
     });

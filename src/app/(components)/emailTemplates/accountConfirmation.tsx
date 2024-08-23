@@ -13,7 +13,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   appUrl,
 }) => {
   return (
-    <div style={{ width: "75%" }}>
+    <div style={{ width: "95%" }}>
       <main
         style={{
           marginTop: "10px",

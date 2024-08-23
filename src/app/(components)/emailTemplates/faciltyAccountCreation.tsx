@@ -3,13 +3,14 @@ import * as React from "react";
 interface EmailFacilityCreationTemplateProps {
   firstName: string;
   email: string;
+  appUrl: string;
 }
 
 export const EmailFacilityCreationTemplate: React.FC<
   Readonly<EmailFacilityCreationTemplateProps>
-> = ({ firstName, email }) => {
+> = ({ firstName, email, appUrl }) => {
   return (
-    <div style={{ width: "75%" }}>
+    <div style={{ width: "98%" }}>
       <main
         style={{
           marginTop: "10px",
@@ -63,9 +64,21 @@ export const EmailFacilityCreationTemplate: React.FC<
           Email, <b>{email}</b>
         </p>
         <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
-          for password click <b>Login button</b> on login screen{" "}
-          <b>click forgot password link</b> then follow the instructions and
-          create your own new password.
+          for password click{" "}
+          <a
+            href={`/${appUrl}/auth/login`}
+            style={{ textDecoration: "none", fontStyle: "bold" }}
+          >
+            Login
+          </a>{" "}
+          on login screen{" "}
+          <a
+            href={`/${appUrl}/auth/forgot_password`}
+            style={{ textDecoration: "none", fontStyle: "bold" }}
+          >
+            click forgot password link
+          </a>{" "}
+          then follow the instructions and create your own new password.
         </p>
         <p
           style={{
