@@ -4,11 +4,12 @@ interface EmailFacilityCreationTemplateProps {
   firstName: string;
   email: string;
   appUrl: string;
+  facilityName: string;
 }
 
 export const EmailFacilityCreationTemplate: React.FC<
   Readonly<EmailFacilityCreationTemplateProps>
-> = ({ firstName, email, appUrl }) => {
+> = ({ firstName, email, appUrl, facilityName }) => {
   return (
     <div style={{ width: "98%" }}>
       <main
@@ -25,9 +26,6 @@ export const EmailFacilityCreationTemplate: React.FC<
         <h2 style={{ color: "#2A5568", textAlign: "left" }}>
           Dear {firstName},
         </h2>
-        <p style={{ textAlign: "left", color: "#718096" }}>
-          We trust this email finds you well.
-        </p>
         <p
           style={{
             marginTop: "2px",
@@ -36,19 +34,8 @@ export const EmailFacilityCreationTemplate: React.FC<
             textAlign: "left",
           }}
         >
-          This serves to notify you that an account has been created for you on
-          RPMFA Member Management System (RPMFA MIS).
-        </p>
-        <p
-          style={{
-            marginTop: "2px",
-            lineHeight: "1.75",
-            color: "#718096",
-            textAlign: "left",
-          }}
-        >
-          The purpose of the system is to improve service delivery to the
-          members of RPMFA through digitization.
+          This serves to notify you that an account has been created for your
+          facility <b>{facilityName}</b> on RPMFA MIS.
         </p>
         <p
           style={{
@@ -61,24 +48,7 @@ export const EmailFacilityCreationTemplate: React.FC<
           Below are your credentials:
         </p>
         <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
-          Email, <b>{email}</b>
-        </p>
-        <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
-          for password click{" "}
-          <a
-            href={`/${appUrl}/auth/login`}
-            style={{ textDecoration: "none", fontStyle: "bold" }}
-          >
-            Login
-          </a>{" "}
-          on login screen{" "}
-          <a
-            href={`/${appUrl}/auth/forgot_password`}
-            style={{ textDecoration: "none", fontStyle: "bold" }}
-          >
-            click forgot password link
-          </a>{" "}
-          then follow the instructions and create your own new password.
+          Username:<b>{email}</b>
         </p>
         <p
           style={{
@@ -88,9 +58,42 @@ export const EmailFacilityCreationTemplate: React.FC<
             textAlign: "left",
           }}
         >
-          Please expect to receive further communication from us informing you
-          about the next steps and guide on how to use the platform.
+          These are the next steps:
         </p>
+        <p
+          style={{
+            marginTop: "2px",
+            lineHeight: "1.75",
+            color: "#718096",
+            textAlign: "left",
+          }}
+        >
+          Next steps:
+        </p>
+        <div>
+          <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
+            1. Log into the system by clicking{" "}
+            <a
+              href={`/${appUrl.replace(/^https?:\/\//, "")}/auth/login`}
+              style={{ textDecoration: "none", color: "blue" }}
+            >
+              here
+            </a>
+          </p>
+          <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
+            2. Update your password by clicking{" "}
+            <a
+              href={`/${appUrl.replace(/^https?:\/\//, "")}/auth/forgot_password`}
+              style={{ textDecoration: "none", color: "blue" }}
+            >
+              here
+            </a>
+          </p>
+          <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
+            3. Update your {"facility's"} information, including the upload of
+            any
+          </p>
+        </div>
         <p
           style={{
             marginTop: "2px",
@@ -105,10 +108,10 @@ export const EmailFacilityCreationTemplate: React.FC<
         <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
           1. Angelo Igitego, Software Engineer, <b>+250 788 597 772</b>
         </p>
-        <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
+        <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
           2. Henriette Iradukunda, Admin, <b>+250 785 123 731</b>
         </p>
-        <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
+        <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
           3. Christian Ntakirutimana, Executive Secretary,{" "}
           <b>+250 788 515 358</b>
         </p>
