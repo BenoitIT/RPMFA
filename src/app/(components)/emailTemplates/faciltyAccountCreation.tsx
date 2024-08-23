@@ -5,11 +5,12 @@ interface EmailFacilityCreationTemplateProps {
   email: string;
   appUrl: string;
   facilityName: string;
+  facId:string,
 }
 
 export const EmailFacilityCreationTemplate: React.FC<
   Readonly<EmailFacilityCreationTemplateProps>
-> = ({ firstName, email, appUrl, facilityName }) => {
+> = ({ firstName, email, appUrl, facilityName,facId }) => {
   return (
     <div style={{ width: "98%" }}>
       <main
@@ -83,15 +84,26 @@ export const EmailFacilityCreationTemplate: React.FC<
           <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
             2. Update your password by clicking{" "}
             <a
-              href={`/${appUrl.replace(/^https?:\/\//, "")}/auth/forgot_password`}
+              href={`/${appUrl.replace(
+                /^https?:\/\//,
+                ""
+              )}/auth/forgot_password`}
               style={{ textDecoration: "none", color: "blue" }}
             >
               here
             </a>
           </p>
           <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
-            3. Update your {"facility's"} information, including the upload of
-            any
+            2. Update {"facility’s"} information by clicking{" "}
+            <a
+              href={`/${appUrl.replace(
+                /^https?:\/\//,
+                ""
+              )}/member/dashboard/applications/${facId}`}
+              style={{ textDecoration: "none", color: "blue" }}
+            >
+              here
+            </a>
           </p>
         </div>
         <p
