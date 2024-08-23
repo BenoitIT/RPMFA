@@ -35,7 +35,7 @@ const AddFacility = () => {
   const session: any = useSession();
   const token = session?.data?.user?.name?.accessToken;
   const facilityOwner = session?.data?.user?.id;
-  const username=session?.data?.user?.name?.first;
+  const username = session?.data?.user?.name?.first;
   const [currentSection, setCurrentSection] = useState(1);
   const [currentProgress, setCurrentProgress] = useState(25);
   const [disabled, setDisabled] = useState(false);
@@ -62,18 +62,16 @@ const AddFacility = () => {
   useEffect(() => {
     const handleButtonDisability = () => {
       if (
-        currentSection == 1 &&
-        formValues.facilityName == "" &&
-        formValues.facilityName == "" &&
-        formValues.tinNumber == ""
+        (currentSection == 1 && formValues.facilityName == "") ||
+        (currentSection == 1 && formValues.facilityCategory == "") ||
+        (currentSection == 1 && formValues.tinNumber == "")
       ) {
         setWorning("Fill the missing data");
         setDisabled(true);
       } else if (
-        currentSection == 2 &&
-        formValues.district == "" &&
-        formValues.sector == "" &&
-        formValues.cell == ""
+        (currentSection == 2 && formValues.district == "") ||
+        (currentSection == 2 && formValues.sector == "") ||
+        (currentSection == 2 && formValues.cell == "")
       ) {
         setWorning("Fill the missing data");
         setDisabled(true);
@@ -155,7 +153,7 @@ const AddFacility = () => {
           },
           body: JSON.stringify({
             userId: facilityOwner,
-            username:username
+            username: username,
           }),
         });
         const data = await emailResponse.json();
@@ -229,7 +227,6 @@ const AddFacility = () => {
                   name="facilityCategory"
                   value={formValues.facilityCategory}
                   options={[
-                    "Select category here",
                     "General clinic",
                     "Polyclinic",
                     "Specialized Clinic",

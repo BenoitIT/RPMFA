@@ -1,9 +1,4 @@
 const districts = [
-  {
-    id: 0,
-    name: "Select district",
-    province: "",
-  },
   { id: 1, name: "Nyarugenge", province: "Kigali City" },
   { id: 2, name: "Gasabo", province: "Kigali City" },
   { id: 3, name: "Kicukiro", province: "Kigali City" },

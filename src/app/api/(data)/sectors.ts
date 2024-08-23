@@ -1,8 +1,4 @@
 const sectors = [
-  {
-    id: 0,
-    name: "Select sector",
-  },
   { id: 1, name: "Bumbogo", district: "Gasabo" },
   { id: 2, name: "Gatsata", district: "Gasabo" },
   { id: 3, name: "Gikomero", district: "Gasabo" },
@@ -408,5 +404,17 @@ const sectors = [
   { id: 522, name: "Ngoma", district: "Rulindo" },
   { id: 525, name: "Shyorongi", district: "Rulindo" },
   { id: 526, name: "Tare", district: "Rulindo" },
+  { id: 527, name: "Fumbwe", district: "Rwamagana" },
+  { id: 528, name: "Gahengeri", district: "Rwamagana" },
+  { id: 529, name: "Gishari", district: "Rwamagana" },
+  { id: 530, name: "Karenge", district: "Rwamagana" },
+  { id: 531, name: "Kigabiro", district: "Rwamagana" },
+  { id: 532, name: "Muhazi", district: "Rwamagana" },
+  { id: 533, name: "Munyaga", district: "Rwamagana" },
+  { id: 534, name: "Munyiginya", district: "Rwamagana" },
+  { id: 535, name: "Mwulire", district: "Rwamagana" },
+  { id: 536, name: "Nyakaliro", district: "Rwamagana" },
+  { id: 537, name: "Nzige", district: "Rwamagana" },
+  { id: 538, name: "Rubona", district: "Rwamagana" }
 ];
 export default sectors;

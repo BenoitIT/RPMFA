@@ -1,8 +1,4 @@
 const provinces = [
-    {
-        id: 0,
-        name: "Select province"
-      },
   {
     id: 1,
     name: "Eastern",
