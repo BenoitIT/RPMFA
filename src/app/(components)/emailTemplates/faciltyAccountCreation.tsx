@@ -5,12 +5,12 @@ interface EmailFacilityCreationTemplateProps {
   email: string;
   appUrl: string;
   facilityName: string;
-  facId:string,
+  facId: string;
 }
 
 export const EmailFacilityCreationTemplate: React.FC<
   Readonly<EmailFacilityCreationTemplateProps>
-> = ({ firstName, email, appUrl, facilityName,facId }) => {
+> = ({ firstName, email, appUrl, facilityName, facId }) => {
   return (
     <div style={{ width: "98%" }}>
       <main
@@ -38,18 +38,8 @@ export const EmailFacilityCreationTemplate: React.FC<
           This serves to notify you that an account has been created for your
           facility <b>{facilityName}</b> on RPMFA MIS.
         </p>
-        <p
-          style={{
-            marginTop: "2px",
-            lineHeight: "1.75",
-            color: "#718096",
-            textAlign: "left",
-          }}
-        >
-          Below are your credentials:
-        </p>
         <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
-          Username:<b>{email}</b>
+          Your username is: <b>{email}</b>
         </p>
         <p
           style={{
@@ -60,16 +50,6 @@ export const EmailFacilityCreationTemplate: React.FC<
           }}
         >
           These are the next steps:
-        </p>
-        <p
-          style={{
-            marginTop: "2px",
-            lineHeight: "1.75",
-            color: "#718096",
-            textAlign: "left",
-          }}
-        >
-          Next steps:
         </p>
         <div>
           <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
@@ -99,7 +79,7 @@ export const EmailFacilityCreationTemplate: React.FC<
               href={`/${appUrl.replace(
                 /^https?:\/\//,
                 ""
-              )}/member/dashboard/applications/${facId}`}
+              )}/member/dashboard/applications/${facId}/edit/${facId}`}
               style={{ textDecoration: "none", color: "blue" }}
             >
               here
