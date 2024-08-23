@@ -9,7 +9,7 @@ export const EmailFacilityCreationTemplate: React.FC<
   Readonly<EmailFacilityCreationTemplateProps>
 > = ({ firstName, email }) => {
   return (
-    <div style={{ width: "50%" }}>
+    <div style={{ width: "75%" }}>
       <main
         style={{
           marginTop: "10px",
