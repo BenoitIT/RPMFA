@@ -70,7 +70,7 @@ const Table = ({
         </div>
       ) : (
         <>
-          <table className="w-full h-fit shadow-sm border border-gray-100">
+          <table className="w-full h-fit shadow-sm border border-gray-100 z-1">
           <tbody className="bg-white">
             <tr className="bg-white rounded">
               <th className={"py-3 pl-4"}>
