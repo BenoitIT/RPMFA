@@ -8,7 +8,7 @@ export const PUT = async (request: Request) => {
         id: Number(id),
       },
     });
-    if (facility ) {
+    if (facility) {
       await prisma.facility.update({
         where: {
           id: Number(id),
@@ -18,6 +18,35 @@ export const PUT = async (request: Request) => {
         },
       });
       return NextResponse.json({ status: 200, facility });
+    } else {
+      return NextResponse.json({ status: 404, facility });
+    }
+  } catch (err) {
+    return NextResponse.json({
+      message: "unexpected issue occurs",
+      status: 400,
+    });
+  }
+};
+export const DELETE = async (request: Request) => {
+  try {
+    const id = request.url.split("facility/")[1];
+    const facility = await prisma.facility.findFirst({
+      where: {
+        id: Number(id),
+      },
+    });
+    if (facility) {
+      await prisma.facility.delete({
+        where: {
+          id: Number(id),
+        },
+      });
+      return NextResponse.json({
+        status: 200,
+        facility,
+        message: "health facility account is deleted",
+      });
     } else {
       return NextResponse.json({ status: 404, facility });
     }
