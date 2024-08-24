@@ -55,7 +55,7 @@ export const EmailFacilityCreationTemplate: React.FC<
           <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
             1. Log into the system by clicking{" "}
             <a
-              href={`/${appUrl.replace(/^https?:\/\//, "")}/auth/login`}
+              href={`rpmfa.org/auth/login`}
               style={{ textDecoration: "none", color: "blue" }}
             >
               here
@@ -64,10 +64,7 @@ export const EmailFacilityCreationTemplate: React.FC<
           <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
             2. Update your password by clicking{" "}
             <a
-              href={`/${appUrl.replace(
-                /^https?:\/\//,
-                ""
-              )}/auth/forgot_password`}
+              href={`rpmfa.org/auth/forgot_password`}
               style={{ textDecoration: "none", color: "blue" }}
             >
               here
@@ -76,10 +73,7 @@ export const EmailFacilityCreationTemplate: React.FC<
           <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
             2. Update {"facility’s"} information by clicking{" "}
             <a
-              href={`/${appUrl.replace(
-                /^https?:\/\//,
-                ""
-              )}/member/dashboard/applications/${facId}/edit/${facId}`}
+              href={`rpmfa.org/member/dashboard/applications/${facId}/edit/${facId}`}
               style={{ textDecoration: "none", color: "blue" }}
             >
               here
