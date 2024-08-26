@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BsTrash, BsEye, BsPencil, BsFile } from "react-icons/bs";
 import Image from "next/image";
 import { LiaTimesSolid } from "react-icons/lia";
@@ -7,6 +7,8 @@ import { tableProps } from "@/app/interfaces/table";
 import { Empty } from "antd";
 import CheckBox from "../checkboxes/checkBox";
 import Paginator from "../pagination/generalPaginator";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Table = ({
   columns,
@@ -23,46 +25,52 @@ const Table = ({
   paginationLinks,
 }: tableProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const searchParams: any = useSearchParams();
+  const activePage = searchParams?.get("page");
+  const router = useRouter();
+  const itemsPerPage = 15;
   const lastPage = paginationLinks?.last
     ? parseInt(paginationLinks?.last.charAt(paginationLinks?.last.length - 1))
     : null;
-  const NextPage = paginationLinks?.next
-    ? parseInt(paginationLinks?.next.charAt(paginationLinks?.next.length - 1))
-    : null;
-  const currentPageLink = NextPage ? NextPage - 1 : lastPage;
   const totalPages = Math.ceil(data?.length / itemsPerPage || 1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = paginationLinks
     ? data
     : data?.slice(indexOfFirstItem, indexOfLastItem);
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    if (setCurrentDataLink) {
-      setCurrentDataLink(`?page=${pageNumber}`);
-    }
+    router.push(`?${createQueryString("page", pageNumber.toString())}`);
   };
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-      if (setCurrentDataLink && currentPageLink) {
-        setCurrentDataLink(`?page=${currentPageLink - 1}`);
-      }
+      router.push(
+        `?${createQueryString("page", (currentPage - 1).toString())}`
+      );
     }
   };
   const handleNextPage = () => {
     if (totalPages > currentPage) {
-      setCurrentPage(currentPage + 1);
-      if (setCurrentDataLink && NextPage) {
-        setCurrentDataLink(`?page=${NextPage - 1}`);
-      }
+      router.push(
+        `?${createQueryString("page", (currentPage + 1).toString())}`
+      );
     }
   };
-
+  useEffect(() => {
+    if (activePage) {
+      setCurrentPage(activePage);
+    }
+  }, [activePage]);
   return (
     <div className="w-full text-sm ">
-      {data?.length < 1 ? (
+      {data?.length < 1 || currentItems.length < 1 ? (
         <div className="flex h-[50vh] bg-transparent w-full justify-center items-center">
           <div className="text-base text-gray-900">
             <Empty />
@@ -71,27 +79,29 @@ const Table = ({
       ) : (
         <>
           <table className="w-full h-fit shadow-sm border border-gray-100 z-1">
-          <tbody className="bg-white">
-            <tr className="bg-white rounded">
-              <th className={"py-3 pl-4"}>
-                <div className="flex items-center h-5">
-                  <CheckBox
-                    onChange={() => selectAllRow(data)}
-                    checked={isSelectAll}
-                  />
-                </div>
-              </th>
-              {columns?.map((column: any) => (
-                <th
-                  className={`md:py-3 xs:py-2 xs:px-1 text-left md:text-sm  xs:text-xs font-normal text-gray-700 capitalize ${column.hideOnMobile ? 'hidden md:table-cell' : ''}`}
-                  key={column.field}
-                >
-                  {column.header.length > 28
-                    ? column.header.slice(0, 28) + "..."
-                    : column.header}
+            <tbody className="bg-white">
+              <tr className="bg-white rounded">
+                <th className={"py-3 pl-4"}>
+                  <div className="flex items-center h-5">
+                    <CheckBox
+                      onChange={() => selectAllRow(data)}
+                      checked={isSelectAll}
+                    />
+                  </div>
                 </th>
-              ))}
-            </tr>
+                {columns?.map((column: any) => (
+                  <th
+                    className={`md:py-3 xs:py-2 xs:px-1 text-left md:text-sm  xs:text-xs font-normal text-gray-700 capitalize ${
+                      column.hideOnMobile ? "hidden md:table-cell" : ""
+                    }`}
+                    key={column.field}
+                  >
+                    {column.header.length > 28
+                      ? column.header.slice(0, 28) + "..."
+                      : column.header}
+                  </th>
+                ))}
+              </tr>
 
               {currentItems?.map((data: any) => (
                 <tr
@@ -114,7 +124,9 @@ const Table = ({
                         col.field === "image" || col.field === "logo"
                           ? " md:py-2 xs:py-2  font-normal h-[30px] pl-1"
                           : `  md:py-2 xs:py-1 text-left text-xs md:text-sm font-normal text-grey-800`
-                      } ${col.field === "email" ? "" : "capitalize"} ${col.hideOnMobile ? 'hidden md:table-cell' : ''}`}
+                      } ${col.field === "email" ? "" : "capitalize"} ${
+                        col.hideOnMobile ? "hidden md:table-cell" : ""
+                      }`}
                     >
                       {col.field === "image" && (
                         <div className="flex items-center h-[30px] rounded-full">
@@ -232,7 +244,7 @@ const Table = ({
             }
           >
             <Paginator
-              activePage={currentPageLink ? currentPageLink : currentPage}
+              activePage={currentPage}
               totalPages={lastPage ? lastPage : totalPages}
               onPageChange={handlePageChange}
               onPreviousPageChange={handlePreviousPage}

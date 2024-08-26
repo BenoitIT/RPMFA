@@ -22,7 +22,7 @@ const Paginator: React.FC<PaginatorProps> = ({
           <button
             key={ActivepageNumber}
             className={`px-4 md:py-2 xs:py-1 mx-1 text-grey-800 font-normal text-sm  rounded-md border shadow border-grey-400 ${
-              activePage === ActivepageNumber
+              activePage == ActivepageNumber
                 ? "bg-blue-600 text-white"
                 : "bg-white"
             }`}
