@@ -90,13 +90,10 @@ export const EmailFacilityCreationTemplate: React.FC<
           people:
         </p>
         <p style={{ color: "#718096", textAlign: "left" }}>
-          1. Angelo Igitego, Software Engineer, <b>+250 788 597 772</b>
+          1. Henriette Iradukunda, Admin, <b>+250 785 123 731</b>
         </p>
         <p style={{ color: "#718096", textAlign: "left" }}>
-          2. Henriette Iradukunda, Admin, <b>+250 785 123 731</b>
-        </p>
-        <p style={{ color: "#718096", textAlign: "left" }}>
-          3. Christian Ntakirutimana, Executive Secretary,{" "}
+          2. Christian Ntakirutimana, Executive Secretary,{" "}
           <b>+250 788 515 358</b>
         </p>
         <p
