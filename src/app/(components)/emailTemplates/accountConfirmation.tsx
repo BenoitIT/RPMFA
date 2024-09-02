@@ -38,7 +38,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             margin: "0 0 15px",
           }}
         >
-          This serves to notify you that an account has been created for you on RPMFA Member Management Information System (RPMFA MIS).
+          This serves to notify you that an account has been created for you on
+          RPMFA Member Management Information System (RPMFA MIS).
         </p>
         <p
           style={{
@@ -48,7 +49,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             margin: "0 0 15px",
           }}
         >
-          The purpose of the system is to improve service delivery to the members of RPMFA through digitalization.
+          The purpose of the system is to improve service delivery to the
+          members of RPMFA through digitalization.
         </p>
         <p
           style={{
@@ -58,7 +60,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             margin: "0 0 15px",
           }}
         >
-          Please expect to receive further communication from us informing you about the next steps and guide on how to use the platform.
+          Please expect to receive further communication from us informing you
+          about the next steps and guide on how to use the platform.
         </p>
         <p
           style={{
@@ -68,13 +71,15 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             margin: "0 0 15px",
           }}
         >
-          For any support or clarification, you may contact the following people:
+          For any support or clarification, you may contact the following
+          people:
         </p>
         <p style={{ color: "#718096", textAlign: "left", margin: "0 0 10px" }}>
-          1. Henriette Iradukunda, Admin, <b>+250 785 123 731</b>
+          1. Henriette Iradukunda, Admin, <b>+250 785 143 731</b>
         </p>
         <p style={{ color: "#718096", textAlign: "left", margin: "0 0 10px" }}>
-          2. Christian Ntakirutimana, Executive Secretary, <b>+250 788 515 358</b>
+          2. Christian Ntakirutimana, Executive Secretary{" "}
+          <b>+250 788 515 358</b>
         </p>
         <p
           style={{
