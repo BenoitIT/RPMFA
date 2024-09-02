@@ -139,7 +139,6 @@ const SignUpPage = () => {
               name="title"
               value={userTitle.title}
               options={[
-                "Select title",
                 "Owner",
                 "Managing director",
                 "Clinical director",
