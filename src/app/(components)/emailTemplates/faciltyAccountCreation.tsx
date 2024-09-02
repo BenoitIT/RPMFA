@@ -12,7 +12,7 @@ export const EmailFacilityCreationTemplate: React.FC<
   Readonly<EmailFacilityCreationTemplateProps>
 > = ({ firstName, email, appUrl, facilityName, facId }) => {
   return (
-    <div style={{ width: "98%" }}>
+    <div style={{ width: "95%", maxWidth: "450px", margin: "auto" }}>
       <main
         style={{
           marginTop: "10px",
@@ -20,8 +20,8 @@ export const EmailFacilityCreationTemplate: React.FC<
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          marginRight: "20px",
-          marginLeft: "5px",
+          padding: "20px",
+          boxSizing: "border-box",
         }}
       >
         <h2 style={{ color: "#2A5568", textAlign: "left" }}>
@@ -29,21 +29,19 @@ export const EmailFacilityCreationTemplate: React.FC<
         </h2>
         <p
           style={{
-            marginTop: "2px",
+            marginTop: "1px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
           }}
         >
           This serves to notify you that an account has been created for your
-          facility <b>{facilityName}</b> on RPMFA MIS.
-        </p>
-        <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
-          Your username is: <b>{email}</b>
+          facility <b>{facilityName}</b> on RPMFA MIS.Your username is:{" "}
+          <b>{email}</b>
         </p>
         <p
           style={{
-            marginTop: "2px",
+            marginTop: "1px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
@@ -52,7 +50,7 @@ export const EmailFacilityCreationTemplate: React.FC<
           These are the next steps:
         </p>
         <div>
-          <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
+          <p style={{ color: "#718096", textAlign: "left" }}>
             1. Log into the system by clicking{" "}
             <a
               href={`rpmfa.org/auth/login`}
@@ -61,7 +59,7 @@ export const EmailFacilityCreationTemplate: React.FC<
               here
             </a>
           </p>
-          <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
+          <p style={{ color: "#718096", textAlign: "left" }}>
             2. Update your password by clicking{" "}
             <a
               href={`rpmfa.org/auth/forgot_password`}
@@ -70,7 +68,7 @@ export const EmailFacilityCreationTemplate: React.FC<
               here
             </a>
           </p>
-          <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
+          <p style={{ color: "#718096", textAlign: "left" }}>
             2. Update {"facility’s"} information by clicking{" "}
             <a
               href={`rpmfa.org/member/dashboard/applications/${facId}/edit/${facId}`}
@@ -91,19 +89,19 @@ export const EmailFacilityCreationTemplate: React.FC<
           For any support or clarification, you may contact the following
           people:
         </p>
-        <p style={{ marginTop: "2px", color: "#718096", textAlign: "left" }}>
+        <p style={{ color: "#718096", textAlign: "left" }}>
           1. Angelo Igitego, Software Engineer, <b>+250 788 597 772</b>
         </p>
-        <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
+        <p style={{ color: "#718096", textAlign: "left" }}>
           2. Henriette Iradukunda, Admin, <b>+250 785 123 731</b>
         </p>
-        <p style={{ marginTop: "1px", color: "#718096", textAlign: "left" }}>
+        <p style={{ color: "#718096", textAlign: "left" }}>
           3. Christian Ntakirutimana, Executive Secretary,{" "}
           <b>+250 788 515 358</b>
         </p>
         <p
           style={{
-            marginTop: "2px",
+            marginTop: "1px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
@@ -113,7 +111,7 @@ export const EmailFacilityCreationTemplate: React.FC<
         </p>
         <p
           style={{
-            marginTop: "2px",
+            marginTop: "1px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
@@ -123,7 +121,7 @@ export const EmailFacilityCreationTemplate: React.FC<
         </p>
         <p
           style={{
-            marginTop: "2px",
+            marginTop: "1px",
             lineHeight: "1.75",
             color: "#718096",
             textAlign: "left",
