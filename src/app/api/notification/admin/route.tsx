@@ -16,3 +16,20 @@ export const GET = async () => {
     });
   }
 };
+export const DELETE = async () => {
+  try {
+    const request = await prisma.notification.deleteMany({
+      where: {
+        reciverId: 1,
+      },
+    });
+    if (request) {
+      return NextResponse.json({ status: 200 });
+    }
+  } catch (err) {
+    return NextResponse.json({
+      message: "unexpected issue occurs",
+      status: 400,
+    });
+  }
+};
