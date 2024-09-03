@@ -2,15 +2,19 @@
 import Button from "@/app/(components)/buttons/primaryBtn";
 import { SuccessModal } from "@/app/(components)/modals/SuccessModal";
 import { Alert } from "antd";
-import { useState } from "react";
+import { useState, lazy } from "react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
-import FeedbackModal from "@/app/(components)/modals/feedbackModal";
 import { useSession } from "next-auth/react";
-import MemberShipExtraInfo from "./modals/memberShipExtraInfo";
-import MemberShipCertificateUploader from "./modals/certificateUpload";
+const FeedbackModal = lazy(
+  () => import("@/app/(components)/modals/feedbackModal")
+);
+const MemberShipExtraInfo = lazy(() => import("./modals/memberShipExtraInfo"));
+const MemberShipCertificateUploader = lazy(
+  () => import("./modals/certificateUpload")
+);
 const ApplicationDetails = ({ application, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();

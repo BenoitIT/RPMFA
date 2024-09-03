@@ -56,7 +56,7 @@ export const EmailFacilityCreationTemplate: React.FC<
               href={`rpmfa.org/auth/login`}
               style={{ textDecoration: "none", color: "blue" }}
             >
-              https://www.rpmfa.org/sign_in
+              {`https://www.rpmfa.org/auth/login`}
             </a>
           </p>
           <p style={{ color: "#718096", textAlign: "left" }}>
@@ -65,7 +65,7 @@ export const EmailFacilityCreationTemplate: React.FC<
               href={`rpmfa.org/auth/forgot_password`}
               style={{ textDecoration: "none", color: "blue" }}
             >
-              https://www.rpmfa.org/update_password
+              {`https://www.rpmfa.org/auth/forgot_password`}
             </a>
           </p>
           <p style={{ color: "#718096", textAlign: "left" }}>
@@ -74,7 +74,7 @@ export const EmailFacilityCreationTemplate: React.FC<
               href={`rpmfa.org/member/dashboard/applications/${facId}/edit/${facId}`}
               style={{ textDecoration: "none", color: "blue" }}
             >
-              https://www.rpmfa.org/update_facility info
+              {`https://www.rpmfa.org/member/dashboard/applications/${facId}/edit/${facId}`}
             </a>
           </p>
         </div>

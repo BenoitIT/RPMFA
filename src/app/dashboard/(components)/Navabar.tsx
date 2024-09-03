@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, lazy } from "react";
 import {
   IoIosArrowUp,
   IoIosNotificationsOutline,
@@ -20,7 +20,7 @@ import {
   membersDashboardLinks,
 } from "./links";
 import { SidebarMenu } from "./sidebar/Sidebar";
-import Notifcations from "./cards/notification";
+const Notifcations = lazy(() => import("./cards/notification"));
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +33,7 @@ const Navbar = () => {
   const [refresh, setRefesh] = useState<boolean>(false);
   const [displayNotification, setDisplayNotification] = useState(false);
   const session: any = useSession();
+  const notificationPop: any = useRef(null);
   const handleModalDisplay = () => {
     setProfileMenus(!openProfileMenus);
   };
@@ -54,6 +55,20 @@ const Navbar = () => {
   setTimeout(() => {
     setRefesh(!refresh);
   }, 1000 * 60);
+  const handleClickOutSide = (event: any) => {
+    if (
+      notificationPop?.current &&
+      !notificationPop.current.contains(event.target)
+    ) {
+      setDisplayNotification(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutSide);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    };
+  }, []);
   useEffect(() => {
     const fetchNotifications = async () => {
       if (session || refresh) {
@@ -83,10 +98,10 @@ const Navbar = () => {
   }, [session, refresh]);
   const handleMarkAsRead = async (id: string | number) => {
     const response = await fetch(`/api/notification/${id}`, {
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
-      }
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     const data = await response.json();
     if (data.status == 200) {
@@ -183,8 +198,10 @@ const Navbar = () => {
           )}
         </div>
         <Notifcations
+          reference={notificationPop}
           displayNotification={displayNotification}
           notifications={notifications}
+          setRefesh={setRefesh}
           handleMarkAsRead={handleMarkAsRead}
         />
       </div>

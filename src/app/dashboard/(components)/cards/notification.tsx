@@ -1,14 +1,31 @@
 import { HiOutlineBellAlert } from "react-icons/hi2";
+import { useSession } from "next-auth/react";
 interface NoticationProps {
   displayNotification: boolean;
   notifications: any[];
   handleMarkAsRead: (val: number) => void;
+  reference: any;
+  setRefesh: (val: any) => void;
 }
 const Notifcations = ({
   displayNotification,
   notifications,
   handleMarkAsRead,
+  reference,
+  setRefesh,
 }: NoticationProps) => {
+  const session = useSession();
+  const handleDeleteAllInfo = async () => {
+    if (session?.data?.user?.role == "admin") {
+      const response = await fetch("/api/notification/admin", {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      if (data.status == 200) {
+        setRefesh((prev: boolean) => !prev);
+      }
+    }
+  };
   return (
     <div
       className={
@@ -16,6 +33,7 @@ const Notifcations = ({
           ? "md:w-[400px] w-[320px] bg-white shadow rounded-lg shadow-lightblue py-2 px-3 z-50 absolute top-[56px] lg:right-[52px] right-[10px] border border-lightblue flex flex-col gap-2 max-h-[85vh] overflow-y-auto"
           : "hidden"
       }
+      ref={reference}
     >
       <p className="text-gray-700 font-semibold text-sm">Notifications</p>
       {notifications.length > 0 ? (
@@ -36,10 +54,20 @@ const Notifcations = ({
         ))
       ) : (
         <p className="text-xs p-2  rounded font-light opacity-95 cursor-default flex gap-2 relative w-full">
-            <HiOutlineBellAlert className="mt-[1px]" />
+          <HiOutlineBellAlert className="mt-[1px]" />
           <span>No notification found..</span>
         </p>
       )}
+      <button
+        className={
+          notifications.length > 0 && session?.data?.user?.role == "admin"
+            ? "bg-red-500 text-white rounded w-full text-sm shadow py-1"
+            : "hidden"
+        }
+        onClick={handleDeleteAllInfo}
+      >
+        Delete all notifications
+      </button>
     </div>
   );
 };
