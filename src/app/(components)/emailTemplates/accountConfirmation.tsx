@@ -8,8 +8,6 @@ interface EmailTemplateProps {
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   firstName,
-  token,
-  appUrl,
 }) => {
   return (
     <div style={{ width: "95%", maxWidth: "600px", margin: "auto" }}>

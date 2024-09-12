@@ -1,6 +1,4 @@
 import * as React from "react";
-import { SlEnvolope } from "react-icons/sl";
-
 interface EmailTemplateProps {
   firstName: string;
   subject: string;
@@ -8,89 +6,88 @@ interface EmailTemplateProps {
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   firstName,
-  subject,
 }) => (
-  <div style={{ width: "100%" }}>
-    <div
-      style={{
-        height: "150px",
-        backgroundColor: "#365CCE",
-        width: "100%",
-        color: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: "20px",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <div
-          style={{ width: "40px", height: "1px", backgroundColor: "white" }}
-        ></div>
-        <SlEnvolope style={{ fontSize: "1.125rem", color: "blue" }} />
-        <div
-          style={{ width: "40px", height: "1px", backgroundColor: "white" }}
-        ></div>
-      </div>
-      <div style={{ marginTop: "40px" }}>
-        <div
-          style={{
-            textAlign: "center",
-            fontSize: "0.875rem",
-            lineHeight: "1.25rem",
-            letterSpacing: "0.1em",
-            fontWeight: "400",
-            marginBottom: "10px",
-          }}
-        >
-          THANKS FOR SENDING APPLICATION!
-        </div>
-      </div>
-    </div>
+  <div style={{ width: "95%", maxWidth: "600px", margin: "auto" }}>
     <main
       style={{
-        marginTop: "32px",
+        marginTop: "10px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
-        paddingRight: "20px",
+        padding: "20px",
+        boxSizing: "border-box",
       }}
     >
-      <h2 style={{ color: "#4A5568", textAlign: "center" }}>
-        Hello {firstName}!
-      </h2>
+      <h4>
+        <b style={{ textAlign: "left",color: "#2A5568" }}>Your application has been approved!</b>
+      </h4>
+      <h5 style={{ color: "#2A5568", textAlign: "left", margin: "0 0 15px" }}>
+        Dear {firstName},
+      </h5>
       <p
         style={{
-          marginTop: "8px",
           lineHeight: "1.75",
           color: "#718096",
-          textAlign: "center",
+          textAlign: "left",
+          margin: "0 0 15px",
         }}
       >
-        {subject}.
+        We are delighted to inform you that your digital application to become a
+        Rwanda Private Medical Facilities Association (RPMFA) has been approved!
       </p>
       <p
         style={{
-          marginTop: "8px",
           lineHeight: "1.75",
           color: "#718096",
-          textAlign: "center",
+          textAlign: "left",
+          margin: "0 0 15px",
         }}
       >
-        We are delighted to inform you that your application to become a Rwanda
-        Private Medical Facilities Association (RPMFA) has been approved! Your
-        commitment to excellence and your contributions to Rwanda Private Medical facilities Association are truly commendable. As an RPMFA, you now join
-        an elite group of professionals who are recognized for their expertise,
-        leadership, and dedication to advancing the profession.
+        Your commitment to excellence and your contributions to Rwanda Private
+        Medical Facilities Association are truly commendable.
       </p>
-      <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
-        Thank you, <br />
-        RPMFA Regards
+      <p
+        style={{
+          lineHeight: "1.75",
+          color: "#718096",
+          textAlign: "left",
+          margin: "0 0 15px",
+        }}
+      >
+        As an RPMFA member, you now join an elite group of professionals who are
+        recognized for their expertise, leadership, and dedication to advancing
+        the medical profession in Rwanda.
       </p>
-      <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
-        For any support or more information, contact: <b>+250 788 597 772</b>
+      <p
+        style={{
+          lineHeight: "1.75",
+          color: "#718096",
+          textAlign: "left",
+          margin: "0 0 15px",
+        }}
+      >
+        Thank you and best regards,
+      </p>
+      <p
+        style={{
+          lineHeight: "1.75",
+          color: "#718096",
+          textAlign: "left",
+          margin: "0 0 15px",
+        }}
+      >
+        RPMFA Secretariat.
+      </p>
+      <p
+        style={{
+          lineHeight: "1.75",
+          color: "#718096",
+          textAlign: "left",
+          margin: "0 0 15px",
+        }}
+      >
+        For any support or more information, contact: +250-785-143-731
       </p>
     </main>
   </div>
