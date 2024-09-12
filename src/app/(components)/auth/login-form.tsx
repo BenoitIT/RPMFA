@@ -65,7 +65,7 @@ const LoginForm = () => {
       <h1 className="text-xl font-medium text-center py-4 leading-tight tracking-tight text-blue-600 md:text-2xl">
         Login
       </h1>
-      <div className="w-full  bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
+      <div className="w-full  bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-200 m-3">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <form
             className="space-y-4 md:space-y-6"
@@ -81,9 +81,9 @@ const LoginForm = () => {
               <input
                 type="email"
                 disabled={pending}
-                placeholder="Enter your email here"
+                placeholder="Enter your email"
                 {...form.register("email")}
-                className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
+                className="border border-gray-300 bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
               />
               {form.formState.errors.email && (
                 <p className="text-red-500 text-xs">
@@ -101,19 +101,19 @@ const LoginForm = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 disabled={pending}
-                placeholder="Enter password here"
+                placeholder="Enter password"
                 {...form.register("password")}
-                className="bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
+                className="border border-gray-300 bg-green-50 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 top-[35%] pr-3 flex items-center text-gray-700"
+                className="absolute inset-y-0 right-0 top-[35%] pr-3 flex items-center text-gray-500"
               >
                 {showPassword ? (
-                  <AiOutlineEyeInvisible size={20} className="text-gray-700"/>
+                  <AiOutlineEyeInvisible size={20} className="text-gray-400 font-thin"/>
                 ) : (
-                  <AiOutlineEye size={20} className="text-gray-700" />
+                  <AiOutlineEye size={20} className="text-gray-400 font-thin" />
                 )}
               </button>
             </div>

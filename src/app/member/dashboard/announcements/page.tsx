@@ -13,7 +13,7 @@ const Page = async () => {
   const data = await response.json();
   if (data.status == 200) {
     return (
-      <div className="mt-4 w-full">
+      <div className="mt-4 w-full flex flex-col">
         <h3 className="text-gray-600 text-sm flex gap-1">
           <Link
             href="/member/dashboard"
@@ -24,7 +24,9 @@ const Page = async () => {
           <PiGreaterThanLight className="mt-[3px]" />
           <p className="text-blue-700 hover:cursor-pointer">Announcements</p>
         </h3>
+        <div>
         <AnnouncementContents announcements={data.announcements} />
+        </div>
       </div>
     );
   }

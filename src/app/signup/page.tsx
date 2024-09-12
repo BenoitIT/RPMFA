@@ -6,7 +6,6 @@ import { EmailConfirmationModal } from "../(components)/modals/EmailConfirmation
 import Footer from "../(components)/navigations/Footer";
 import { FormEvent, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { PrimarySelectorInput } from "../(components)/inputs/SelectorInputs";
 const SignUpPage = () => {

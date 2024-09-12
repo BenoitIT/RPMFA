@@ -62,19 +62,19 @@ const NavBar = ({ isLoggedin }: any) => {
         <div className="flex md:order-2 space-x-2 lg:space-x-3 rtl:space-x-reverse">
           <Button
             label={isLoggedin ? "Log out" : "Login"}
-            customStyle="border text-blue-1 py-1 border-blue-700 hover:bg-blue-1 hover:text-white mt-1 md:mt-0"
+            customStyle="shadow border text-blue-1 py-1 border-blue-1 hover:bg-blue-1 hover:text-white mt-1 md:mt-0"
             Click={handleSignOut}
           />
           {session?.data?.user ? (
             <Button
               label="Dashboard"
-              customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0"
+              customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0 shadow"
               Click={handleDashbordRedirection}
             />
           ) : (
             <Button
               label="Get started"
-              customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0"
+              customStyle="bg-blue-1 py-1 hover:bg-blue-900 text-white border border-blue-700 mt-1 md:mt-0 shadow"
               Click={handleMoveSignUp}
             />
           )}

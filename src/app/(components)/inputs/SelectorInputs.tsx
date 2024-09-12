@@ -34,7 +34,7 @@ export const PrimarySelectorInput = ({
 
       <select
         name={name}
-        className="bg-gray-1 outline-none text-gray-900 text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
+        className="border border-gray-300 bg-gray-1 outline-none text-gray-900 text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
         onChange={changeHandler}
       >
         <option value="">please select...</option>
