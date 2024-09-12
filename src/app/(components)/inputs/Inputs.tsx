@@ -40,7 +40,7 @@ export const PrimaryInput = ({
         value={value}
         id={name}
         onChange={changeHandler}
-        className="bg-gray-1 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
+        className="border border-gray-300 bg-gray-1 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm"
         placeholder={placeholder}
         disabled={disabled && disabled}
       />

@@ -55,9 +55,9 @@ const Certificates = ({ memberships }: certificate) => {
             />
           ))}
         </div>
-        <div className="w-fit border border-blue-200 h-[80vh] overflow-scroll ml-2">
+        <div className="w-fit border border-blue-200 h-[80vh] overflow-auto ml-2">
           {certificate == "" ? (
-            <div className="h-fit w-fit rounded border border-gray-300 text-sm text-black p-6 flex flex-col gap-2 leading-5 text-center shadow">
+            <div className="h-fit w-fit rounded  text-sm text-black p-6 flex flex-col gap-2 leading-5 text-center">
               <li className="list-disc">
                 Membership certificate has not yet been sent from Admin
               </li>

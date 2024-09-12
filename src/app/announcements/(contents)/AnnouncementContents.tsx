@@ -39,7 +39,7 @@ const AnnouncementContents = ({ announcements }: AnnouncmentProps) => {
           </div>
         </div>
       ) : (
-        <div className="h-[40vh] w-screen flex justify-center items-center text-sm flex-col gap-3 max-w-full">
+        <div className="h-[40vh] w-full flex justify-center items-center text-sm flex-col gap-3 max-w-full">
           <TbDatabaseX className="text-4xl text-blue-300" />
           <p className="text-gray-700 font-light">There is no announcement for now.</p>
         </div>
