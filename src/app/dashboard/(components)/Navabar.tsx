@@ -51,7 +51,7 @@ const Navbar = () => {
       setDashBordMainMenu(memberHomeMenu);
       setDashProfile(membersDashboardLinks);
     }
-  }, [session?.user?.role]);
+  }, [session?.data?.user?.role]);
   setTimeout(() => {
     setRefesh(!refresh);
   }, 1000 * 60);
