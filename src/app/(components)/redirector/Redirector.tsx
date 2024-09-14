@@ -7,7 +7,7 @@ const Redirector = () => {
   const router = useRouter();
   useEffect(() => {
     router.back();
-  }, []);
+  }, [router]);
   return (
     <div className="h-[300px] flex justify-center items-center font-medium">
       You are try to access the contents which do not match your role

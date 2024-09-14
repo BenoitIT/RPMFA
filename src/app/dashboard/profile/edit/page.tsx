@@ -56,12 +56,21 @@ const Page = () => {
   return (
     <div className="mt-4 w-full">
       <h3 className="text-gray-600 text-sm flex gap-1">
-        <Link
-          href="/dashboard"
-          className="hover:text-blue-700 hover:cursor-pointer"
-        >
-          Home
-        </Link>
+        {session?.data?.user?.role == "admin" ? (
+          <Link
+            href="/dashboard"
+            className="hover:text-blue-700 hover:cursor-pointer"
+          >
+            Home
+          </Link>
+        ) : (
+          <Link
+            href="/member/dashboard"
+            className="hover:text-blue-700 hover:cursor-pointer"
+          >
+            Home
+          </Link>
+        )}
         <PiGreaterThanLight className="mt-[3px]" />
         {session?.data?.user?.role == "admin" ? (
           <Link
@@ -72,7 +81,7 @@ const Page = () => {
           </Link>
         ) : (
           <Link
-            href="/dashboard/member/profile"
+            href="/member/dashboard/profile"
             className="hover:text-blue-700 hover:cursor-pointer"
           >
             Profile
