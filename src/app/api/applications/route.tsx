@@ -11,6 +11,9 @@ export const GET = async () => {
       include: {
         user: true,
       },
+      orderBy:{
+        createdAt:"desc"
+      }
     });
     const response = NextResponse.json({ status: 200, applications });
     response.headers.set(

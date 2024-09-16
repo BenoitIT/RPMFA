@@ -10,6 +10,9 @@ export const GET = async () => {
       include: {
         user: true,
       },
+      orderBy:{
+        createdAt:"desc"
+      }
     });
     return NextResponse.json({ status: 200, members });
   } catch (err) {
