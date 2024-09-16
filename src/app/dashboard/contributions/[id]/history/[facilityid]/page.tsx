@@ -6,14 +6,17 @@ import { extractYear } from "@/app/utilities/timeParser";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ContributionHistories from "@/app/dashboard/(components)/ContentsContainers/contributionHistory";
+import Loader from "@/app/dashboard/(components)/ContentsContainers/loader";
 
 const Page = () => {
   const params: any = useParams();
   const facilityId = params?.facilityid;
   const contrId = params?.id;
   const [contributionInfo, setContributionInfo] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     const fetchHistory = async () => {
+      setLoading(true);
       const response = await fetch(
         `/api/contribution/facilities/${facilityId}`,
         {
@@ -46,6 +49,7 @@ const Page = () => {
         }));
         setContributionInfo(contributions);
       }
+      setLoading(false);
     };
     fetchHistory();
   }, [facilityId]);
@@ -79,7 +83,11 @@ const Page = () => {
         </Link>
       </h3>
       <div className=" p-6 h-full -ml-4">
-        <ContributionHistories contributions={contributionInfo} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <ContributionHistories contributions={contributionInfo} />
+        )}
       </div>
     </div>
   );
