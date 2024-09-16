@@ -60,9 +60,9 @@ const ApplicationDetails = ({ application, category }: any) => {
       <div className="flex justify-between">
         <div className="w-fit flex flex-col">
           <div className="h-16 w-16 rounded-full bg-blue-200 flex  text-xl justify-center items-center uppercase font-bold text-blue-950">
-            {application?.facility?.facilityName +
+            {application?.facilityName[0] +
               "" +
-              application?.facility?.facilityName[0]}
+              application?.facilityName[application?.facilityName?.length-1]}
           </div>
           <h1 className="font-medium text-blue-600 my-6 text-base capitalize">
             {application?.facilityName}
