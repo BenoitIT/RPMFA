@@ -7,12 +7,12 @@ export const memberTableColumns = [
   { field: "Action", header: "Action" },
 ];
 export const ContributionTableColumns = [
-  { field: "image", header: "Image" },
+  { field: "image", header: "Image",hideOnMobile:true },
   { field: "facilityName", header: "Facility Name" },
   { field: "category", header: "Category",hideOnMobile:true },
   { field: "amountPaid", header: "Amount Paid" },
   { field: "dueDate", header: "Due Date",hideOnMobile:true },
-  { field: "amountDue", header: "Amount Due", },
+  { field: "amountDue", header: "Amount Due",hideOnMobile:true },
   { field: "numberOfPeriod", header: "Number of Seasons",hideOnMobile:true },
   { field: "paymentYear", header: "Payment Year",hideOnMobile:true },
   { field: "status", header: "Status",hideOnMobile:true },

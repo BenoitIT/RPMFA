@@ -6,7 +6,7 @@ export const HandleContrDataSearch = (
     const filteredData = data.filter(
       (contribution) =>
         contribution?.status?.toLowerCase().includes(value.toLowerCase()) ||
-        contribution?.paymentYear?.toLowerCase().includes(value.toLowerCase()) ||
+        contribution?.paymentYear==value ||
         contribution?.amountDue?.toLowerCase().includes(value) ||
         contribution?.amountPaid?.toLowerCase().includes(value) ||
         contribution?.category?.toLowerCase().includes(value) ||
