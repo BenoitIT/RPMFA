@@ -70,7 +70,7 @@ const Contributions = ({ contributions }: contributionTabs) => {
   }, [currentYear]);
 
   const dataSearchingTrigger = () => {
-    HandleContrDataSearch(searchValue, contributions, setActiveData);
+    HandleContrDataSearch(searchValue, contributions[0].data, setActiveData);
   };
   return (
     <div className="mt-2 w-full">

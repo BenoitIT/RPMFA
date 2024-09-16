@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 export const revalidate = 0;
 export const GET = async (request: Request) => {
   try {
-    const id = request.url.split("user/")[1];
+    const id = request.url.split("facilities/")[1];
     const prisma = new PrismaClient();
     const contributions = await prisma.contribution.findMany({
       where: {
-        userId: Number(id),
+        facilityId: Number(id),
       },
       include: {
         user: true,

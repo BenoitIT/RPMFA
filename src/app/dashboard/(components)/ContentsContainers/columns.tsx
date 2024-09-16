@@ -38,3 +38,13 @@ export const memberContributionTableColumns = [
   { field: "status", header: "Status",hideOnMobile:true },
   { field: "Action", header: "Action" },
 ];
+export const memberRecentContributionTableColumns = [
+  { field: "created_at", header: "Contribution Date" },
+  { field: "contributionAmount", header: "Contribution Amount" },
+  { field: "depositReceiptNumber", header: "Deposit Receipt Number",hideOnMobile:true },
+  { field: "amountDue", header: "Amount Due",hideOnMobile:true },
+  { field: "contributionPeriod", header: "Number of Seasons",hideOnMobile:true },
+  { field: "paymentYear", header: "Payment Year" },
+  { field: "status", header: "Status",hideOnMobile:true },
+  { field: "Action", header: "Action" },
+];

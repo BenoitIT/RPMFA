@@ -14,8 +14,8 @@ export const HandleContrDataSearch = (
     );
 
     if (filteredData.length > 0) {
-      return setFilteredData(filteredData);
+       setFilteredData(filteredData);
     } else {
-      return setFilteredData([]);
+     setFilteredData([]);
     }
   };

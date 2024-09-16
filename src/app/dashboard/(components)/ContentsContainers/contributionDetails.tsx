@@ -29,11 +29,12 @@ const ContributionDetails = ({ contribution, category }: any) => {
         },
       });
       const data = await response.json();
-      if (data?.status == 200) {
+      if (data?.status) {
         setOpenSuccessModal(true);
         setTimeout(() => {
           router.refresh();
         }, 3000);
+        setOpenSuccessModal(false);
         setLoading(false);
       }
     } catch (err) {
@@ -46,9 +47,11 @@ const ContributionDetails = ({ contribution, category }: any) => {
       <div className="flex justify-between">
         <div className="w-fit flex flex-col">
           <div className="h-16 w-16 rounded-full bg-blue-200 flex  text-xl justify-center items-center uppercase font-bold text-blue-950">
-            {contribution?.user?.firstName[0] +
+            {contribution?.facility?.facilityName[0] +
               "" +
-              contribution?.user?.lastName[0]}
+              contribution?.facility?.facilityName[
+                contribution?.facility?.facilityName?.length - 1
+              ]}
           </div>
           <h1 className="font-medium text-blue-600 my-6 text-base capitalize">
             {contribution?.facility?.facilityName}
@@ -82,7 +85,8 @@ const ContributionDetails = ({ contribution, category }: any) => {
       </div>
       <div className="w-full flex justify-center px-4 pb-3">
         <p className="text-base uppercase font-medium">
-          {contribution?.facility?.facilityCategory}{"'s"} Contribution:{" "}
+          {contribution?.facility?.facilityCategory}
+          {"'s"} Contribution:{" "}
           {new Intl.NumberFormat("en-US").format(
             contribution?.facility?.defaultContribution
           )}{" "}
@@ -202,12 +206,24 @@ const ContributionDetails = ({ contribution, category }: any) => {
       ) : (
         ""
       )}
-      {contribution?.status == "pending" &&
-      session?.data?.user?.role == "admin" ? (
+      {session?.data?.user?.role == "admin" ? (
         <div className="flex flex-row justify-end  gap-4 p-2 w-full">
           <Button
+            label={"View Contribution history"}
+            customStyle="border border-blue-1 py-2 hover:bg-blue-800 text-blue-800 hover:text-white w-fit rounded font-medium"
+            Click={() =>
+              router.push(
+                `/dashboard/contributions/${contribution?.id}/history/${contribution?.facility?.id}`
+              )
+            }
+          />
+          <Button
             label={loading ? "Approving..." : "Approve Contribution"}
-            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-fit rounded font-medium"
+            customStyle={
+              contribution?.status == "pending"
+                ? "bg-blue-1 py-2 hover:bg-blue-800 text-white w-fit rounded font-medium"
+                : "hidden"
+            }
             Click={handleApproveContribution}
           />
         </div>

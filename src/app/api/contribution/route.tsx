@@ -151,60 +151,76 @@ export const GET = async () => {
         facility: true,
       },
     });
+    const filterLatestContributions = (contributions: any[]) => {
+      const contributionMap = new Map();
+      contributions.forEach((contribution: any) => {
+        const facilityId = contribution.facility.id;
+        const existingContribution = contributionMap.get(facilityId);
+        if (!existingContribution || contribution.createdAt > existingContribution.createdAt) {
+          contributionMap.set(facilityId, contribution);
+        }
+      });
+      return Array.from(contributionMap.values());
+    };
+    const latestPendingContributions = filterLatestContributions(pendingcontributions);
+    const latestApprovedContributions = filterLatestContributions(approvedcontributions);
+    const pendingData = latestPendingContributions.map((contribution: any) => ({
+      id: contribution?.id,
+      facilityName: contribution?.facility?.facilityName,
+      category: contribution?.facility?.facilityCategory,
+      amountPaid:
+        "RWF" +
+        " " +
+        new Intl.NumberFormat("en-US").format(
+          contribution?.contributionAmount
+        ),
+      image: contribution?.user?.profileImage,
+      amountDue:
+        "RWF" +
+        " " +
+        new Intl.NumberFormat("en-US").format(
+          contribution?.unpaidContribution
+        ),
+      dueDate: convertTimestamp(contribution?.createdAt),
+      status: contribution?.status,
+      numberOfPeriod: contribution?.contributionPeriod,
+      paymentYear: extractYear(contribution?.YearOfContributionStart),
+    }));
+    const approvedData = latestApprovedContributions.map((contribution: any) => ({
+      id: contribution?.id,
+      facilityName: contribution?.facility?.facilityName,
+      category: contribution?.facility?.facilityCategory,
+      amountPaid:
+        "RWF" +
+        " " +
+        new Intl.NumberFormat("en-US").format(
+          contribution?.contributionAmount
+        ),
+      image: contribution?.user?.profileImage,
+      amountDue:
+        "RWF" +
+        " " +
+        new Intl.NumberFormat("en-US").format(
+          contribution?.unpaidContribution
+        ),
+      dueDate: convertTimestamp(contribution?.createdAt),
+      status: contribution?.status,
+      numberOfPeriod: contribution?.contributionPeriod,
+      paymentYear: extractYear(contribution?.YearOfContributionStart),
+    }));
     const contributions = [
       {
         name: "Pending contributions",
-        counts: pendingcontributions.length,
-        data: pendingcontributions.map((contribution: any) => ({
-          id: contribution?.id,
-          facilityName: contribution?.facility?.facilityName,
-          category: contribution?.facility?.facilityCategory,
-          amountPaid:
-            "RWF" +
-            " " +
-            new Intl.NumberFormat("en-US").format(
-              contribution?.contributionAmount
-            ),
-          image: contribution?.user?.profileImage,
-          amountDue:
-            "RWF" +
-            " " +
-            new Intl.NumberFormat("en-US").format(
-              contribution?.unpaidContribution
-            ),
-          dueDate: convertTimestamp(contribution?.createdAt),
-          status: contribution?.status,
-          numberOfPeriod: contribution?.contributionPeriod,
-          paymentYear: extractYear(contribution?.YearOfContributionStart),
-        })),
+        counts: pendingData.length,
+        data: pendingData,
       },
       {
         name: "Approved contributions",
-        counts: approvedcontributions.length,
-        data: approvedcontributions.map((contribution: any) => ({
-          id: contribution?.id,
-          facilityName: contribution?.facility?.facilityName,
-          category: contribution?.facility?.facilityCategory,
-          amountPaid:
-            "RWF" +
-            " " +
-            new Intl.NumberFormat("en-US").format(
-              contribution?.contributionAmount
-            ),
-          image: contribution?.user?.profileImage,
-          amountDue:
-            "RWF" +
-            " " +
-            new Intl.NumberFormat("en-US").format(
-              contribution?.unpaidContribution
-            ),
-          dueDate: convertTimestamp(contribution?.createdAt),
-          status: contribution?.status,
-          numberOfPeriod: contribution?.contributionPeriod,
-          paymentYear: extractYear(contribution?.YearOfContributionStart),
-        })),
+        counts: approvedData.length,
+        data: approvedData,
       },
     ];
+
     return NextResponse.json({ status: 200, contributions });
   } catch (err) {
     return NextResponse.json({
@@ -213,3 +229,5 @@ export const GET = async () => {
     });
   }
 };
+
+

@@ -37,20 +37,20 @@ const Dashboard = async () => {
           <Link href={"/member/dashboard/contributions"}>
             <DashbordCard
               title="Pending Contributions"
-              value={`RWF ${data?.pendingContributionsValue}`}
+              value={`RWF ${new Intl.NumberFormat('en-US').format(data?.pendingContributionsValue)}`}
               icon={<PiCertificate className="text-2xl text-blue-1" />}
             />
           </Link>
           <Link href={"/member/dashboard/contributions"}>
             <DashbordCard
               title="Total Contributions"
-              value={`RWF ${data?.Approvedcontribution}`}
+              value={`RWF ${new Intl.NumberFormat('en-US').format(data?.Approvedcontribution)}`}
               icon={<PiHouseLine className="text-2xl text-blue-1" />}
             />
           </Link>
           <DashbordCard
             title="Recent Contributions"
-            value={`RWF ${data?.latestContributionListValue}`}
+            value={`RWF ${new Intl.NumberFormat('en-US').format(data?.latestContributionListValue)}`}
             icon={<MdOutlineRecentActors className="text-2xl text-blue-1" />}
           />
         </div>

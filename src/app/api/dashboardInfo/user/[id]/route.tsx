@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { convertTimestamp } from "@/app/utilities/timeConverters";
+import { extractYear } from "@/app/utilities/timeParser";
 export const revalidate = 0;
 export const GET = async (request: Request) => {
   const id = request.url.split("user/")[1];
@@ -13,15 +14,26 @@ export const GET = async (request: Request) => {
       orderBy: {
         id: "desc",
       },
+      include: {
+        user: true,
+        facility: true,
+      },
     });
     const approvedContributions = await prisma.contribution.findMany({
       where: {
         status: "approved",
         userId: Number(id),
       },
+      orderBy: {
+        id: "desc",
+      },
+      include: {
+        user: true,
+        facility: true,
+      },
     });
     const totalContributionDue = await prisma.contribution.findMany({
-      where:{
+      where: {
         status: "pending",
         userId: Number(id),
       },
@@ -46,6 +58,15 @@ export const GET = async (request: Request) => {
         depositReceiptNumber: contribution?.depositRecieptNumber,
         created_at: convertTimestamp(contribution?.createdAt),
         status: contribution?.status,
+        amountDue:
+          "RWF" +
+          " " +
+          new Intl.NumberFormat("en-US").format(
+            contribution?.unpaidContribution
+          ),
+        unpaidContribution: contribution?.unpaidContribution,
+        contributionPeriod: contribution?.contributionPeriod,
+        paymentYear: extractYear(contribution?.YearOfContributionStart),
       }));
     const latestContributionListValue = latestContributionList.reduce(
       (acc: any, value: any) => acc + value?.contributionAmount,

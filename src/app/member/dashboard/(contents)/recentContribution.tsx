@@ -7,6 +7,7 @@ import {
 import Table from "@/app/(components)/tables/table";
 import {
   memberContributionTableColumns,
+  memberRecentContributionTableColumns,
 } from "@/app/dashboard/(components)/ContentsContainers/columns";
 interface memberContribution
   {
@@ -37,7 +38,7 @@ const Contribution = ({ contributions}:memberContributions) => {
     <div className="mt-6 w-full">
       <Table
         data={contributions}
-        columns={memberContributionTableColumns}
+        columns={memberRecentContributionTableColumns}
         onSelectingRow={handleSelectedRows}
         selectAllRow={handleAllRowsSelection}
         isSelectAll={allSelected}
