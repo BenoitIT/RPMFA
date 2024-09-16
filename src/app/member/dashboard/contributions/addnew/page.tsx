@@ -138,7 +138,7 @@ const Page = () => {
             >
               <PrimaryInput
                 label="Contribution Amount"
-                type="text"
+                type="number"
                 name="recieptAmount"
                 value={formValues.recieptAmount}
                 placeholder="Enter your contribution amount"
@@ -160,7 +160,7 @@ const Page = () => {
                 changeHandler={handleInputChange}
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Date Of Contribution Start
+                Date Of Contribution
               </label>
               <DatePicker
                 onChange={(value: any, dateString) => {
