@@ -23,6 +23,7 @@ const Page = async () => {
       status: contribution?.status,
       defaultcontribution:contribution?.facility?.defaultContribution,
       amountDue:"RWF" + " " +new Intl.NumberFormat('en-US').format(contribution?.unpaidContribution),
+      unpaidContribution:contribution?.unpaidContribution,
       created_at: convertTimestamp(contribution?.createdAt),
       contributionPeriod:contribution?.contributionPeriod,
       paymentYear:extractYear(contribution?.YearOfContributionStart)

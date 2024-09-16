@@ -84,7 +84,7 @@ export const POST = async (request: NextRequest) => {
         });
       } else {
         let updatedUnPaidContributionBal: number;
-        if (verifiedMembership.defaultContribution < body.contributionAmount) {
+        if (verifiedMembership.defaultContribution <= body.contributionAmount) {
           updatedUnPaidContributionBal = 0;
         } else {
           updatedUnPaidContributionBal =
