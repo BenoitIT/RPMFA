@@ -59,7 +59,10 @@ const Table = ({
   const handleNextPage = () => {
     if (totalPages > currentPage) {
       router.push(
-        `?${createQueryString("page", (currentPage + 1).toString())}`
+        `?${createQueryString(
+          "page",
+          (Number(currentPage) + Number(1)).toString()
+        )}`
       );
     }
   };
