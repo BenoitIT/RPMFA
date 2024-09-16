@@ -80,6 +80,15 @@ const ContributionDetails = ({ contribution, category }: any) => {
           </div>
         )}
       </div>
+      <div className="w-full flex justify-center px-4 pb-3">
+        <p className="text-base uppercase font-medium">
+          {contribution?.facility?.facilityCategory}{"'s"} Contribution:{" "}
+          {new Intl.NumberFormat("en-US").format(
+            contribution?.facility?.defaultContribution
+          )}{" "}
+          RWF
+        </p>
+      </div>
       <div className="text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
         <AppField
           title="Category of Health Facility"
