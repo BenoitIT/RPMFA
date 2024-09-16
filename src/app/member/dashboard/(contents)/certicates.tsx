@@ -42,7 +42,8 @@ const Certificates = ({ memberships }: certificate) => {
   };
   if (memberships) {
     return (
-      <div className="w-full flex flex-row gap-[4px] py-[3vh] px-[2vw] bg-white rounded min-h-[80vh]">
+      <div className="w-full flex flex-col md:flex-row gap-4 py-[3vh] px-[2vw] bg-white rounded min-h-[80vh]">
+        <div className="w-fit">
         <div className="w-fit grid grid-cols-1 gap-3">
           {memberships?.map((membership, index: number) => (
             <Certifcate
@@ -55,9 +56,10 @@ const Certificates = ({ memberships }: certificate) => {
             />
           ))}
         </div>
-        <div className="w-fit border border-blue-200 h-[80vh] overflow-auto ml-2">
-          {certificate == "" ? (
-            <div className="h-fit w-fit rounded  text-sm text-black p-6 flex flex-col gap-2 leading-5 text-center">
+        </div>
+        <div className="min-w-[78%] border border-blue-200 h-[80vh] overflow-auto ml-2">
+          {!certificate||certificate == "" ? (
+            <div className="h-full w-full rounded  text-sm text-black p-6 flex flex-col gap-2 leading-5 justify-center items-center">
               <li className="list-disc">
                 Membership certificate has not yet been sent from Admin
               </li>
@@ -94,9 +96,9 @@ const Certifcate = ({
   onDownload,
 }: certificateCard) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-[200px]">
       <div
-        className={`w-[200px] bg-blue-50 h-[140px] rounded flex justify-center items-center ${
+        className={`w-full bg-blue-50 h-[140px] rounded flex justify-center items-center ${
           currentPreview == certificateLink ? "border-2" : ""
         } hover:border-2 border-blue-300 hover:cursor-pointer`}
         onClick={() => onClick(certificateLink)}
@@ -113,9 +115,4 @@ const Certifcate = ({
     </div>
   );
 };
-// function getImage(
-//   publicId: any,
-//   arg1: { width: number; height: number; quality: number }
-// ) {
-//   throw new Error("Function not implemented.");
-// }
+
