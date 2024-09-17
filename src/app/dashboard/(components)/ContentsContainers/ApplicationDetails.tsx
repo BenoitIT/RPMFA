@@ -3,7 +3,7 @@ import Button from "@/app/(components)/buttons/primaryBtn";
 import { SuccessModal } from "@/app/(components)/modals/SuccessModal";
 import { Alert } from "antd";
 import { useState, lazy } from "react";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import {  usePathname, useRouter } from "next/navigation";
 import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
