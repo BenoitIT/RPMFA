@@ -54,7 +54,13 @@ export const GET = async (request: Request) => {
       .slice(0, 5)
       .map((contribution: any) => ({
         id: contribution?.id,
-        contributionAmount: contribution?.contributionAmount,
+        contributionAmount:
+        "RWF" +
+        " " +
+        new Intl.NumberFormat("en-US").format(
+          contribution?.contributionAmount
+        ),
+        contributionValue:contribution?.contributionAmount,
         depositReceiptNumber: contribution?.depositRecieptNumber,
         created_at: convertTimestamp(contribution?.createdAt),
         status: contribution?.status,
@@ -69,7 +75,7 @@ export const GET = async (request: Request) => {
         paymentYear: extractYear(contribution?.YearOfContributionStart),
       }));
     const latestContributionListValue = latestContributionList.reduce(
-      (acc: any, value: any) => acc + value?.contributionAmount,
+      (acc: any, value: any) => acc + value?.contributionValue,
       0
     );
     return NextResponse.json({

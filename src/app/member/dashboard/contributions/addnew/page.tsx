@@ -52,12 +52,16 @@ const Page = () => {
       setLoading(true);
       if (isNaN(Number(formValues.recieptAmount))) {
         setWorning("Amount should be a valid number!");
+        setLoading(false);
       } else if (formValues.faciltyId == 0) {
         setWorning("select health facility!");
+        setLoading(false);
       } else if (formValues.recieptNumber == "") {
         setWorning("Receipt number should not be empty!");
+        setLoading(false);
       } else if (image.length < 1) {
         setWorning("Receipt image should be selected");
+        setLoading(false);
       } else {
         setWorning("");
         const payload = {
@@ -160,7 +164,7 @@ const Page = () => {
                 changeHandler={handleInputChange}
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Date Of Contribution
+                Contributing Year
               </label>
               <DatePicker
                 onChange={(value: any, dateString) => {
