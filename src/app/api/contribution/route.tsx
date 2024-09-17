@@ -11,6 +11,13 @@ export const POST = async (request: NextRequest) => {
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, { status: 400 });
     }
+    const currentContribution = await prisma.contributingYearsMonitor.findFirst(
+      {
+        orderBy: {
+          id: "desc",
+        },
+      }
+    );
     const isRecieptRegistered = await prisma.contribution.findFirst({
       where: {
         depositRecieptNumber: body.depositRecieptNumber,
@@ -39,6 +46,7 @@ export const POST = async (request: NextRequest) => {
         },
         take: 1,
       });
+
       if (
         checkInitialContributionInfo &&
         checkInitialContributionInfo.unpaidContribution > 0
@@ -82,8 +90,37 @@ export const POST = async (request: NextRequest) => {
           message:
             "Your contribution is sent successfully and unpaid contribution balance is changed",
         });
+      } else if (
+        checkInitialContributionInfo &&
+        extractYear(checkInitialContributionInfo?.YearOfContributionStart) >
+          extractYear(body.YearOfContributionStart)
+      ) {
+        return NextResponse.json({
+          status: 400,
+          data: null,
+          message: `We are no longer focusing on ${extractYear(
+            body.YearOfContributionStart
+          )}'s contributions. Correct Contributing Year`,
+        });
       } else {
         let updatedUnPaidContributionBal: number;
+        if (!currentContribution) {
+          return NextResponse.json({
+            status: 400,
+            data: null,
+            message: `New payments for contribution are not open.`,
+          });
+        }
+        if (
+          currentContribution &&
+          currentContribution?.year < extractYear(body.YearOfContributionStart)
+        ) {
+          return NextResponse.json({
+            status: 400,
+            data: null,
+            message: `We are currently focusing on ${currentContribution?.year}'s contributions`,
+          });
+        }
         if (verifiedMembership.defaultContribution <= body.contributionAmount) {
           updatedUnPaidContributionBal = 0;
         } else {
@@ -103,7 +140,7 @@ export const POST = async (request: NextRequest) => {
         });
         await prisma.notification.create({
           data: {
-            notification: `New membership contribution has been raised!`,
+            notification: `New membership contribution has been sent!`,
             senderId: body.userId,
             reciverId: 1,
           },
@@ -123,7 +160,6 @@ export const POST = async (request: NextRequest) => {
       });
     }
   } catch (err) {
-    console.log(err);
     return NextResponse.json({
       message: "unexpected issue occurs",
       status: 400,
@@ -156,14 +192,20 @@ export const GET = async () => {
       contributions.forEach((contribution: any) => {
         const facilityId = contribution.facility.id;
         const existingContribution = contributionMap.get(facilityId);
-        if (!existingContribution || contribution.createdAt > existingContribution.createdAt) {
+        if (
+          !existingContribution ||
+          contribution.createdAt > existingContribution.createdAt
+        ) {
           contributionMap.set(facilityId, contribution);
         }
       });
       return Array.from(contributionMap.values());
     };
-    const latestPendingContributions = filterLatestContributions(pendingcontributions);
-    const latestApprovedContributions = filterLatestContributions(approvedcontributions);
+    const latestPendingContributions =
+      filterLatestContributions(pendingcontributions);
+    const latestApprovedContributions = filterLatestContributions(
+      approvedcontributions
+    );
     const pendingData = latestPendingContributions.map((contribution: any) => ({
       id: contribution?.id,
       facilityName: contribution?.facility?.facilityName,
@@ -171,43 +213,41 @@ export const GET = async () => {
       amountPaid:
         "RWF" +
         " " +
-        new Intl.NumberFormat("en-US").format(
-          contribution?.contributionAmount
-        ),
+        new Intl.NumberFormat("en-US").format(contribution?.contributionAmount),
       image: contribution?.user?.profileImage,
       amountDue:
         "RWF" +
         " " +
-        new Intl.NumberFormat("en-US").format(
-          contribution?.unpaidContribution
-        ),
+        new Intl.NumberFormat("en-US").format(contribution?.unpaidContribution),
       dueDate: convertTimestamp(contribution?.createdAt),
       status: contribution?.status,
       numberOfPeriod: contribution?.contributionPeriod,
       paymentYear: extractYear(contribution?.YearOfContributionStart),
     }));
-    const approvedData = latestApprovedContributions.map((contribution: any) => ({
-      id: contribution?.id,
-      facilityName: contribution?.facility?.facilityName,
-      category: contribution?.facility?.facilityCategory,
-      amountPaid:
-        "RWF" +
-        " " +
-        new Intl.NumberFormat("en-US").format(
-          contribution?.contributionAmount
-        ),
-      image: contribution?.user?.profileImage,
-      amountDue:
-        "RWF" +
-        " " +
-        new Intl.NumberFormat("en-US").format(
-          contribution?.unpaidContribution
-        ),
-      dueDate: convertTimestamp(contribution?.createdAt),
-      status: contribution?.status,
-      numberOfPeriod: contribution?.contributionPeriod,
-      paymentYear: extractYear(contribution?.YearOfContributionStart),
-    }));
+    const approvedData = latestApprovedContributions.map(
+      (contribution: any) => ({
+        id: contribution?.id,
+        facilityName: contribution?.facility?.facilityName,
+        category: contribution?.facility?.facilityCategory,
+        amountPaid:
+          "RWF" +
+          " " +
+          new Intl.NumberFormat("en-US").format(
+            contribution?.contributionAmount
+          ),
+        image: contribution?.user?.profileImage,
+        amountDue:
+          "RWF" +
+          " " +
+          new Intl.NumberFormat("en-US").format(
+            contribution?.unpaidContribution
+          ),
+        dueDate: convertTimestamp(contribution?.createdAt),
+        status: contribution?.status,
+        numberOfPeriod: contribution?.contributionPeriod,
+        paymentYear: extractYear(contribution?.YearOfContributionStart),
+      })
+    );
     const contributions = [
       {
         name: "Pending contributions",
@@ -229,5 +269,3 @@ export const GET = async () => {
     });
   }
 };
-
-
