@@ -102,7 +102,7 @@ const MemberShipExtraInfo = ({ setOpen, open, id }: Modal) => {
                 : "hidden"
             }
           >
-            <p>Select the date next to thelatest contribution date</p>
+            <p>Select the date next to the latest contribution date</p>
             <DatePicker
               onChange={(value: any, dateString) => {
                 const datee = new Date(value).toISOString();
