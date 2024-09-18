@@ -46,19 +46,19 @@ export const POST = async (request: NextRequest) => {
         },
         take: 1,
       });
-
       if (
         checkInitialContributionInfo &&
         checkInitialContributionInfo.unpaidContribution > 0
       ) {
-        let balanceExtraAmount: number = 0;
         let contributionBalance =
           checkInitialContributionInfo.unpaidContribution -
           body.contributionAmount;
         if (contributionBalance < 0) {
-          balanceExtraAmount = Math.abs(contributionBalance);
-          contributionBalance =
-            balanceExtraAmount - verifiedMembership.defaultContribution;
+          return NextResponse.json({
+            status: 400,
+            data: null,
+            message: `Amount due required can not exceed ${checkInitialContributionInfo.unpaidContribution} RWF`,
+          });
         }
         const amountBalance =
           body.contributionAmount +
@@ -121,7 +121,14 @@ export const POST = async (request: NextRequest) => {
             message: `We are currently focusing on ${currentContribution?.year}'s contributions`,
           });
         }
-        if (verifiedMembership.defaultContribution <= body.contributionAmount) {
+        if (verifiedMembership.defaultContribution < body.contributionAmount) {
+          return NextResponse.json({
+            status: 400,
+            data: null,
+            message: `Your contribution can not exceed ${verifiedMembership.defaultContribution} RWF`,
+          });
+        }
+        if (verifiedMembership.defaultContribution == body.contributionAmount) {
           updatedUnPaidContributionBal = 0;
         } else {
           updatedUnPaidContributionBal =
