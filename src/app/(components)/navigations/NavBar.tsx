@@ -44,8 +44,8 @@ const NavBar = ({ isLoggedin }: any) => {
     },
   ];
   return (
-    <nav className="bg-white  w-full text-sm">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="bg-white  w-[100vw] text-sm lg:px-12 px-0 md:px-0 ">
+      <div className="w-full flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
