@@ -25,7 +25,7 @@ export default async function Home() {
       <div className="fixed w-full top-0 z-40 bg-white">
         <NavBar isLoggedin= {isLoggedin}/>
       </div>
-      <div className="p-4 w-full mt-6">
+      <div className="p-4 w-full mt-[100px]">
         <div className="lg:w-1/2 md:w-full w-full text-left lg:mx-11 mx-4 flex flex-col space-y-4">
           <p className="capitalize lg:text-5xl text-3xl text-blue-700 font-normal leading-tight">
             Rwanda Private Medical Facilities Association
