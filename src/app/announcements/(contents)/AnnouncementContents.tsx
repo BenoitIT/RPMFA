@@ -2,12 +2,57 @@
 
 import FilterButton from "@/app/(components)/buttons/FilterButton";
 import AnnouncementCard from "@/app/(components)/cards/AnnouncementCard";
+import Paginator from "@/app/(components)/pagination/generalPaginator";
 import { AnnouncmentProps } from "@/app/dashboard/(components)/ContentsContainers/anouncements";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { TbDatabaseX } from "react-icons/tb";
 
 const AnnouncementContents = ({ announcements }: AnnouncmentProps) => {
   const [activeAnnouncements, setActiveAnnouncements] = useState(announcements);
+  const router = useRouter();
+  const searchParams: any = useSearchParams();
+  const activePage = searchParams?.get("page");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(activeAnnouncements.length / itemsPerPage || 1);
+  const lastPage = null;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = activeAnnouncements?.slice(indexOfFirstItem, indexOfLastItem);
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
+  const handlePageChange = (pageNumber: number) => {
+    router.push(`?${createQueryString("page", pageNumber.toString())}`);
+  };
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      router.push(
+        `?${createQueryString("page", (currentPage - 1).toString())}`
+      );
+    }
+  };
+  const handleNextPage = () => {
+    if (totalPages > currentPage) {
+      router.push(
+        `?${createQueryString(
+          "page",
+          (Number(currentPage) + Number(1)).toString()
+        )}`
+      );
+    }
+  };
+  useEffect(() => {
+    if (activePage) {
+      setCurrentPage(activePage);
+    }
+  }, [activePage]);
   return (
     <>
       {Array.isArray(activeAnnouncements) && activeAnnouncements.length > 0 ? (
@@ -16,18 +61,9 @@ const AnnouncementContents = ({ announcements }: AnnouncmentProps) => {
             <h1 className="text-xl font-medium text-blue-1">
               Announcements
             </h1>
-            <div className="flex gap-3">
-              <input
-                type="date"
-                name="date"
-                id="date"
-                className="border border-gray-200 rounded-lg p-2 w-50"
-              />
-              <FilterButton btnText="Filter" />
-            </div>
           </div>
           <div className="grid gap-8 my-6 border border-gray-150 p-2 lg:px-2 max-sm:p-1 rounded-md">
-            {activeAnnouncements.map((announcement) => (
+            {currentItems.map((announcement) => (
               <AnnouncementCard
                 key={announcement.id}
                 title={announcement.subject}
@@ -37,6 +73,19 @@ const AnnouncementContents = ({ announcements }: AnnouncmentProps) => {
               />
             ))}
           </div>
+          <div
+              className={
+                totalPages > 1 ? "w-full flex justify-end my-3 ml-4 px-2 lg:px-12" : "hidden"
+              }
+            >
+              <Paginator
+                activePage={currentPage}
+                totalPages={lastPage ? lastPage : totalPages}
+                onPageChange={handlePageChange}
+                onPreviousPageChange={handlePreviousPage}
+                onNextPageChange={handleNextPage}
+              />
+            </div>
         </div>
       ) : (
         <div className="h-[66vh] w-[100vw] flex justify-center items-center text-sm flex-col gap-3">
