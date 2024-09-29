@@ -21,7 +21,7 @@ export default async function Home() {
   const session: any = await auth();
   const isLoggedin = !!session;
   return (
-    <main className="flex min-h-screen flex-col item-scenter bg-white w-[100vw]">
+    <main className="flex min-h-screen flex-col item-scenter bg-white w-[100vw] max-w-full overflow-x-hidden">
       <div className="sticky w-full top-0 z-40 bg-white">
         <NavBar isLoggedin= {isLoggedin}/>
       </div>

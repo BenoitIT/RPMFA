@@ -26,7 +26,7 @@ const AnnouncementContents = ({ announcements }: AnnouncmentProps) => {
               <FilterButton btnText="Filter" />
             </div>
           </div>
-          <div className="grid gap-8 my-6 border border-gray-150 p-7 max-sm:p-1 rounded-md">
+          <div className="grid gap-8 my-6 border border-gray-150 p-2 lg:px-2 max-sm:p-1 rounded-md">
             {activeAnnouncements.map((announcement) => (
               <AnnouncementCard
                 key={announcement.id}

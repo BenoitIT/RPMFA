@@ -11,7 +11,7 @@ const Announcements =async() => {
   if(data.status==200){
   return (
     <>
-      <div className="w-[100vw] mx-auto">
+      <div className="w-[100vw] max-w-full overflow-x-hidden">
         <NavBar />
          <AnnouncementContents announcements={data.announcements}/>
       </div>

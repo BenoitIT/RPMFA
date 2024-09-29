@@ -45,7 +45,10 @@ const Members = ({ Allmembers }: pageProps) => {
   const handleNextPage = () => {
     if (totalPages > currentPage) {
       router.push(
-        `?${createQueryString("page", ((Number(currentPage) + Number(1))).toString())}`
+        `?${createQueryString(
+          "page",
+          (Number(currentPage) + Number(1)).toString()
+        )}`
       );
     }
   };
@@ -56,7 +59,7 @@ const Members = ({ Allmembers }: pageProps) => {
   }, [activePage]);
   return (
     <div className="min-h-screen max-h-fit">
-      <div className="w-[100vw]">
+      <div className="w-[100vw] max-w-full overflow-x-hidden">
         <NavBar />
         {Allmembers.length > 0 ? (
           <div className="w-full p-5 min-h-[66vh]">
@@ -65,7 +68,7 @@ const Members = ({ Allmembers }: pageProps) => {
                 Members
               </h1>
             </div>
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-3">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-3 px-2 lg:px-12">
               {currentItems.map((member) => (
                 <MemberDetatils
                   key={member.id}
@@ -82,7 +85,7 @@ const Members = ({ Allmembers }: pageProps) => {
             </div>
             <div
               className={
-                totalPages > 1 ? "w-full flex justify-end my-3 ml-4" : "hidden"
+                totalPages > 1 ? "w-full flex justify-end my-3 ml-4 px-2 lg:px-12" : "hidden"
               }
             >
               <Paginator
