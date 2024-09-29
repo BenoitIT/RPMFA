@@ -59,7 +59,7 @@ const Members = ({ Allmembers }: pageProps) => {
       <div className="w-[100vw]">
         <NavBar />
         {Allmembers.length > 0 ? (
-          <div className="w-full p-5">
+          <div className="w-full p-5 min-h-[66vh]">
             <div className="mb-6">
               <h1 className="text-blue-1 text2xl font-semibold mb-3 text-center">
                 Members
