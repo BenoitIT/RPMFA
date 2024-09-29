@@ -4,7 +4,9 @@ import Image from "next/image";
 import { SidebarMenuLinkProps } from "../../../../../types";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
-import { SidebarMenu, sideBarMenus } from "./Sidebar";
+import { SidebarMenu} from "./Sidebar";
+import { TbLogout2 } from "react-icons/tb";
+import { signOut } from "next-auth/react";
 
 interface SidebarElementsProps {
   className?: string;
@@ -22,7 +24,10 @@ const SidebarElements = ({
   HomeMenu,
 }: SidebarElementsProps) => {
   const currentPath = usePathname();
-  console.log(currentPath);
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = "/auth/login";
+  };
   return (
     <div className={`${className} w-full p-4`}>
       <div>
@@ -73,6 +78,16 @@ const SidebarElements = ({
             </div>
           </Link>
         ))}
+        <Link href=""  onClick={handleSignOut}>
+            <div
+              className={classNames(
+                "flex gap-2 p-3 items-center text-sm text-gray-500"
+              )}
+            >
+              <span className="text-xl"><TbLogout2/></span>
+              <p>Logout</p>
+            </div>
+          </Link>
       </div>
     </div>
   );

@@ -12,7 +12,9 @@ const Announcements =async() => {
   return (
     <>
       <div className="w-[100vw] max-w-full overflow-x-hidden">
+        <div className="fixed top-0 w-full mb-[100px] z-20">
         <NavBar />
+        </div>
          <AnnouncementContents announcements={data.announcements}/>
       </div>
       <Footer />

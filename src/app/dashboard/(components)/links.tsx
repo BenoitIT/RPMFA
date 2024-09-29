@@ -56,23 +56,13 @@ export const profileAndSupportLinks = [
     path: "/dashboard/profile",
     icon: <CiSettings />,
   },
-  {
-    name: "Support",
-    path: "#support",
-    icon: <MdOutlineContactSupport />,
-  },
 ];
 export const memberProfileAndSupportLinks = [
   {
     name: "Settings",
     path: "/member/dashboard/profile",
     icon: <CiSettings />,
-  },
-  {
-    name: "Support",
-    path: "#support",
-    icon: <MdOutlineContactSupport />,
-  },
+  }
 ];
 export const membersDashboardLinks = [
   {
