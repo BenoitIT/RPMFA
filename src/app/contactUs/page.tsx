@@ -46,7 +46,7 @@ const Contact = () => {
         <h1 className="text-blue-1 font-semibold text-xl text-center max-sm:text-lg mb-6">
           Contact Us
         </h1>
-        <div className=" w-[45vw] max-sm:w-screen max-md:w-[60vw]  border border-gray-150 rounded-lg p-5 ">
+        <div className=" w-[45vw] max-sm:w-screen h-[66vh] max-md:w-[60vw]  border border-gray-150 rounded-lg p-5 ">
           <form onSubmit={handleSubmit} className="grid grid-flow-row gap-3">
             <PrimaryInput
               label="First Name"

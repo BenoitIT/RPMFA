@@ -56,7 +56,7 @@ const Members = ({ Allmembers }: pageProps) => {
   }, [activePage]);
   return (
     <div className="min-h-screen max-h-fit">
-      <div className="max-w-screen-xl px-12">
+      <div className="w-[100vw]">
         <NavBar />
         {Allmembers.length > 0 ? (
           <div className="w-full p-5">
@@ -95,7 +95,7 @@ const Members = ({ Allmembers }: pageProps) => {
             </div>
           </div>
         ) : (
-          <div className="h-[40vh] w-screen flex justify-center items-center text-sm flex-col gap-3 max-w-full">
+          <div className="h-[66vh] w-[] flex justify-center items-center text-sm flex-col gap-3">
             <TbDatabaseX className="text-4xl text-blue-300" />
             <p className="text-gray-700 font-light">
               Members are not found. They will be recorded.
