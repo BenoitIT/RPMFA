@@ -22,7 +22,7 @@ export default async function Home() {
   const isLoggedin = !!session;
   return (
     <main className="flex min-h-screen flex-col item-scenter bg-white w-[100vw] max-w-full overflow-x-hidden">
-      <div className="sticky w-full top-0 z-40 bg-white">
+      <div className="fixed w-full top-0 z-40 bg-white">
         <NavBar isLoggedin= {isLoggedin}/>
       </div>
       <div className="p-4 w-full mt-6">
