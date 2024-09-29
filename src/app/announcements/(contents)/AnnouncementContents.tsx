@@ -11,7 +11,7 @@ const AnnouncementContents = ({ announcements }: AnnouncmentProps) => {
   return (
     <>
       {Array.isArray(activeAnnouncements) && activeAnnouncements.length > 0 ? (
-        <div className="w-full mx-auto min-h-[66vh]">
+        <div className="w-full mx-auto min-h-[66vh] px-6 lg:px-12 xl:px-14">
           <div className="flex justify-between my-8 gap-y-3 max-sm:flex-col">
             <h1 className="text-xl font-medium text-blue-1">
               Announcements
