@@ -13,7 +13,7 @@ const Page = async () => {
   const data = await response.json();
   if (data.status == 200) {
     return (
-      <div className="mt-4 w-full flex flex-col">
+      <div className="w-[82vw] flex flex-col gap-2 mt-3 overflow-hidden">
         <h3 className="text-gray-600 text-sm flex gap-1">
           <Link
             href="/member/dashboard"
