@@ -22,10 +22,10 @@ export const PUT = async (request: NextRequest) => {
       });
       if (member) {
         const contributionExistanceDiff =
-          extractYear(member.createdAt) - extractYear(body.joinedAt) + 1;
+          extractYear(member.createdAt) - extractYear(body.joinedAt)==0?1:extractYear(member.createdAt) - extractYear(body.joinedAt);
         const unPaidContribution =
           member.defaultContribution * contributionExistanceDiff;
-        if (!memberContribution && unPaidContribution > 0) {
+        if (!memberContribution && unPaidContribution >= 0) {
           const updatedContri = await prisma.contribution.create({
             data: {
               contributionAmount: 0,
