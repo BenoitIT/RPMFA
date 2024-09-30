@@ -60,6 +60,9 @@ export const GET = async (request: Request) => {
         userId: Number(id),
         status: "approved",
       },
+      include:{
+        Contribution:true
+      }
     });
     if (memberShipCertificates) {
       return NextResponse.json({

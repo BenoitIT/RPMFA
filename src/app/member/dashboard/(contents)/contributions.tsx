@@ -65,7 +65,6 @@ const Contribution = ({ contributions }: memberContributions) => {
             label="Add New Contribution"
             customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white  rounded font-medium h-fit -mt-1 disabled:opacity-80 disabled:cursor-not-allowed"
             Click={() => router.push("contributions/addnew")}
-            disabled={contributions.every((contribution:any)=>contribution?.unpaidContribution==0)}
           />
         ) : (
           ""

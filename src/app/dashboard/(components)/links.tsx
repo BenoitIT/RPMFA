@@ -29,11 +29,6 @@ export const DashboardLinks = [
     path: "/dashboard/announcements",
     icon: <TfiAnnouncement />,
   },
-  // {
-  //   name: "Performance",
-  //   path: "/dashboard/performance",
-  //   icon: <PiChartLineUpBold />,
-  // },
   {
     name: "Messages",
     path: "/dashboard/contacts",

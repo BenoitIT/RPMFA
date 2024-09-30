@@ -3,7 +3,7 @@ import Button from "@/app/(components)/buttons/primaryBtn";
 import { SuccessModal } from "@/app/(components)/modals/SuccessModal";
 import { Alert } from "antd";
 import { useState, lazy } from "react";
-import {  usePathname, useRouter } from "next/navigation";
+import {   useRouter } from "next/navigation";
 import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
 import { ApplicationRejectionModal } from "@/app/(components)/modals/rejectionModal";
@@ -18,7 +18,6 @@ const MemberShipCertificateUploader = lazy(
 const ApplicationDetails = ({ application, category }: any) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();
-  const currentPath = usePathname();
   const [openRejectModal, setRejectModal] = useState(false);
   const [deliverCerticate, setDeliverCertificate] = useState(false);
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
@@ -201,18 +200,6 @@ const ApplicationDetails = ({ application, category }: any) => {
           type="error"
           showIcon
         />
-      ) : (
-        ""
-      )}
-      {application?.contributionChecked &&
-      application.membershipCertificate == "" ? (
-        <div className="w-full flex justify-end pt-4">
-          <Button
-            label="Deliver Certificate"
-            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[170px] rounded font-medium"
-            Click={() => setDeliverCertificate(true)}
-          />
-        </div>
       ) : (
         ""
       )}

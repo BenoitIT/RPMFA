@@ -19,7 +19,6 @@ const Page = () => {
   const [image, setImage] = useState<any>([]);
   const [facilties, setFacilities] = useState<any[]>([]);
   const [worning, setWorning] = useState("");
-  const [dateValue, setDateValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     recieptAmount: "",
@@ -68,7 +67,6 @@ const Page = () => {
           depositRecieptNumber: formValues.recieptNumber,
           depositReciept: image,
           contributionAmount: Number(formValues.recieptAmount),
-          YearOfContributionStart: dateValue,
           facilityId: Number(formValues.faciltyId),
           userId: Number(userId),
         };
@@ -82,8 +80,8 @@ const Page = () => {
         const data = await response.json();
         if (data.status == 201) {
           toast.success(data?.message);
-          router.refresh();
           setLoading(false);
+          router.back()
         } else if (data[0]?.message) {
           toast.success(data[0]?.path[0] + " " + data[0]?.message);
           setLoading(false);
@@ -162,17 +160,6 @@ const Page = () => {
                 value=""
                 options={facilties}
                 changeHandler={handleInputChange}
-              />
-              <label className="block mb-2 text-sm font-medium text-gray-900">
-                Contributing Year
-              </label>
-              <DatePicker
-                onChange={(value: any, dateString) => {
-                  const datee = new Date(value).toISOString();
-                  setDateValue(datee);
-                }}
-                onOk={onOk}
-                className="bg-gray-1  text-gray-900 sm:text-sm rounded-lg block w-full p-2 md:p-2.5 placeholder:text-sm outline-none"
               />
               <label className="block mb-2 text-sm font-medium text-gray-900">
                 Receipt Image

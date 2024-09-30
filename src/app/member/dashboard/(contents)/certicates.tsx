@@ -1,10 +1,15 @@
 "use client";
-import { CldImage, getCldImageUrl } from "next-cloudinary";
+import { CldImage} from "next-cloudinary";
 import { useEffect, useState } from "react";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { Cloudinary } from "cloudinary-core";
+import { extractYear } from "@/app/utilities/timeParser";
+interface certifcateRecord{
+  membershipCertificate:string;
+  Contribution?:any
+}
 interface certificate {
-  memberships: any[];
+  memberships: certifcateRecord[];
 }
 interface certificateCard {
   name: number;
@@ -18,8 +23,10 @@ const Certificates = ({ memberships }: certificate) => {
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   });
   const [certificate, setCertificate] = useState("");
+  const [contributions,setContribution]=useState<any[]>([])
   useEffect(() => {
     setCertificate(memberships[0]?.membershipCertificate);
+    setContribution(memberships[0]?.Contribution?.filter((contr:any)=>contr?.status=="approved").sort((a:any,b:any)=>b?.YearOfContributionStart-a?.YearOfContributionStart))
   }, [memberships]);
   const handleDownload = async () => {
     const imageUrl = cld.url(certificate, {
@@ -47,7 +54,7 @@ const Certificates = ({ memberships }: certificate) => {
         <div className="w-fit grid grid-cols-1 gap-3">
           {memberships?.map((membership, index: number) => (
             <Certifcate
-              name={index + 1}
+              name={extractYear(contributions[0]?.YearOfContributionStart)}
               key={index}
               certificateLink={membership?.membershipCertificate}
               onClick={setCertificate}
@@ -111,7 +118,7 @@ const Certifcate = ({
           }}
         />
       </div>
-      <h2 className="text-sm ml-2">Certificate {name}</h2>
+      <h2 className="text-sm ml-2">Certificate - {name}</h2>
     </div>
   );
 };

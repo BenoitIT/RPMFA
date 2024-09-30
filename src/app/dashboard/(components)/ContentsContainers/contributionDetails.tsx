@@ -2,7 +2,7 @@
 import Button from "@/app/(components)/buttons/primaryBtn";
 import { SuccessModal } from "@/app/(components)/modals/SuccessModal";
 import { Alert } from "antd";
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaFile } from "react-icons/fa6";
 import Link from "next/link";
@@ -10,11 +10,17 @@ import FeedbackModal from "@/app/(components)/modals/feedbackModal";
 import { useSession } from "next-auth/react";
 import { extractYear } from "@/app/utilities/timeParser";
 import { toast } from "react-toastify";
+const MemberShipCertificateUploader = lazy(
+  () => import("./modals/certificateUpload")
+);
 const ContributionDetails = ({ contribution, category }: any) => {
+  console.log("contribution", contribution)
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [deliverCerticate, setDeliverCertificate] = useState(false);
+  const currentYear = new Date().getFullYear();
   const router = useRouter();
   const handleFeedbackModal = () => {
     setOpenFeedbackModal(true);
@@ -50,7 +56,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
             {contribution?.facility?.facilityName[0] +
               "" +
               contribution?.facility?.facilityName[
-                contribution?.facility?.facilityName?.length - 1
+              contribution?.facility?.facilityName?.length - 1
               ]}
           </div>
           <h1 className="font-medium text-blue-600 my-6 text-base capitalize">
@@ -58,7 +64,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
           </h1>
         </div>
         {session?.data?.user?.role == "admin" &&
-        contribution.status == "pending" ? (
+          contribution.status == "pending" ? (
           <Button
             label="Feedback"
             customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
@@ -68,15 +74,13 @@ const ContributionDetails = ({ contribution, category }: any) => {
           <div className="flex flex-col gap-1 text-black text-sm">
             <h3 className="font-semibold">Contribution Status</h3>
             <p
-              className={` text-xs text-center rounded py-[5px] capitalize ${
-                contribution.status?.toLowerCase() == "approved"
-                  ? "text-blue-400 bg-green-100 font-medium"
-                  : ""
-              } ${
-                contribution.status?.toLowerCase().includes("pending")
+              className={` text-xs text-center rounded py-[5px] capitalize ${contribution.status?.toLowerCase() == "approved"
+                ? "text-blue-400 bg-green-100 font-medium"
+                : ""
+                } ${contribution.status?.toLowerCase().includes("pending")
                   ? "border-yellow-100 font-medium  text-yellow-600 bg-yellow-100"
                   : ""
-              }`}
+                }`}
             >
               {contribution.status}
             </p>
@@ -178,7 +182,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
         )}
       </div>
       {contribution?.status == "rejected" &&
-      session?.data?.user?.role !== "admin" ? (
+        session?.data?.user?.role !== "admin" ? (
         <div className="text-sm my-3">
           <AppField
             title="Reason for rejection"
@@ -190,8 +194,8 @@ const ContributionDetails = ({ contribution, category }: any) => {
       )}
       {(contribution?.status == "pending" &&
         session?.data?.user?.role !== "admin") ||
-      (contribution?.status == "rejected" &&
-        session?.data?.user?.role !== "admin") ? (
+        (contribution?.status == "rejected" &&
+          session?.data?.user?.role !== "admin") ? (
         <div className="w-full flex justify-end">
           <Button
             label="Update Info"
@@ -226,6 +230,19 @@ const ContributionDetails = ({ contribution, category }: any) => {
             }
             Click={handleApproveContribution}
           />
+          {session?.data?.user?.role == "admin" && extractYear(contribution?.
+            YearOfContributionStart
+          ) == currentYear ? (
+            <Button
+              label={loading ? "Delivering..." : "Deliver certificate"}
+              customStyle={
+                contribution?.status == "approved"
+                  ? "bg-blue-1 py-2 hover:bg-blue-800 text-white w-fit rounded font-medium"
+                  : "hidden"
+              }
+              Click={() => setDeliverCertificate(true)}
+            />
+          ) : ""}
         </div>
       ) : contribution?.status == "approved" ? (
         <Alert
@@ -249,6 +266,11 @@ const ContributionDetails = ({ contribution, category }: any) => {
         userId={contribution?.user?.id}
         applicantEmail={contribution?.user?.email}
         applicantName={contribution?.user?.firstName}
+      />
+      <MemberShipCertificateUploader
+        open={deliverCerticate}
+        setOpen={setDeliverCertificate}
+        id={contribution?.facility?.id}
       />
     </div>
   );
