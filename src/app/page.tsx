@@ -117,7 +117,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="lg:my-12 md:my-8 my-4">
+      <div className="lg:my-12 md:my-8 my-4 w-full flex justify-center items-center">
         <div className="lg:p-12 md:p-6 px-11 p-6 h-fit grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-3">
           <Image
             src="/logo/rbc.png"
@@ -168,9 +168,10 @@ export default async function Home() {
       </div>
       <div className="my-2">
         <div className="m-6">
-          <h1 className="text-3xl lg:m-6 m-4 text-blue-700">Our Team</h1>
+          <h1 className="text-3xl lg:m-6 m-4 text-blue-700 xl:ml-[50px]">Our Team</h1>
         </div>
-        <div className="lg:px-12 md:px-6 p-4 h-fit grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-3">
+        <div className="w-full">
+        <div className="lg:px-12 md:px-6 p-4 h-fit grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-3 lg:m-6 m-4  xl:ml-[50px]">
           <SimpleImageCard
             source="/images/mugenzi.png"
             name="Dr. Mugenzi Dominique Savio"
@@ -191,6 +192,7 @@ export default async function Home() {
             name="Dr. Kaitesi Batamuliza Mukara"
             workTitle="Treasurer"
           />
+        </div>
         </div>
       </div>
       <Footer />
