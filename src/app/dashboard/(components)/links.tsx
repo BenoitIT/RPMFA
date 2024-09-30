@@ -35,7 +35,7 @@ export const DashboardLinks = [
   //   icon: <PiChartLineUpBold />,
   // },
   {
-    name: "Cantacts",
+    name: "Messages",
     path: "/dashboard/contacts",
     icon: <FaRegMessage />,
   },

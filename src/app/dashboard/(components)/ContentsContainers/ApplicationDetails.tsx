@@ -175,20 +175,6 @@ const ApplicationDetails = ({ application, category }: any) => {
       ) : (
         ""
       )}
-      {(application?.status == "pending" &&
-        session?.data?.user?.role !== "admin") ||
-      (application?.status == "rejected" &&
-        session?.data?.user?.role !== "admin") ? (
-        <div className="w-full flex justify-end">
-          <Button
-            label="Update Info"
-            customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
-            Click={() => router.push(`${currentPath}/edit/${application?.id}`)}
-          />
-        </div>
-      ) : (
-        ""
-      )}
       {application?.status == "pending" &&
       session?.data?.user?.role == "admin" ? (
         <div className="flex flex-row gap-4 p-2 w-full">
