@@ -1,18 +1,16 @@
-import { HiOutlineUserGroup } from "react-icons/hi2";
-import { PiHouseLine, PiChartLineUpBold } from "react-icons/pi";
+import { PiHouseLine, PiUsersFourThin } from "react-icons/pi";
 import { FaRegMessage } from "react-icons/fa6";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { CiSettings } from "react-icons/ci";
 import { PiFolderSimpleUserFill } from "react-icons/pi";
 import { PiCertificate } from "react-icons/pi";
-import { MdOutlineContactSupport } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
 
 export const DashboardLinks = [
   {
     name: "Members",
     path: "/dashboard/members",
-    icon: <HiOutlineUserGroup />,
+    icon: <PiUsersFourThin />,
   },
   {
     name: "Contributions",
