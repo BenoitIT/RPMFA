@@ -16,12 +16,13 @@ interface TabsInfo {
 }
 interface contributionTabs {
   contributions: TabsInfo[];
+  openInitContributionModal:boolean;
+  setInitContribution:(val:boolean)=>void
 }
-const Contributions = ({ contributions }: contributionTabs) => {
+const Contributions = ({ contributions,openInitContributionModal,setInitContribution }: contributionTabs) => {
   const router = useRouter();
   const [selectedTableRow, setSelectedTableRow] = useState<number[]>([]);
   const [allSelected, setAllSelected] = useState(false);
-  const [openInitContributionModal, setInitContribution] = useState(false);
   const handleSelectedRows = (id: number) => {
     handleSelectedRow(id, selectedTableRow, setSelectedTableRow);
   };

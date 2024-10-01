@@ -21,8 +21,6 @@ const Page = () => {
   const [allContributions, setAllContributions] = useState<any[]>([]);
   const [year, setYear] = useState(currentYear);
   const [searchValue, setSearchValues] = useState("");
-
-  // Fetch contributions based on the selected year
   useEffect(() => {
     const fetchContributions = async () => {
       try {
@@ -32,7 +30,7 @@ const Page = () => {
         const data = await response.json();
         if (data?.status == 200) {
           setContributions(data?.pendingData);
-          setAllContributions(data?.pendingData); // Store the original data
+          setAllContributions(data?.pendingData);
         }
       } catch (err) {
         return;
@@ -46,7 +44,7 @@ const Page = () => {
     } else {
       dataSearchingTrigger();
     }
-  }, [searchValue]);
+  }, [searchValue,allContributions]);
 
   const dataSearchingTrigger = () => {
     if (Array.isArray(allContributions)) {
@@ -140,7 +138,7 @@ const Page = () => {
         </div>
       </div>
       {Array.isArray(contributions) ? (
-        <Contributions contributions={contributions} />
+        <Contributions contributions={contributions} openInitContributionModal={openInitContributionModal} setInitContribution={setInitContribution}/>
       ) : (
         <Loader />
       )}
