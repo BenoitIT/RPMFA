@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 export const revalidate = 0;
-export const GET = async () => {
+export const GET = async (req: Request) => {
+  const { searchParams } = new URL(req.url);
+  const yearParam = Number(searchParams.get("year")!);
   try {
     const pendingApplications = await prisma.facility.findMany({
       where: {
         status: "pending",
+        createdAt: {
+          gte: new Date(`${yearParam}-01-01T00:00:00.000Z`),
+          lt: new Date(`${yearParam + 1}-01-01T00:00:00.000Z`),
+        },
       },
       include: {
         user: true,
@@ -17,6 +23,10 @@ export const GET = async () => {
     const approvedApplications = await prisma.facility.findMany({
       where: {
         status: "approved",
+        createdAt: {
+          gte: new Date(`${yearParam}-01-01T00:00:00.000Z`),
+          lt: new Date(`${yearParam + 1}-01-01T00:00:00.000Z`),
+        },
       },
       include: {
         user: true,
@@ -25,6 +35,10 @@ export const GET = async () => {
     const rejectedApplications = await prisma.facility.findMany({
       where: {
         status: "rejected",
+        createdAt: {
+          gte: new Date(`${yearParam}-01-01T00:00:00.000Z`),
+          lt: new Date(`${yearParam + 1}-01-01T00:00:00.000Z`),
+        },
       },
       include: {
         user: true,
@@ -33,11 +47,15 @@ export const GET = async () => {
     const settledFacilities = await prisma.contribution.findMany({
       where: {
         status: "approved",
+        createdAt: {
+          gte: new Date(`${yearParam}-01-01T00:00:00.000Z`),
+          lt: new Date(`${yearParam + 1}-01-01T00:00:00.000Z`),
+        },
       },
     });
-    const settleFacilitiesAmount=settledFacilities.reduce((acc,contrib)=>{
-      return acc+=contrib.contributionAmount;
-    },0);
+    const settleFacilitiesAmount = settledFacilities.reduce((acc, contrib) => {
+      return (acc += contrib.contributionAmount);
+    }, 0);
     const members = approvedApplications.length;
     const application = pendingApplications.length;
     const rejections = rejectedApplications.length;
@@ -58,7 +76,7 @@ export const GET = async () => {
       rejections,
       latestMembers,
       settleContributionCount: settledFacilities.length,
-      totalSettled:settleFacilitiesAmount
+      totalSettled: settleFacilitiesAmount,
     });
   } catch (err) {
     return NextResponse.json({

@@ -18,7 +18,7 @@ export default function Loader() {
           </div>
         </div>
         <div className="flex h-full flex-grow items-center justify-center">
-          <div className="w-full md:w-[397px] h-[176px] items-center flex flex-col gap-10">
+          <div className="w-full md:w-[397px] h-[176px] items-center flex flex-col gap-10 text-sm">
             <Spin size="large" />
             <p className="text-center">Hang on, we are setting up this page.</p>
           </div>

@@ -1,5 +1,5 @@
-"use server";
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { FcFlashOn } from "react-icons/fc";
 import { LuCheckSquare } from "react-icons/lu";
 import { PiUsersFourThin } from "react-icons/pi";
@@ -7,21 +7,55 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import AllMembers from "./(components)/ContentsContainers/allmembers";
 import Link from "next/link";
+import FilterButton from "../(components)/buttons/FilterButton";
+import { MdOutlineSettingsInputComposite } from "react-icons/md";
+import MonthOrYear from "./(components)/inputs/input";
+import Loader from "./(components)/ContentsContainers/loader";
 
 const Dashboard = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_APP_URL}/api/dashboardInfo`,
-    {
-      cache: "no-store",
-    }
-  );
-  const data = await response.json();
-  if (data.status == 200) {
+  const currentYear = new Date().getFullYear();
+  const [data, setData] = useState<any>();
+  const [year, setYear] = useState(currentYear);
+  useEffect(() => {
+    const getStats = async () => {
+      const response = await fetch(`/api/dashboardInfo?year=${year}`, {
+        cache: "no-store",
+      });
+      const data = await response.json();
+      setData(data);
+    };
+    getStats();
+  }, [year]);
+  if (data?.status) {
+    const years = Array.from(
+      { length: 60 },
+      (_, index) => new Date().getFullYear() - 30 + index
+    );
+    const handYearChange = (event: any) => {
+      setYear(event.target.value);
+    };
     return (
       <div className="mt-4 w-full">
-        <h1 className="text-2xl text-blue-1 font-semibold">
-          Quick Insight <FcFlashOn className="inline text-2xl" />
-        </h1>
+        <div className="w-full flex justify-between flex-col md:flex-row gap-2">
+          <h1 className="text-2xl text-blue-1 font-semibold">
+            Quick Insight <FcFlashOn className="inline text-2xl" />
+          </h1>
+          <div className="flex gap-2">
+            <FilterButton
+              className={`block text-sm`}
+              icon={<MdOutlineSettingsInputComposite />}
+              btnText="Filter"
+            />
+            <div className={"w-fit mt-2"}>
+              <MonthOrYear
+                label="Year"
+                value={year}
+                options={years}
+                onChange={handYearChange}
+              />
+            </div>
+          </div>
+        </div>
         <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-8">
           <Link href={"/dashboard/members"}>
             <DashbordCard
@@ -46,7 +80,11 @@ const Dashboard = async () => {
           />
           <DashbordCard
             title="Annually Contribution"
-            value={Intl.NumberFormat("en-US").format(data?.totalSettled)+" "+"RWF"}
+            value={
+              Intl.NumberFormat("en-US").format(data?.totalSettled) +
+              " " +
+              "RWF"
+            }
             icon={<GiTakeMyMoney className="text-2xl text-blue-1" />}
           />
         </div>
@@ -58,13 +96,15 @@ const Dashboard = async () => {
         <AllMembers Allmembers={data?.latestMembers} filterHide={true} />
       </div>
     );
+  } else {
+    return <Loader />;
   }
 };
 export default Dashboard;
 
 interface DashbordCardProps {
   title: string;
-  value: number|string;
+  value: number | string;
   icon: any;
 }
 

@@ -73,7 +73,7 @@ const Table = ({
   }, [activePage]);
   return (
     <div className="w-full text-sm ">
-      {data?.length < 1 || currentItems.length < 1 ? (
+      {data?.length < 1 || currentItems?.length < 1 ? (
         <div className="flex h-[50vh] bg-transparent w-full justify-center items-center">
           <div className="text-base text-gray-900">
             <Empty />
@@ -95,13 +95,13 @@ const Table = ({
                 {columns?.map((column: any) => (
                   <th
                     className={`md:py-3 xs:py-2 xs:px-1 text-left xs:text-sm  text-xs  text-gray-700 capitalize font-semibold ${
-                      column.hideOnMobile ? "hidden md:table-cell" : ""
+                      column?.hideOnMobile ? "hidden md:table-cell" : ""
                     }`}
-                    key={column.field}
+                    key={column?.field}
                   >
-                    {column.header.length > 28
-                      ? column.header.slice(0, 28) + "..."
-                      : column.header}
+                    {column?.header?.length > 28
+                      ? column?.header.slice(0, 28) + "..."
+                      : column?.header}
                   </th>
                 ))}
               </tr>
