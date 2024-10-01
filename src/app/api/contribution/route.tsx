@@ -303,10 +303,11 @@ export const POST = async (request: NextRequest) => {
 export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url);
   const yearParam = Number(searchParams.get("year")!);
+  
   try {
     const contributions = await prisma.contribution.findMany({
       where: {
-        createdAt: {
+        YearOfContributionStart: {
           gte: new Date(`${yearParam}-01-01T00:00:00.000Z`),
           lt: new Date(`${yearParam + 1}-01-01T00:00:00.000Z`),
         },
@@ -316,10 +317,20 @@ export const GET = async (req: Request) => {
         facility: true,
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: "desc", 
       },
     });
-    const pendingData = contributions.map((contribution: any) => ({
+
+    const latestContributionsMap = new Map();
+
+    for (const contribution of contributions) {
+      const facilityId = contribution?.facility?.id;
+      if (!latestContributionsMap.has(facilityId)) {
+        latestContributionsMap.set(facilityId, contribution);
+      }
+    }
+    const latestContributions = Array.from(latestContributionsMap.values());
+    const pendingData = latestContributions.map((contribution: any) => ({
       id: contribution?.id,
       facilityName: contribution?.facility?.facilityName,
       category: contribution?.facility?.facilityCategory,
@@ -337,6 +348,7 @@ export const GET = async (req: Request) => {
       numberOfPeriod: contribution?.contributionPeriod,
       paymentYear: extractYear(contribution?.YearOfContributionStart),
     }));
+
     return NextResponse.json({ status: 200, pendingData });
   } catch (err) {
     return NextResponse.json({
@@ -345,3 +357,4 @@ export const GET = async (req: Request) => {
     });
   }
 };
+
