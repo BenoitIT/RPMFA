@@ -13,8 +13,9 @@ import SearchInput from "@/app/(components)/inputs/SearchInput";
 import { HandleDataSearch } from "@/app/utilities/applicationManipulators";
 export interface pageProps {
   Allmembers: any[];
+  filterHide?:boolean;
 }
-const AllMembers = ({ Allmembers }: pageProps) => {
+const AllMembers = ({ Allmembers,filterHide }: pageProps) => {
   const router = useRouter();
   const [selectedTableRow, setSelectedTableRow] = useState<number[]>([]);
   const [allSelected, setAllSelected] = useState(false);
@@ -55,7 +56,7 @@ const AllMembers = ({ Allmembers }: pageProps) => {
           searchData={dataSearchingTrigger}
         />
         <FilterButton
-          className="w-full"
+          className={`w-full ${filterHide?"hidden":""}`}
           icon={<MdOutlineSettingsInputComposite />}
           btnText="Filter"
           onClick={dataSearchingTrigger}

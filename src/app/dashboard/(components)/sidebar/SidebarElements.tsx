@@ -67,7 +67,7 @@ const SidebarElements = ({
           <Link href={link.path} key={index} onClick={onclick}>
             <div
               className={classNames(
-                "flex gap-2 p-3 items-center text-sm text-gray-500",
+                "flex gap-2 p-3 items-center xl:text-sm text-xs text-gray-500",
                 currentPath == link.path
                   ? "bg-blue-1 text-white rounded-lg"
                   : ""
@@ -105,9 +105,9 @@ const SidebarMenuLink = ({
   return (
     <Link href={path} onClick={onclick}>
       <div
-        className={`${className} flex gap-3 p-3 items-center text-sm text-gray-500`}
+        className={`${className} flex gap-3 p-3 xl:text-sm text-xs text-gray-500`}
       >
-        <span className="text-xl">{icon}</span>
+        <span className="xl:text-xl lg:text-lg">{icon}</span>
         <p>{name}</p>
       </div>
     </Link>

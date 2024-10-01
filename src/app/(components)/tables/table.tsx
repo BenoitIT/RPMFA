@@ -94,7 +94,7 @@ const Table = ({
                 </th>
                 {columns?.map((column: any) => (
                   <th
-                    className={`md:py-3 xs:py-2 xs:px-1 text-left md:text-sm  xs:text-xs font-normal text-gray-700 capitalize ${
+                    className={`md:py-3 xs:py-2 xs:px-1 text-left xs:text-sm  text-xs  text-gray-700 capitalize font-semibold ${
                       column.hideOnMobile ? "hidden md:table-cell" : ""
                     }`}
                     key={column.field}
@@ -126,7 +126,7 @@ const Table = ({
                       className={`${
                         col.field === "image" || col.field === "logo"
                           ? " md:py-2 xs:py-2  font-normal h-[30px] pl-1"
-                          : `  md:py-2 xs:py-1 text-left text-xs md:text-sm font-normal text-grey-800`
+                          : `  md:py-2 xs:py-1 text-xs xl:text-sm font-normal text-grey-800 text-center xl:text-left`
                       } ${col.field === "email" ? "" : "capitalize"} ${
                         col.hideOnMobile ? "hidden md:table-cell" : ""
                       }`}

@@ -1,9 +1,10 @@
 "use server";
 import React from "react";
 import { FcFlashOn } from "react-icons/fc";
-import { HiOutlineUserGroup } from "react-icons/hi2";
-import { CiFileOn } from "react-icons/ci";
-import { HiOutlineDocumentDuplicate } from "react-icons/hi";
+import { LuCheckSquare } from "react-icons/lu";
+import { PiUsersFourThin } from "react-icons/pi";
+import { GiTakeMyMoney } from "react-icons/gi";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import AllMembers from "./(components)/ContentsContainers/allmembers";
 import Link from "next/link";
 
@@ -21,33 +22,40 @@ const Dashboard = async () => {
         <h1 className="text-2xl text-blue-1 font-semibold">
           Quick Insight <FcFlashOn className="inline text-2xl" />
         </h1>
-        <div className="grid md:grid-cols-3 max:md:grid-cols-2 max-sm:grid-cols-1 gap-10 mt-8">
+        <div className="grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-8">
           <Link href={"/dashboard/members"}>
             <DashbordCard
               title="Total Members"
               value={data?.members}
-              icon={<HiOutlineUserGroup className="text-2xl text-blue-1" />}
+              icon={<PiUsersFourThin className="text-2xl text-blue-1" />}
             />
           </Link>
           <Link href={"/dashboard/applications"}>
             <DashbordCard
               title="Total Applications"
               value={data?.application}
-              icon={<CiFileOn className="text-2xl text-blue-1" />}
+              icon={
+                <VscGitPullRequestGoToChanges className="text-2xl text-blue-1" />
+              }
             />
           </Link>
           <DashbordCard
-            title="Recently Added Members"
-            value={data?.latestMembers?.length}
-            icon={
-              <HiOutlineDocumentDuplicate className="text-2xl text-blue-1" />
-            }
+            title="Settled Facilities"
+            value={data?.settleContributionCount}
+            icon={<LuCheckSquare className="text-2xl text-blue-1" />}
+          />
+          <DashbordCard
+            title="Annually Contribution"
+            value={Intl.NumberFormat("en-US").format(data?.totalSettled)+" "+"RWF"}
+            icon={<GiTakeMyMoney className="text-2xl text-blue-1" />}
           />
         </div>
         <div className="py-4">
-          <h1 className="text-base  text-blue-700">Recently Added Members</h1>
+          <h1 className="xl:text-base  text-blue-700 text-sm">
+            Recently Added Members
+          </h1>
         </div>
-        <AllMembers Allmembers={data?.latestMembers} />
+        <AllMembers Allmembers={data?.latestMembers} filterHide={true} />
       </div>
     );
   }
@@ -56,7 +64,7 @@ export default Dashboard;
 
 interface DashbordCardProps {
   title: string;
-  value: number;
+  value: number|string;
   icon: any;
 }
 

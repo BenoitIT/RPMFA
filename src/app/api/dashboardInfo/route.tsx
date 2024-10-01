@@ -30,6 +30,14 @@ export const GET = async () => {
         user: true,
       },
     });
+    const settledFacilities = await prisma.contribution.findMany({
+      where: {
+        status: "approved",
+      },
+    });
+    const settleFacilitiesAmount=settledFacilities.reduce((acc,contrib)=>{
+      return acc+=contrib.contributionAmount;
+    },0);
     const members = approvedApplications.length;
     const application = pendingApplications.length;
     const rejections = rejectedApplications.length;
@@ -49,6 +57,8 @@ export const GET = async () => {
       application,
       rejections,
       latestMembers,
+      settleContributionCount: settledFacilities.length,
+      totalSettled:settleFacilitiesAmount
     });
   } catch (err) {
     return NextResponse.json({
