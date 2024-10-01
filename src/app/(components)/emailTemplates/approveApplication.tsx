@@ -7,7 +7,7 @@ interface EmailTemplateProps {
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   firstName,
 }) => (
-  <div style={{ width: "95%", maxWidth: "600px", margin: "auto" }}>
+<div style={{ width: "95%", maxWidth: "600px", margin: "auto" }}>
     <main
       style={{
         marginTop: "10px",
@@ -19,12 +19,22 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         boxSizing: "border-box",
       }}
     >
-      <h4>
-        <b style={{ textAlign: "left",color: "#2A5568" }}>Your application has been approved!</b>
-      </h4>
-      <h5 style={{ color: "#2A5568", textAlign: "left", margin: "0 0 15px" }}>
-        Dear {firstName},
-      </h5>
+      <h2 style={{ color: "#2A5568", textAlign: "left", margin: "0 0 15px" }}>
+        Hello {firstName},
+      </h2>
+      <p style={{ textAlign: "left", color: "#718096", margin: "0 0 15px" }}>
+        We trust this email finds you well.
+      </p>
+      <p
+        style={{
+          lineHeight: "1.75",
+          color: "#718096",
+          textAlign: "left",
+          margin: "0 0 15px",
+        }}
+      >
+        Your application has been approved!
+      </p>
       <p
         style={{
           lineHeight: "1.75",
@@ -44,8 +54,13 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           margin: "0 0 15px",
         }}
       >
-        Your commitment to excellence and your contributions to Rwanda Private
-        Medical Facilities Association are truly commendable.
+        For any support or clarification, you may contact the following people:
+      </p>
+      <p style={{ color: "#718096", textAlign: "left", margin: "0 0 10px" }}>
+        1. Henriette Iradukunda, Admin, <b>+250 785 143 731</b>
+      </p>
+      <p style={{ color: "#718096", textAlign: "left", margin: "0 0 10px" }}>
+        2. Christian Ntakirutimana, Executive Secretary <b>+250 788 515 358</b>
       </p>
       <p
         style={{
@@ -55,19 +70,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           margin: "0 0 15px",
         }}
       >
-        As an RPMFA member, you now join an elite group of professionals who are
-        recognized for their expertise, leadership, and dedication to advancing
-        the medical profession in Rwanda.
-      </p>
-      <p
-        style={{
-          lineHeight: "1.75",
-          color: "#718096",
-          textAlign: "left",
-          margin: "0 0 15px",
-        }}
-      >
-        Thank you and best regards,
+        We wish you a productive day.
       </p>
       <p
         style={{
@@ -79,16 +82,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       >
         RPMFA Secretariat.
       </p>
-      <p
-        style={{
-          lineHeight: "1.75",
-          color: "#718096",
-          textAlign: "left",
-          margin: "0 0 15px",
-        }}
-      >
-        For any support or more information, contact: +250-785-143-731
-      </p>
     </main>
   </div>
 );
+
+

@@ -12,6 +12,7 @@ import FilterButton from "@/app/(components)/buttons/FilterButton";
 import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import MonthOrYear from "../(components)/inputs/input";
 import Loader from "../(components)/ContentsContainers/loader";
+import { exportTableToExcel } from "@/app/utilities/exportContibutions";
 
 const Page = () => {
   const [openInitContributionModal, setInitContribution] = useState(false);
@@ -44,7 +45,7 @@ const Page = () => {
     } else {
       dataSearchingTrigger();
     }
-  }, [searchValue,allContributions]);
+  }, [searchValue, allContributions]);
 
   const dataSearchingTrigger = () => {
     if (Array.isArray(allContributions)) {
@@ -91,7 +92,10 @@ const Page = () => {
   return (
     <div className="mt-4 w-full">
       <h3 className="text-gray-600 text-sm flex gap-1">
-        <Link href="/dashboard" className="hover:text-blue-700 hover:cursor-pointer">
+        <Link
+          href="/dashboard"
+          className="hover:text-blue-700 hover:cursor-pointer"
+        >
           Home
         </Link>
         <PiGreaterThanLight className="mt-[3px]" />
@@ -124,7 +128,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-start lg:justify-end">
+        <div className="w-full flex justify-start lg:justify-end gap-2">
           <button
             className="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[150px] text-sm rounded-md font-normal disabled:cursor-not-allowed disabled:opacity-40"
             onClick={handleInitContribution}
@@ -135,10 +139,20 @@ const Page = () => {
           >
             Send Reminder
           </button>
+          <button
+            className="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[100px] text-sm rounded-md font-normal disabled:cursor-not-allowed disabled:opacity-40"
+            onClick={() => exportTableToExcel(contributions)}
+          >
+            Export
+          </button>
         </div>
       </div>
       {Array.isArray(contributions) ? (
-        <Contributions contributions={contributions} openInitContributionModal={openInitContributionModal} setInitContribution={setInitContribution}/>
+        <Contributions
+          contributions={contributions}
+          openInitContributionModal={openInitContributionModal}
+          setInitContribution={setInitContribution}
+        />
       ) : (
         <Loader />
       )}

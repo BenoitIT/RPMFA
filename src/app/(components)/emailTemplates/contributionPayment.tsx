@@ -1,5 +1,4 @@
 import * as React from "react";
-import { SlEnvolope } from "react-icons/sl";
 
 interface EmailTemplateProps {
   subject: string|number;
@@ -8,87 +7,60 @@ interface EmailTemplateProps {
 export const EmailContributionTemplate: React.FC<
   Readonly<EmailTemplateProps>
 > = ({ subject }) => (
-  <div style={{ width: "100%" }}>
-    <div
+  <div style={{ width: "95%", maxWidth: "600px", margin: "auto" }}>
+  <main
+    style={{
+      marginTop: "10px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "20px",
+      boxSizing: "border-box",
+    }}
+  >
+    <h2 style={{ color: "#2A5568", textAlign: "left", margin: "0 0 15px" }}>
+    Dear Esteemed members,
+    </h2>
+    <p style={{ textAlign: "left", color: "#718096", margin: "0 0 15px" }}>
+    We would like to remind you to pay membership fee for year {subject}
+    </p>
+    <p
       style={{
-        height: "150px",
-        backgroundColor: "#365CCE",
-        width: "100%",
-        color: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: "20px",
+        lineHeight: "1.75",
+        color: "#718096",
+        textAlign: "left",
+        margin: "0 0 15px",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <div
-          style={{ width: "40px", height: "1px", backgroundColor: "white" }}
-        ></div>
-        <SlEnvolope style={{ fontSize: "1.125rem", color: "blue" }} />
-        <div
-          style={{ width: "40px", height: "1px", backgroundColor: "white" }}
-        ></div>
-      </div>
-      <div style={{ marginTop: "40px" }}>
-        <div
-          style={{
-            textAlign: "center",
-            fontSize: "0.875rem",
-            lineHeight: "1.25rem",
-            letterSpacing: "0.1em",
-            fontWeight: "400",
-            marginBottom: "10px",
-          }}
-        >
-          Thank you for being impeccable member of RPMFA!
-        </div>
-      </div>
-    </div>
-    <main
+      For any support or clarification, you may contact the following people:
+    </p>
+    <p style={{ color: "#718096", textAlign: "left", margin: "0 0 10px" }}>
+      1. Henriette Iradukunda, Admin, <b>+250 785 143 731</b>
+    </p>
+    <p style={{ color: "#718096", textAlign: "left", margin: "0 0 10px" }}>
+      2. Christian Ntakirutimana, Executive Secretary <b>+250 788 515 358</b>
+    </p>
+    <p
       style={{
-        marginTop: "32px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        paddingRight: "20px",
+        lineHeight: "1.75",
+        color: "#718096",
+        textAlign: "left",
+        margin: "0 0 15px",
       }}
     >
-      <h2 style={{ color: "#4A5568", textAlign: "center" }}>
-        Hello !
-      </h2>
-      <p
-        style={{
-          marginTop: "8px",
-          lineHeight: "1.75",
-          color: "#718096",
-          textAlign: "center",
-        }}
-      >
-        Payment of membership contribution {subject} is up.
-      </p>
-      <p
-        style={{
-          marginTop: "8px",
-          lineHeight: "1.75",
-          color: "#718096",
-          textAlign: "center",
-        }}
-      >
-        We hope this message finds you well. We are writing to remind you that
-        your membership with RPMFA is due for renewal on for {subject}. As a
-        valued member, your support is crucial to our community, and we truly
-        appreciate your contributions over the past year.
-      </p>
-      <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
-        Thank you, <br />
-        RPMFA Regards
-      </p>
-      <p style={{ marginTop: "32px", color: "#718096", textAlign: "center" }}>
-        For any support or more information, contact: <b>+250 788 597 772</b>
-      </p>
-    </main>
-  </div>
+      We wish you a productive day.
+    </p>
+    <p
+      style={{
+        lineHeight: "1.75",
+        color: "#718096",
+        textAlign: "left",
+        margin: "0 0 15px",
+      }}
+    >
+      RPMFA Secretariat.
+    </p>
+  </main>
+</div>
 );
