@@ -228,6 +228,7 @@ const AddFacility = () => {
                     "General clinic",
                     "Polyclinic",
                     "Hospital",
+                    "Specialized Clinic"
                   ]}
                   changeHandler={handleInputChange}
                 />

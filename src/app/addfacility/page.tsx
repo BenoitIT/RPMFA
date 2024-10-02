@@ -206,7 +206,7 @@ const AddFacility = () => {
       {worning.length > 0 && (
         <Alert message={worning} type="warning" showIcon closable />
       )}
-      <div className="w-full bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3">
+      <div className="w-full bg-white rounded-lg shadow dark:border my-3 sm:max-w-lg xl:p-0 border border-blue-100 m-3 min-h-[66vh]">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <Progress
             percent={currentProgress}
@@ -331,16 +331,10 @@ const AddFacility = () => {
                       member of rpmfa.
                     </li>
                     <li className="list-disc">
-                      Application letter addressed to RPMFA President
+                      Application letter addressed to RPMFA Chairman
                     </li>
                     <li className="list-disc">
                       Copy of License Application Letter received by MoH
-                    </li>
-                    <li className="list-disc">
-                      Response Letter from MOH about License Application Letter
-                    </li>
-                    <li className="list-disc">
-                      Copy of MOH License for Operating Facilities
                     </li>
                     <li className="list-disc">
                       Responsible Medical Doctor Certified License to practice

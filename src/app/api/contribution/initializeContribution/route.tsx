@@ -14,7 +14,6 @@ export const POST = async () => {
     orderBy: {
       id: "desc",
     },
-    take: 1,
   });
   if (!currentContribution?.id || !currentContribution?.initialized) {
     const contributingFacilities = await prisma.facility.findMany({
@@ -36,18 +35,8 @@ export const POST = async () => {
         orderBy: {
           id: "desc",
         },
-        take: 1,
       });
-      if (
-        facilityContribution?.unpaidContribution &&
-        facilityContribution?.unpaidContribution > 0 &&
-        extractYear(facilityContribution?.YearOfContributionStart) < currentYear
-      ) {
-        const updatedUnpaidContributionAtStartOfYear =
-          facilityContribution?.unpaidContribution +
-          facility?.defaultContribution;
-        const numberOfContributionPeriod =
-          facilityContribution?.contributionPeriod + 1;
+      if (facilityContribution) {
         const result = await resend.emails.send({
           from: "rpmfa@rpmfa.org",
           to: facilityContribution.user.email,
@@ -58,13 +47,25 @@ export const POST = async () => {
           text: "RPMFA membership contribution season is started",
         });
         console.log(result);
-        const notification=await prisma.notification.create({
+        const notification = await prisma.notification.create({
           data: {
-            notification: `place your ${currentYear} contribution!`,
+            notification: `RPMFA membership contribution season ${currentYear} is started!`,
             senderId: 1,
             reciverId: facilityContribution.user.id,
           },
         });
+      }
+      if (
+        facilityContribution?.unpaidContribution &&
+        facilityContribution?.unpaidContribution > 0 &&
+        extractYear(facilityContribution?.YearOfContributionStart) < currentYear
+      ) {
+        const updatedUnpaidContributionAtStartOfYear =
+          facilityContribution?.unpaidContribution +
+          facility?.defaultContribution;
+        const numberOfContributionPeriod =
+          facilityContribution?.contributionPeriod + 1;
+
         await prisma.contribution.update({
           where: {
             facilityId: facility?.id,
@@ -78,16 +79,6 @@ export const POST = async () => {
       } else if (
         extractYear(facilityContribution?.YearOfContributionStart) < currentYear
       ) {
-        const result = await resend.emails.send({
-          from: "rpmfa@rpmfa.org",
-          to: facility.user.email,
-          subject: "RPMFA membership contribution season is started",
-          react: EmailContributionTemplate({
-            subject: currentYear,
-          }),
-          text: "RPMFA membership contribution season is started",
-        });
-        console.log(result);
         await prisma.contribution.create({
           data: {
             contributionAmount: 0,
@@ -110,7 +101,7 @@ export const POST = async () => {
     });
     return NextResponse.json({
       status: 200,
-      message: `${currentYear}'s contributions are initialized for each member`,
+      message: `${currentYear}'s contributions reminders was sent each member`,
     });
   } else {
     return NextResponse.json({

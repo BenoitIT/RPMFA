@@ -27,6 +27,7 @@ export const POST = async (request: NextRequest) => {
       where: {
         status: "approved",
         contributionChecked: true,
+        userId:body.userId
       },
     });
     if (verifiedMembership) {
@@ -73,7 +74,7 @@ export const POST = async (request: NextRequest) => {
           );
           const remainder =
             excessAmount % verifiedMembership.defaultContribution;
-          if (probableYearsTobeCovered <= 1) {
+          if (probableYearsTobeCovered <= 1&&remainder>=verifiedMembership.defaultContribution) {
             const nextYear =
               extractYear(
                 checkInitialContributionInfo.YearOfContributionStart
@@ -109,7 +110,7 @@ export const POST = async (request: NextRequest) => {
               });
             }
           }
-          if (remainder > 0) {
+          if (remainder > 0&&remainder<=verifiedMembership.defaultContribution) {
             const nextYear =
               extractYear(
                 checkInitialContributionInfo?.YearOfContributionStart

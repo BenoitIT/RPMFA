@@ -20,7 +20,7 @@ export const EmailContributionTemplate: React.FC<
     }}
   >
     <h2 style={{ color: "#2A5568", textAlign: "left", margin: "0 0 15px" }}>
-    Dear Esteemed members,
+    Dear Esteemed member,
     </h2>
     <p style={{ textAlign: "left", color: "#718096", margin: "0 0 15px" }}>
     We would like to remind you to pay membership fee for year {subject}

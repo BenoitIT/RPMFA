@@ -12,7 +12,7 @@ import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import MonthOrYear from "./(components)/inputs/input";
 import Loader from "./(components)/ContentsContainers/loader";
 
-const Dashboard = async () => {
+const Dashboard = () => {
   const currentYear = new Date().getFullYear();
   const [data, setData] = useState<any>();
   const [year, setYear] = useState(currentYear);
