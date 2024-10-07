@@ -34,15 +34,16 @@ const ContributionDetails = ({ contribution, category }: any) => {
         },
       });
       const data = await response.json();
-      if (data?.status==200) {
+      if (data?.status == 200) {
         setOpenSuccessModal(true);
         setTimeout(() => {
           router.refresh();
         }, 1000);
         setOpenSuccessModal(false);
         setLoading(false);
-      }else{
+      } else {
         toast.error(data?.message);
+        setLoading(false);
       }
     } catch (err) {
       toast.error("unexpected error occurs");
@@ -57,7 +58,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
             {contribution?.facility?.facilityName[0] +
               "" +
               contribution?.facility?.facilityName[
-              contribution?.facility?.facilityName?.length - 1
+                contribution?.facility?.facilityName?.length - 1
               ]}
           </div>
           <h1 className="font-medium text-blue-600 my-6 text-base capitalize">
@@ -65,7 +66,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
           </h1>
         </div>
         {session?.data?.user?.role == "admin" &&
-          contribution.status == "pending" ? (
+        contribution.status == "pending" ? (
           <Button
             label="Feedback"
             customStyle="bg-blue-1 py-2 hover:bg-blue-800 text-white w-[130px] rounded font-medium"
@@ -75,13 +76,15 @@ const ContributionDetails = ({ contribution, category }: any) => {
           <div className="flex flex-col gap-1 text-black text-sm">
             <h3 className="font-semibold">Contribution Status</h3>
             <p
-              className={` text-xs text-center rounded py-[5px] capitalize ${contribution.status?.toLowerCase() == "approved"
-                ? "text-blue-400 bg-green-100 font-medium"
-                : ""
-                } ${contribution.status?.toLowerCase().includes("pending")
+              className={` text-xs text-center rounded py-[5px] capitalize ${
+                contribution.status?.toLowerCase() == "approved"
+                  ? "text-blue-400 bg-green-100 font-medium"
+                  : ""
+              } ${
+                contribution.status?.toLowerCase().includes("pending")
                   ? "border-yellow-100 font-medium  text-yellow-600 bg-yellow-100"
                   : ""
-                }`}
+              }`}
             >
               {contribution.status}
             </p>
@@ -183,7 +186,7 @@ const ContributionDetails = ({ contribution, category }: any) => {
         )}
       </div>
       {contribution?.status == "rejected" &&
-        session?.data?.user?.role !== "admin" ? (
+      session?.data?.user?.role !== "admin" ? (
         <div className="text-sm my-3">
           <AppField
             title="Reason for rejection"
@@ -195,8 +198,8 @@ const ContributionDetails = ({ contribution, category }: any) => {
       )}
       {(contribution?.status == "pending" &&
         session?.data?.user?.role !== "admin") ||
-        (contribution?.status == "rejected" &&
-          session?.data?.user?.role !== "admin") ? (
+      (contribution?.status == "rejected" &&
+        session?.data?.user?.role !== "admin") ? (
         <div className="w-full flex justify-end">
           <Button
             label="Update Info"
@@ -231,9 +234,8 @@ const ContributionDetails = ({ contribution, category }: any) => {
             }
             Click={handleApproveContribution}
           />
-          {session?.data?.user?.role == "admin" && extractYear(contribution?.
-            YearOfContributionStart
-          ) == currentYear ? (
+          {session?.data?.user?.role == "admin" &&
+          extractYear(contribution?.YearOfContributionStart) == currentYear ? (
             <Button
               label={loading ? "Delivering..." : "Deliver certificate"}
               customStyle={
@@ -243,7 +245,9 @@ const ContributionDetails = ({ contribution, category }: any) => {
               }
               Click={() => setDeliverCertificate(true)}
             />
-          ) : ""}
+          ) : (
+            ""
+          )}
         </div>
       ) : contribution?.status == "approved" ? (
         <Alert

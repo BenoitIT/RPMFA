@@ -83,7 +83,7 @@ const Page = () => {
       }
     };
     checkCurrentYearContributionStatus();
-  }, [currentYear]);
+  }, [currentYear,openInitContributionModal]);
 
   const handleInitContribution = () => {
     setInitContribution(true);

@@ -38,20 +38,26 @@ const Dashboard = async () => {
           <Link href={"/member/dashboard/contributions"}>
             <DashbordCard
               title="Pending Contributions"
-              value={`RWF ${new Intl.NumberFormat('en-US').format(data?.pendingContributionsValue)}`}
+              value={`RWF ${new Intl.NumberFormat("en-US").format(
+                data?.pendingContributionsValue
+              )}`}
               icon={<PiCertificate className="text-2xl text-blue-1" />}
             />
           </Link>
           <Link href={"/member/dashboard/contributions"}>
             <DashbordCard
               title="Total Contributions"
-              value={`RWF ${new Intl.NumberFormat('en-US').format(data?.Approvedcontribution)}`}
+              value={`RWF ${new Intl.NumberFormat("en-US").format(
+                data?.Approvedcontribution
+              )}`}
               icon={<GiTakeMyMoney className="text-2xl text-blue-1" />}
             />
           </Link>
           <DashbordCard
             title="Recent Contributions"
-            value={`RWF ${new Intl.NumberFormat('en-US').format(data?.latestContributionListValue)}`}
+            value={`RWF ${new Intl.NumberFormat("en-US").format(
+              data?.latestContributionListValue
+            )}`}
             icon={<MdOutlineRecentActors className="text-2xl text-blue-1" />}
           />
         </div>
@@ -97,9 +103,9 @@ interface DashbordCardProps {
 
 const DashbordCard = ({ title, value, icon }: DashbordCardProps) => {
   return (
-    <div className="w-full flex gap-1 p-4 rounded-md shadow bg-white items-center hover:cursor-pointer hover:bg-blue-50">
+    <div className="w-full flex gap-3 p-4 rounded-md shadow bg-white items-center hover:cursor-pointer hover:bg-blue-50">
       <div className="flex items-center">{icon}</div>
-      <div className="p-4">
+      <div>
         <h1 className="text-lg font-medium text-gray-700">{value}</h1>
         <p className="text-sm font-light">{title}</p>
       </div>
