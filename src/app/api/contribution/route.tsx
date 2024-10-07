@@ -130,15 +130,6 @@ export const POST = async (request: NextRequest) => {
               },
             });
           }
-
-          await prisma.notification.create({
-            data: {
-              notification: `Your unpaid contribution has been settled! The remaining amount is applied to next year's contribution.`,
-              senderId: body.userId,
-              reciverId: 1,
-            },
-          });
-
           return NextResponse.json({
             status: 201,
             data: { currentContribution: contribution },

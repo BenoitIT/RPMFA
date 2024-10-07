@@ -28,8 +28,7 @@ export const GET = async (req: Request) => {
       where: {
         status: "approved",
         createdAt: {
-          gte: new Date(`${yearParam}-01-01T00:00:00.000Z`),
-          lt: new Date(`${yearParam + 1}-01-01T00:00:00.000Z`),
+          lte: new Date(`${yearParam}-12-31T23:59:59.999Z`)
         },
       },
       include: {

@@ -7,6 +7,7 @@ import { PiCertificate, PiHouseLine } from "react-icons/pi";
 import { MdOutlineCreditCardOff } from "react-icons/md";
 import { auth } from "@/auth";
 import Contribution from "./(contents)/recentContribution";
+import { GiTakeMyMoney } from "react-icons/gi";
 
 const Dashboard = async () => {
   const session: any = await auth();
@@ -45,7 +46,7 @@ const Dashboard = async () => {
             <DashbordCard
               title="Total Contributions"
               value={`RWF ${new Intl.NumberFormat('en-US').format(data?.Approvedcontribution)}`}
-              icon={<PiHouseLine className="text-2xl text-blue-1" />}
+              icon={<GiTakeMyMoney className="text-2xl text-blue-1" />}
             />
           </Link>
           <DashbordCard

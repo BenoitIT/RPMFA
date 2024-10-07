@@ -74,12 +74,12 @@ const Dashboard = () => {
             />
           </Link>
           <DashbordCard
-            title="Settled Facilities"
+            title="Settled Members"
             value={data?.settleContributionCount}
             icon={<LuCheckSquare className="text-2xl text-blue-1" />}
           />
           <DashbordCard
-            title="Annually Contribution"
+            title="Total Annual Contribution"
             value={
               Intl.NumberFormat("en-US").format(data?.totalSettled) +
               " " +
