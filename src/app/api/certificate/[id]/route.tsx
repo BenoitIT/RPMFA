@@ -34,7 +34,7 @@ export const PUT = async (request: NextRequest) => {
         return NextResponse.json({
           status: 200,
           data: updatedmember,
-          message: `Membership certificate is successfully ${updatedmember.facilityName} ${updatedmember.facilityCategory}`,
+          message: `Membership certificate is successfully sent ${updatedmember.facilityName} ${updatedmember.facilityCategory}`,
           notification
         });
       } else {

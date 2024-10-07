@@ -27,7 +27,7 @@ export const POST = async (request: NextRequest) => {
       where: {
         status: "approved",
         contributionChecked: true,
-        userId:body.userId
+        userId: body.userId,
       },
     });
     if (verifiedMembership) {
@@ -69,12 +69,19 @@ export const POST = async (request: NextRequest) => {
               unpaidContribution: 0,
             },
           });
-          const probableYearsTobeCovered = Math.floor(
-            excessAmount / verifiedMembership.defaultContribution
-          );
+          const probableYearsTobeCovered =
+            Math.floor(excessAmount / verifiedMembership.defaultContribution) >
+            0
+              ? Math.floor(
+                  excessAmount / verifiedMembership.defaultContribution
+                )
+              : 1;
           const remainder =
             excessAmount % verifiedMembership.defaultContribution;
-          if (probableYearsTobeCovered <= 1&&remainder>=verifiedMembership.defaultContribution) {
+          if (
+            probableYearsTobeCovered <= 1 &&
+            remainder >= verifiedMembership.defaultContribution
+          ) {
             const nextYear =
               extractYear(
                 checkInitialContributionInfo.YearOfContributionStart
@@ -89,6 +96,25 @@ export const POST = async (request: NextRequest) => {
                 userId: body.userId,
                 unpaidContribution:
                   verifiedMembership.defaultContribution - excessAmount,
+              },
+            });
+          }
+          if (probableYearsTobeCovered == 1) {
+            const nextYear = extractYear(
+              checkInitialContributionInfo.YearOfContributionStart
+            );
+            await prisma.contribution.create({
+              data: {
+                contributionAmount:
+                  verifiedMembership.defaultContribution - excessAmount,
+                depositRecieptNumber: body.depositRecieptNumber,
+                facilityId: body.facilityId,
+                depositReciept: body.depositReciept,
+                YearOfContributionStart: getRandomDate(nextYear),
+                userId: body.userId,
+                unpaidContribution:
+                  verifiedMembership.defaultContribution -
+                  body.contributionAmount,
               },
             });
           } else {
@@ -110,7 +136,10 @@ export const POST = async (request: NextRequest) => {
               });
             }
           }
-          if (remainder > 0&&remainder<=verifiedMembership.defaultContribution) {
+          if (
+            remainder > 0 &&
+            remainder <= verifiedMembership.defaultContribution
+          ) {
             const nextYear =
               extractYear(
                 checkInitialContributionInfo?.YearOfContributionStart
@@ -150,7 +179,7 @@ export const POST = async (request: NextRequest) => {
                 ...checkInitialContributionInfo.depositReciept,
                 ...body.depositReciept,
               ],
-              unpaidContribution: contributionBalance, // Update the remaining unpaid balance
+              unpaidContribution: contributionBalance,
             },
           });
 
@@ -295,7 +324,7 @@ export const POST = async (request: NextRequest) => {
 export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url);
   const yearParam = Number(searchParams.get("year")!);
-  
+
   try {
     const contributions = await prisma.contribution.findMany({
       where: {
@@ -309,7 +338,7 @@ export const GET = async (req: Request) => {
         facility: true,
       },
       orderBy: {
-        createdAt: "desc", 
+        createdAt: "desc",
       },
     });
 
@@ -349,4 +378,3 @@ export const GET = async (req: Request) => {
     });
   }
 };
-
