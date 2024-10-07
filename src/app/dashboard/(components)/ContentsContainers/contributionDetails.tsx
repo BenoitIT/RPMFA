@@ -14,7 +14,6 @@ const MemberShipCertificateUploader = lazy(
   () => import("./modals/certificateUpload")
 );
 const ContributionDetails = ({ contribution, category }: any) => {
-  console.log("contribution", contribution)
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const session: any = useSession();
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
@@ -35,13 +34,15 @@ const ContributionDetails = ({ contribution, category }: any) => {
         },
       });
       const data = await response.json();
-      if (data?.status) {
+      if (data?.status==200) {
         setOpenSuccessModal(true);
         setTimeout(() => {
           router.refresh();
-        }, 3000);
+        }, 1000);
         setOpenSuccessModal(false);
         setLoading(false);
+      }else{
+        toast.error(data?.message);
       }
     } catch (err) {
       toast.error("unexpected error occurs");

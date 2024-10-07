@@ -1,6 +1,5 @@
 import { EmailContApproveTemplate } from "@/app/(components)/emailTemplates/contributionApprove";
 import prisma from "@/prisma/client";
-import { notification } from "antd";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 export const revalidate = 0;
@@ -49,7 +48,7 @@ export const PUT = async (request: NextRequest) => {
           user: true,
         },
       });
-      if (contribution) {
+      if (contribution&&contribution?.unpaidContribution==0) {
         const updatedcontribution = await prisma.contribution.update({
           where: {
             id: Number(id),
@@ -78,6 +77,11 @@ export const PUT = async (request: NextRequest) => {
         return NextResponse.json({
           status: 200,
           contribution: updatedcontribution,
+        });
+      }else{
+        return NextResponse.json({
+          message: "Unpaid contribution fees must be covered",
+          status: 400,
         });
       }
     }

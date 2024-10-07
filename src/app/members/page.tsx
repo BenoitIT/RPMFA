@@ -3,7 +3,9 @@
 import Members from "./contents/members";
 
 const Page = async () => {
-  const response = await fetch(`${process.env.NEXT_APP_URL}/api/members`, {
+  const date=new Date();
+  const currentYear=date.getFullYear();
+  const response = await fetch(`${process.env.NEXT_APP_URL}/api/members?year=${currentYear}`, {
     cache: "no-store",
   });
   const data = await response.json();

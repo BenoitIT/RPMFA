@@ -74,7 +74,7 @@ const Dashboard = () => {
             />
           </Link>
           <DashbordCard
-            title="Settled Members"
+            title="Members without Arrears"
             value={data?.settleContributionCount}
             icon={<LuCheckSquare className="text-2xl text-blue-1" />}
           />
@@ -110,9 +110,9 @@ interface DashbordCardProps {
 
 const DashbordCard = ({ title, value, icon }: DashbordCardProps) => {
   return (
-    <div className="w-full flex gap-1 p-4 rounded-md shadow bg-white items-center hover:cursor-pointer hover:bg-blue-50">
+    <div className="w-full flex gap-3 p-4 rounded-md shadow bg-white items-center hover:cursor-pointer hover:bg-blue-50">
       <div className="flex items-center">{icon}</div>
-      <div className="p-4">
+      <div>
         <h1 className="text-lg font-semibold">{value}</h1>
         <p className="text-sm font-light">{title}</p>
       </div>
