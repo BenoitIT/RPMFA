@@ -328,13 +328,13 @@ const AddFacility = () => {
                   <ul className="text-sm text-black opacity-85 ml-4">
                     <li className="list-disc">
                       Only upload membership certificate.if you are already
-                      member of rpmfa.
+                      member of RPMFA.
                     </li>
                     <li className="list-disc">
                       Application letter addressed to RPMFA Chairman
                     </li>
                     <li className="list-disc">
-                      Copy of License Application Letter received by MoH
+                      Copy of  RDB registration License and MoH License
                     </li>
                     <li className="list-disc">
                       Responsible Medical Doctor Certified License to practice

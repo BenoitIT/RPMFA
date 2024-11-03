@@ -115,7 +115,7 @@ const Navbar = () => {
           {" "}
           {session?.data?.user?.role == "member"
             ? "Member's Dashboard"
-            : "Dashboard"}
+            : "RPMFA Admin Dashboard"}
         </h1>
         <SecondBtn
           customStyle="hidden max-sm:inline-flex items-center mt-1 border  w-10 h-10 hover:bg-blue-1 hover:text-white justify-center rounded"
