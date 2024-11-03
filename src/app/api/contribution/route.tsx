@@ -261,7 +261,7 @@ export const POST = async (request: NextRequest) => {
             });
           }
           return NextResponse.json({
-            status: 200,
+            status: 201,
             data: null,
             message: `You have sent contributions for ${numberOfYearsPaidAtOnce} year(s) ${
               remainder > 0
