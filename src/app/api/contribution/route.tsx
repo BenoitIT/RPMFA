@@ -99,43 +99,24 @@ export const POST = async (request: NextRequest) => {
               },
             });
           }
-          if (probableYearsTobeCovered == 1) {
-            const nextYear = extractYear(
-              checkInitialContributionInfo.YearOfContributionStart
-            );
+          for (let year = 1; year <= probableYearsTobeCovered; year++) {
             await prisma.contribution.create({
               data: {
-                contributionAmount:
-                  verifiedMembership.defaultContribution - excessAmount,
-                depositRecieptNumber: body.depositRecieptNumber,
+                contributionAmount: verifiedMembership.defaultContribution,
+                depositRecieptNumber: body.depositRecieptNumber + `(${year})`,
                 facilityId: body.facilityId,
                 depositReciept: body.depositReciept,
-                YearOfContributionStart: getRandomDate(nextYear),
+                YearOfContributionStart: getRandomDate(
+                  extractYear(
+                    checkInitialContributionInfo.YearOfContributionStart
+                  ) + year
+                ),
                 userId: body.userId,
-                unpaidContribution:
-                  verifiedMembership.defaultContribution -
-                  body.contributionAmount,
+                unpaidContribution: 0,
               },
             });
-          } else {
-            for (let year = 1; year <= probableYearsTobeCovered; year++) {
-              await prisma.contribution.create({
-                data: {
-                  contributionAmount: verifiedMembership.defaultContribution,
-                  depositRecieptNumber: body.depositRecieptNumber + `(${year})`,
-                  facilityId: body.facilityId,
-                  depositReciept: body.depositReciept,
-                  YearOfContributionStart: getRandomDate(
-                    extractYear(
-                      checkInitialContributionInfo.YearOfContributionStart
-                    ) + year
-                  ),
-                  userId: body.userId,
-                  unpaidContribution: 0,
-                },
-              });
-            }
           }
+
           if (
             remainder > 0 &&
             remainder <= verifiedMembership.defaultContribution
