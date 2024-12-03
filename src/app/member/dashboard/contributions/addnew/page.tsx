@@ -81,7 +81,7 @@ const Page = () => {
         if (data.status == 201) {
           toast.success(data?.message);
           setLoading(false);
-          router.back();
+          router.push("/member/dashboard/contributions");
           router.refresh()
         } else if (data[0]?.message) {
           toast.success(data[0]?.path[0] + " " + data[0]?.message);
