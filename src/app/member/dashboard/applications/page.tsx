@@ -7,15 +7,23 @@ import { auth } from "@/auth";
 const Page = async () => {
   const session: any = await auth();
   const userId = session?.user?.id;
+  const token = session?.user?.name?.accessToken;
   const response = await fetch(
     `${process.env.NEXT_APP_URL}/api/applications/user/${userId}`,
     {
       cache: "no-store",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
     }
   );
   const statsResponse = await fetch(
     `${process.env.NEXT_APP_URL}/api/applications/stats/user/${userId}`,
-    { cache: "no-store" }
+    {
+      cache: "no-store", headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    }
   );
   const data = await response.json();
   const statsData = await statsResponse.json();

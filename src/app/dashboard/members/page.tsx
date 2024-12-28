@@ -9,8 +9,11 @@ import FilterButton from "@/app/(components)/buttons/FilterButton";
 import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import Loader from "../(components)/ContentsContainers/loader";
 import MonthOrYear from "../(components)/inputs/input";
+import { useSession } from "next-auth/react";
 
 const Page = () => {
+  const session: any = useSession();
+  const token = session?.data?.user?.name?.accessToken;
   const currentYear = new Date().getFullYear();
   const [searchValue, setSearchValues] = useState("");
   const [Allmembers, setActiveData] = useState<any[]>();
@@ -21,6 +24,9 @@ const Page = () => {
     const handleFetchData = async () => {
       const response = await fetch(`/api/members?year=${year}`, {
         cache: "no-store",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
       });
       const data = await response.json();
       if (response.status === 200) {

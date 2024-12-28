@@ -2,11 +2,17 @@
 import { PiGreaterThanLight } from "react-icons/pi";
 import Applications from "../(components)/ContentsContainers/applications";
 import Link from "next/link";
+import { auth } from "@/auth";
 
 
 const Page = async () => {
+  const session: any = await auth();
+  const token = session?.user?.name?.accessToken;
   const response = await fetch(`${process.env.NEXT_APP_URL}/api/applications`, {
     cache: "no-store",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
   });
   const statsResponse = await fetch(
     `${process.env.NEXT_APP_URL}/api/applications/stats`,

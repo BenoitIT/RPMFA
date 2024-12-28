@@ -8,25 +8,35 @@ import { extractYear } from "@/app/utilities/timeParser";
 const Page = async () => {
   const session: any = await auth();
   const userId = session?.user?.id;
+  const token = session?.user?.name?.accessToken;
   const response = await fetch(
     `${process.env.NEXT_APP_URL}/api/contribution/user/${userId}`,
     {
       cache: "no-store",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
     }
   );
   const data = await response.json();
   if (data.status === 200) {
     const contributions = data.contributions.map((contribution?: any) => ({
       id: contribution?.id,
-      contributionAmount: "RWF" + " " + new Intl.NumberFormat('en-US').format(contribution?.contributionAmount),
+      contributionAmount:
+        "RWF" +
+        " " +
+        new Intl.NumberFormat("en-US").format(contribution?.contributionAmount),
       depositReceiptNumber: contribution?.depositRecieptNumber,
       status: contribution?.status,
-      defaultcontribution:contribution?.facility?.defaultContribution,
-      amountDue:"RWF" + " " +new Intl.NumberFormat('en-US').format(contribution?.unpaidContribution),
-      unpaidContribution:contribution?.unpaidContribution,
+      defaultcontribution: contribution?.facility?.defaultContribution,
+      amountDue:
+        "RWF" +
+        " " +
+        new Intl.NumberFormat("en-US").format(contribution?.unpaidContribution),
+      unpaidContribution: contribution?.unpaidContribution,
       created_at: convertTimestamp(contribution?.createdAt),
-      contributionPeriod:contribution?.contributionPeriod,
-      paymentYear:extractYear(contribution?.YearOfContributionStart)
+      contributionPeriod: contribution?.contributionPeriod,
+      paymentYear: extractYear(contribution?.YearOfContributionStart),
     }));
 
     return (

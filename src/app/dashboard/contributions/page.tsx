@@ -13,8 +13,11 @@ import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import MonthOrYear from "../(components)/inputs/input";
 import Loader from "../(components)/ContentsContainers/loader";
 import { exportTableToExcel } from "@/app/utilities/exportContibutions";
+import { useSession } from "next-auth/react";
 
 const Page = () => {
+  const session: any = useSession();
+  const token = session?.data?.user?.name?.accessToken;
   const [openInitContributionModal, setInitContribution] = useState(false);
   const [currentYearInfo, setCurrentYearInfo] = useState<any>(null);
   const currentYear = new Date().getFullYear();
@@ -27,6 +30,9 @@ const Page = () => {
       try {
         const response = await fetch(`/api/contribution?year=${year}`, {
           cache: "no-store",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
         });
         const data = await response.json();
         if (data?.status == 200) {

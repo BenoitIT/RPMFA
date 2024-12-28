@@ -16,6 +16,7 @@ const Page = () => {
   const session: any = useSession();
   const router = useRouter();
   const userId = session?.data?.user?.id;
+  const token = session?.data?.user?.name?.accessToken;
   const [image, setImage] = useState<any>([]);
   const [facilties, setFacilities] = useState<any[]>([]);
   const [worning, setWorning] = useState("");
@@ -74,6 +75,7 @@ const Page = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(payload),
         });
@@ -82,7 +84,7 @@ const Page = () => {
           toast.success(data?.message);
           setLoading(false);
           router.push("/member/dashboard/contributions");
-          router.refresh()
+          router.refresh();
         } else if (data[0]?.message) {
           toast.success(data[0]?.path[0] + " " + data[0]?.message);
           setLoading(false);
@@ -104,7 +106,7 @@ const Page = () => {
       [name]: value,
     }));
   };
-  const onOk = (value: any) => {};
+  const onOk = (value: any) => { };
   return (
     <div className="mt-4 w-full">
       <h3 className="text-gray-600 text-sm flex gap-1">
