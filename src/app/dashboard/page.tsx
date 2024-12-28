@@ -11,8 +11,11 @@ import FilterButton from "../(components)/buttons/FilterButton";
 import { MdOutlineSettingsInputComposite } from "react-icons/md";
 import MonthOrYear from "./(components)/inputs/input";
 import Loader from "./(components)/ContentsContainers/loader";
+import { useSession } from "next-auth/react";
 
 const Dashboard = () => {
+  const session: any = useSession();
+  const token = session?.data?.user?.name?.accessToken;
   const currentYear = new Date().getFullYear();
   const [data, setData] = useState<any>();
   const [year, setYear] = useState(currentYear);
@@ -20,6 +23,9 @@ const Dashboard = () => {
     const getStats = async () => {
       const response = await fetch(`/api/dashboardInfo?year=${year}`, {
         cache: "no-store",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
       });
       const data = await response.json();
       setData(data);
