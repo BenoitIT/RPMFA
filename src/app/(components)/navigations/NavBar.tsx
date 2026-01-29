@@ -19,6 +19,9 @@ const NavBar = ({ isLoggedin }: any) => {
     await signOut();
     window.location.href = "/auth/login";
   };
+  const handleLoginRedirection = () => {
+    router.push("/auth/login");
+  };
   const handleDashbordRedirection = () => {
     if (session?.data?.user?.role == "admin") {
       router.push("/dashboard");
@@ -61,9 +64,9 @@ const NavBar = ({ isLoggedin }: any) => {
         </Link>
         <div className="flex md:order-2 space-x-2 lg:space-x-3 rtl:space-x-reverse">
           <Button
-            label={isLoggedin ? "Log out" : "Login"}
+            label={session?.data?.user ? "Log out" : "Login"}
             customStyle="shadow border text-blue-1 py-1 border-blue-1 hover:bg-blue-1 hover:text-white mt-1 md:mt-0"
-            Click={handleSignOut}
+            Click={session?.data?.user ? handleSignOut : handleLoginRedirection}
           />
           {session?.data?.user ? (
             <Button
